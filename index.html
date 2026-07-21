@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etern Suite - Aplicaciones Nativas Multiplataforma</title>
+  <meta name="description" content="Colección de aplicaciones nativas de productividad y desarrollo para Windows, Linux y macOS por paucg06.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Ambient Light Effects -->
+  <div class="ambient-bg">
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="brand">
+        <div class="brand-icon">E</div>
+        <span class="brand-name">Etern Suite</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#apps" class="nav-link">Aplicaciones</a>
+        <a href="#about" class="nav-link">Sobre el Proyecto</a>
+        <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+        <button class="btn-coffee-nav trigger-coffee">
+          <span>☕</span> Cómprame un café
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span>🚀</span> Suite Multiplataforma • Windows | Linux | macOS
+      </div>
+
+      <h1 class="hero-title">
+        Herramientas nativas diseñadas para <span>potenciar tu flujo de trabajo</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Aplicaciones ultraligeras, elegantes y sin distracciones creadas para desarrolladores, creadores y diseñadores.
+      </p>
+
+      <!-- Auto-Detected OS Banner -->
+      <div class="os-detector-banner">
+        <div class="os-icon-badge" id="detected-os-icon">💻</div>
+        <div class="os-text">
+          <div class="os-text-label" id="detected-os-detail">Detectando sistema operativo...</div>
+          <div class="os-text-name" id="detected-os-name">Cargando...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apps Showcase (4 Apps Grid) -->
+    <section id="apps">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Nuestra Suite de Aplicaciones</h2>
+          <p class="section-desc">Acceso directo a las 4 aplicaciones principales del ecosistema Etern.</p>
+        </div>
+      </div>
+
+      <div class="apps-grid">
+
+        <!-- App 1: Etern-Notes (FEATURED & LIVE) -->
+        <article class="app-card app-card-featured">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">📋</div>
+              <span class="app-badge badge-live">● Disponible Ahora</span>
+            </div>
+
+            <h3 class="app-title">Etern-Notes</h3>
+            <p class="app-description">
+              Gestor de proyectos y tareas para desarrolladores. Incluye tableros Kanban personalizados con colores, seguimiento de plazos, prioridades y listas de control.
+            </p>
+
+            <img src="assets/etern_notes_preview.jpg" alt="Vista previa de Etern-Notes" class="app-preview-img">
+          </div>
+
+          <div class="card-actions">
+            <!-- Direct OS Download Button -->
+            <a href="https://github.com/paucg06/Etern-Notes/releases" id="btn-download-etern" class="btn-primary" target="_blank">
+              ⚡ Descargar Etern-Notes
+            </a>
+
+            <!-- Manual OS Selector Dropdown -->
+            <div class="os-selector-wrapper">
+              <select id="etern-os-select" class="os-dropdown" aria-label="Seleccionar sistema operativo">
+                <option value="windows">🪟 Windows (.exe 64-bit)</option>
+                <option value="linux">🐧 Linux / Ubuntu (Binario / AppImage)</option>
+                <option value="mac_arm">🍎 macOS (Apple Silicon M1/M2/M3/M4)</option>
+                <option value="mac_intel">🍎 macOS (Intel x64)</option>
+              </select>
+            </div>
+
+            <a href="https://github.com/paucg06/Etern-Notes" target="_blank" rel="noopener" class="btn-secondary" style="margin-top: 6px;">
+              ⭐ Ver en GitHub
+            </a>
+          </div>
+        </article>
+
+        <!-- App 2: Etern-Code (Coming Soon) -->
+        <article class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">💻</div>
+              <span class="app-badge badge-soon">En Desarrollo</span>
+            </div>
+
+            <h3 class="app-title">Etern-Code</h3>
+            <p class="app-description">
+              Gestor de fragmentos de código (code snippets) con resaltado de sintaxis multilenguaje, búsqueda instantánea y almacenamiento local cifrado.
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+              Próximamente
+            </button>
+          </div>
+        </article>
+
+        <!-- App 3: Etern-Focus (Coming Soon) -->
+        <article class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">⏱️</div>
+              <span class="app-badge badge-soon">Próximamente</span>
+            </div>
+
+            <h3 class="app-title">Etern-Focus</h3>
+            <p class="app-description">
+              Temporizador Pomodoro minimalista con sonidos ambientales para concentración profunda y estadísticas de sesiones de trabajo.
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+              Próximamente
+            </button>
+          </div>
+        </article>
+
+        <!-- App 4: Etern-Flow (Coming Soon) -->
+        <article class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">🧠</div>
+              <span class="app-badge badge-soon">Próximamente</span>
+            </div>
+
+            <h3 class="app-title">Etern-Flow</h3>
+            <p class="app-description">
+              Editor de diagramas de flujo y mapas mentales vectoriales super rápido con exportación a SVG y PNG.
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+              Próximamente
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Buy Me a Coffee Section -->
+    <section id="support" class="coffee-section">
+      <div class="coffee-icon-lg">☕</div>
+      <h2 class="coffee-title">¿Te gustan las aplicaciones?</h2>
+      <p class="coffee-subtitle">
+        Todas estas herramientas son 100% gratuitas y de código abierto. Si te resultan útiles, ¡puedes apoyarme invitándome a un café!
+      </p>
+
+      <div class="coffee-tiers">
+        <a href="https://ko-fi.com/paucg06" target="_blank" rel="noopener" class="coffee-tier-btn">
+          ☕ 1 Café (3 €)
+        </a>
+        <a href="https://ko-fi.com/paucg06" target="_blank" rel="noopener" class="coffee-tier-btn">
+          ☕☕☕ 3 Cafés (9 €)
+        </a>
+        <a href="https://ko-fi.com/paucg06" target="_blank" rel="noopener" class="coffee-tier-btn">
+          🚀 Gran Apoyo (15 €)
+        </a>
+      </div>
+
+      <button class="btn-primary trigger-coffee" style="background: var(--accent-amber); color: #000; font-weight: 700;">
+        ☕ Cómprame un café en Ko-fi / BuyMeACoffee
+      </button>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Etern Suite por <strong>paucg06</strong>. Código abierto bajo licencia MIT.</p>
+      <div class="footer-links">
+        <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="footer-link">GitHub Profile</a>
+        <a href="https://github.com/paucg06/Etern-Notes" target="_blank" rel="noopener" class="footer-link">Etern-Notes Repo</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Coffee Modal Window -->
+  <div id="coffee-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <button id="modal-close" class="modal-close">&times;</button>
+      <div style="text-align: center;">
+        <div style="font-size: 40px; margin-bottom: 10px;">☕</div>
+        <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">¡Muchas gracias por tu apoyo!</h3>
+        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">
+          Cada café ayuda a mantener el desarrollo de las 4 aplicaciones de Etern Suite activas y actualizadas.
+        </p>
+
+        <a href="https://ko-fi.com/paucg06" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; background: #FF5E5B; color: #FFF;">
+          Apoyar en Ko-fi / BuyMeACoffee ☕
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
