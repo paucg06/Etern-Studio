@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Etern Suite - OS Detection & Direct Download Logic
+   Etern Studio - OS Detection, Direct Download & Category Filtering Logic
    ========================================================================== */
 
 const REPO_OWNER = 'paucg06';
@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateOSBanner(userOS);
   setupMainDownloadButton(userOS);
   setupCoffeeModal();
+  setupCategoryFilters();
 });
 
 // Update OS Banner in Hero
@@ -99,9 +100,8 @@ function setupMainDownloadButton(os) {
     btn.innerHTML = `${os.icon} Descargar para ${os.name}`;
     btn.href = os.url;
 
-    // Direct download action fallback: if release not created yet, go to GitHub Releases page
+    // Direct download action notification
     btn.addEventListener('click', (e) => {
-      // Trigger smooth direct download notification
       showToast(`Descargando Etern-Notes para ${os.name}...`);
     });
   }
@@ -119,6 +119,37 @@ function setupMainDownloadButton(os) {
       }
     });
   }
+}
+
+// Category Filter Engine (Itch.io Hub Style)
+function setupCategoryFilters() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.app-card');
+  const title = document.getElementById('catalogue-title');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      if (title) {
+        if (filter === 'all') title.textContent = '🚀 Catálogo de Proyectos';
+        else if (filter === 'apps') title.textContent = '🛠️ Aplicaciones de Productividad';
+        else if (filter === 'games') title.textContent = '🎮 Juegos Indie y Prototipos';
+      }
+
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
 }
 
 // Coffee Modal Logic
@@ -147,7 +178,7 @@ function setupCoffeeModal() {
   }
 }
 
-// Toast notification
+// Cartoon Toast notification
 function showToast(message) {
   const toast = document.createElement('div');
   toast.className = 'toast-notification';
@@ -156,16 +187,17 @@ function showToast(message) {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: #1E293B;
-    border: 1px solid #3B82F6;
-    color: #F8FAFC;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 14px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    background: #FFC72C;
+    border: 3px solid #1E1E24;
+    color: #1E1E24;
+    padding: 14px 22px;
+    border-radius: 18px;
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 5px 5px 0px #1E1E24;
     z-index: 2000;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   `;
   document.body.appendChild(toast);
   setTimeout(() => {

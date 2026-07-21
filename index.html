@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etern Studio - Hub Multiplataforma de Aplicaciones</title>
-  <meta name="description" content="Etern Studio: Colección de aplicaciones nativas de productividad y desarrollo para Windows, Linux y macOS por paucg06.">
+  <title>Etern Studio - Hub Indie de Juegos y Aplicaciones</title>
+  <meta name="description" content="Etern Studio: Centro de proyectos gratuitos, juegos indie y aplicaciones de productividad por paucg06.">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
 </head>
 <body>
 
@@ -25,8 +25,8 @@
       </a>
 
       <nav class="nav-links">
-        <a href="#apps" class="nav-link">Aplicaciones</a>
-        <a href="#about" class="nav-link">Sobre el Estudio</a>
+        <a href="#projects" class="nav-link">Catálogo</a>
+        <a href="#support" class="nav-link">Apoyar</a>
         <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="nav-link">GitHub Profile</a>
         <button class="btn-coffee-nav trigger-coffee">
           <span>☕</span> Cómprame un café
@@ -39,15 +39,15 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-badge">
-        <span>🚀</span> Etern Studio • Windows | Linux | macOS
+        <span>🎨</span> Etern Studio • Rincón de Juegos & Herramientas Libres
       </div>
 
       <h1 class="hero-title">
-        Herramientas nativas diseñadas para <span>potenciar tu flujo de trabajo</span>
+        Proyectos gratuitos y juegos indie <span>creados con pasión</span>
       </h1>
 
       <p class="hero-subtitle">
-        Bienvenido a Etern Studio. El centro principal para descargar nuestras 4 aplicaciones ultraligeras, elegantes y sin distracciones.
+        ¡Hola! Bienvenido al hub oficial de Etern Studio. Aquí alojamos nuestras aplicaciones nativas ultraligeras y nuestros futuros videojuegos indie. ¡Todo 100% libre!
       </p>
 
       <!-- Auto-Detected OS Banner -->
@@ -60,19 +60,26 @@
       </div>
     </section>
 
-    <!-- Apps Showcase (4 Apps Grid) -->
-    <section id="apps">
+    <!-- Category Filter Bar (Itch.io Hub Style) -->
+    <div class="category-filter-bar">
+      <button class="filter-btn active" data-filter="all">✨ Todos los Proyectos</button>
+      <button class="filter-btn" data-filter="apps">🛠️ Aplicaciones</button>
+      <button class="filter-btn" data-filter="games">🎮 Juegos Indie</button>
+    </div>
+
+    <!-- Projects Showcase Grid -->
+    <section id="projects">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Nuestras Aplicaciones</h2>
-          <p class="section-desc">Acceso directo y descarga inmediata para las 4 aplicaciones de Etern Studio.</p>
+          <h2 class="section-title" id="catalogue-title">🚀 Catálogo de Proyectos</h2>
+          <p class="section-desc">Explora y descarga directamente nuestras herramientas y creaciones.</p>
         </div>
       </div>
 
       <div class="apps-grid">
 
         <!-- App 1: Etern-Notes (FEATURED & LIVE) -->
-        <article class="app-card app-card-featured">
+        <article class="app-card app-card-featured" data-category="apps">
           <div>
             <div class="card-top">
               <div class="app-icon">📋</div>
@@ -103,18 +110,60 @@
               </select>
             </div>
 
-            <a href="https://github.com/paucg06/Etern-Notes" target="_blank" rel="noopener" class="btn-secondary" style="margin-top: 6px;">
+            <a href="https://github.com/paucg06/Etern-Notes" target="_blank" rel="noopener" class="btn-secondary" style="margin-top: 4px;">
               ⭐ Repositorio de Etern-Notes
             </a>
           </div>
         </article>
 
-        <!-- App 2: Etern-Code (Coming Soon) -->
-        <article class="app-card">
+        <!-- Game 1: Etern Runner (Coming Soon Game) -->
+        <article class="app-card" data-category="games">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">🏃‍♂️</div>
+              <span class="app-badge badge-game">🎮 Juego Indie</span>
+            </div>
+
+            <h3 class="app-title">Etern Runner</h3>
+            <p class="app-description">
+              Un frenético endless runner en pixel art con físicas dinámicas, chiptune original y desbloqueables. Prototipo en desarrollo activo.
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary" disabled style="opacity: 0.7; cursor: not-allowed;">
+              🕹️ En Desarrollo (Próximamente)
+            </button>
+          </div>
+        </article>
+
+        <!-- Game 2: Space Jam Indie (Concept Game) -->
+        <article class="app-card" data-category="games">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">👾</div>
+              <span class="app-badge badge-game">🎮 Game Jam Project</span>
+            </div>
+
+            <h3 class="app-title">Cosmic Jam</h3>
+            <p class="app-description">
+              Mini arcade arcade espacial estilo retro para partidas rápidas. Diseñado durante una game jam de 48 horas.
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary" disabled style="opacity: 0.7; cursor: not-allowed;">
+              🕹️ Próxima Demo
+            </button>
+          </div>
+        </article>
+
+        <!-- App 2: Etern-Code (Coming Soon App) -->
+        <article class="app-card" data-category="apps">
           <div>
             <div class="card-top">
               <div class="app-icon">💻</div>
-              <span class="app-badge badge-soon">En Desarrollo</span>
+              <span class="app-badge badge-soon">🛠️ Aplicación</span>
             </div>
 
             <h3 class="app-title">Etern-Code</h3>
@@ -124,18 +173,18 @@
           </div>
 
           <div class="card-actions">
-            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+            <button class="btn-secondary" disabled style="opacity: 0.7; cursor: not-allowed;">
               Próximamente
             </button>
           </div>
         </article>
 
-        <!-- App 3: Etern-Focus (Coming Soon) -->
-        <article class="app-card">
+        <!-- App 3: Etern-Focus (Coming Soon App) -->
+        <article class="app-card" data-category="apps">
           <div>
             <div class="card-top">
               <div class="app-icon">⏱️</div>
-              <span class="app-badge badge-soon">Próximamente</span>
+              <span class="app-badge badge-soon">🛠️ Aplicación</span>
             </div>
 
             <h3 class="app-title">Etern-Focus</h3>
@@ -145,18 +194,18 @@
           </div>
 
           <div class="card-actions">
-            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+            <button class="btn-secondary" disabled style="opacity: 0.7; cursor: not-allowed;">
               Próximamente
             </button>
           </div>
         </article>
 
-        <!-- App 4: Etern-Flow (Coming Soon) -->
-        <article class="app-card">
+        <!-- App 4: Etern-Flow (Coming Soon App) -->
+        <article class="app-card" data-category="apps">
           <div>
             <div class="card-top">
               <div class="app-icon">🧠</div>
-              <span class="app-badge badge-soon">Próximamente</span>
+              <span class="app-badge badge-soon">🛠️ Aplicación</span>
             </div>
 
             <h3 class="app-title">Etern-Flow</h3>
@@ -166,7 +215,7 @@
           </div>
 
           <div class="card-actions">
-            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+            <button class="btn-secondary" disabled style="opacity: 0.7; cursor: not-allowed;">
               Próximamente
             </button>
           </div>
@@ -178,9 +227,9 @@
     <!-- Buy Me a Coffee Section -->
     <section id="support" class="coffee-section">
       <div class="coffee-icon-lg">☕</div>
-      <h2 class="coffee-title">¿Te gustan las aplicaciones de Etern Studio?</h2>
+      <h2 class="coffee-title">¿Te gustan los proyectos de Etern Studio?</h2>
       <p class="coffee-subtitle">
-        Todas nuestras herramientas son 100% gratuitas y de código abierto. Si te resultan útiles, ¡puedes apoyarme invitándome a un café!
+        Todas nuestras herramientas y juegos son 100% gratuitos e independientes. Si quieres apoyar la creación de nuevo contenido, ¡puedes invitarme a un café!
       </p>
 
       <div class="coffee-tiers">
@@ -195,7 +244,7 @@
         </a>
       </div>
 
-      <button class="btn-primary trigger-coffee" style="background: var(--accent-amber); color: #000; font-weight: 700;">
+      <button class="btn-primary trigger-coffee" style="background: var(--accent-orange); color: #FFF; font-size: 17px;">
         ☕ Cómprame un café en Ko-fi / BuyMeACoffee
       </button>
     </section>
@@ -204,7 +253,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>© 2026 Etern Studio por <strong>paucg06</strong>. Código abierto bajo licencia MIT.</p>
+      <p>© 2026 Etern Studio por <strong>paucg06</strong>. Código abierto y proyectos indie libres.</p>
       <div class="footer-links">
         <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="footer-link">GitHub Profile</a>
         <a href="https://github.com/paucg06/Etern-Studio" target="_blank" rel="noopener" class="footer-link">Etern-Studio Repo</a>
@@ -218,13 +267,13 @@
     <div class="modal-card">
       <button id="modal-close" class="modal-close">&times;</button>
       <div style="text-align: center;">
-        <div style="font-size: 40px; margin-bottom: 10px;">☕</div>
-        <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">¡Muchas gracias por tu apoyo!</h3>
-        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">
-          Cada café ayuda a mantener el desarrollo de las 4 aplicaciones de Etern Studio activas y actualizadas.
+        <div style="font-size: 50px; margin-bottom: 12px; display: inline-block;">☕</div>
+        <h3 style="font-family: var(--font-heading); font-size: 26px; font-weight: 700; margin-bottom: 8px;">¡Muchas gracias por tu apoyo!</h3>
+        <p style="color: var(--ink-muted); font-size: 15px; font-weight: 600; margin-bottom: 24px; line-height: 1.5;">
+          Cada café ayuda a mantener activo el desarrollo independiente de aplicaciones y videojuegos en Etern Studio.
         </p>
 
-        <a href="https://ko-fi.com/paucg06" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; background: #FF5E5B; color: #FFF;">
+        <a href="https://ko-fi.com/paucg06" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; background: #FF4D8D; color: #FFF; font-size: 17px;">
           Apoyar en Ko-fi / BuyMeACoffee ☕
         </a>
       </div>
