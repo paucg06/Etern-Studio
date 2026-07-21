@@ -3,14 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Etern Studio - Hub Multiplataforma de Aplicaciones y Juegos</title>
-  <meta name="description" content="Etern Studio: Aplicaciones nativas de productividad y proyectos indie libres para Windows, Linux y macOS por paucg06.">
+  <title>Etern Studio - Hub Multiplataforma de Aplicaciones</title>
+  <meta name="description" content="Etern Studio: Colección de aplicaciones nativas de productividad y desarrollo para Windows, Linux y macOS por paucg06.">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 </head>
 <body>
 
-  <!-- Top Navigation Bar (Adobe Style) -->
+  <!-- Ambient Light Effects -->
+  <div class="ambient-bg">
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+  </div>
+
+  <!-- Header -->
   <header>
     <div class="container nav-wrapper">
       <a href="#" class="brand">
@@ -19,53 +25,69 @@
       </a>
 
       <nav class="nav-links">
-        <a href="#" class="nav-link active">Inicio</a>
-        <a href="#catalogue" class="nav-link">Catálogo</a>
-        <a href="#support" class="nav-link">Soporte</a>
-        <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+        <a href="#apps" class="nav-link">Aplicaciones</a>
+        <a href="#support" class="nav-link">Sobre el Estudio</a>
+        <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="nav-link">GitHub Profile</a>
         <button class="btn-coffee-nav trigger-coffee">
-          ☕ Cómprame un café
+          <span>☕</span> Cómprame un café
         </button>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Header with Soft Blue Mesh Gradient -->
-  <div class="hero-wrapper">
-    <div class="container">
-      <section class="hero">
-        <div class="hero-badge">
-          <span>✨</span> Etern Studio Hub • 100% Gratuito y Libre
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span>🚀</span> Etern Studio • Windows | Linux | macOS
+      </div>
+
+      <h1 class="hero-title">
+        Herramientas nativas diseñadas para <span>potenciar tu flujo de trabajo</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Bienvenido a Etern Studio. El centro principal para descargar nuestras 4 aplicaciones ultraligeras, elegantes y sin distracciones.
+      </p>
+
+      <!-- Auto-Detected OS Banner -->
+      <div class="os-detector-banner">
+        <div class="os-icon-badge" id="detected-os-icon">💻</div>
+        <div class="os-text">
+          <div class="os-text-label" id="detected-os-detail">Detectando sistema operativo...</div>
+          <div class="os-text-name" id="detected-os-name">Cargando...</div>
         </div>
+      </div>
+    </section>
 
-        <h1 class="hero-title">
-          Explora nuevas formas de <span>potenciar tu trabajo</span>
-        </h1>
+    <!-- Apps Showcase (4 Apps Grid) -->
+    <section id="apps">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Nuestras Aplicaciones</h2>
+          <p class="section-desc">Acceso directo y descarga inmediata para las 4 aplicaciones de Etern Studio.</p>
+        </div>
+      </div>
 
-        <p class="hero-subtitle">
-          El centro principal para explorar y descargar nuestras herramientas nativas ultraligeras y videojuegos indie libres.
-        </p>
+      <div class="apps-grid">
 
-        <!-- Auto-Detected OS Banner -->
-        <div class="os-detector-banner">
-          <div class="os-icon-badge" id="detected-os-icon">💻</div>
-          <div class="os-text">
-            <div class="os-text-label" id="detected-os-detail">Detectando sistema operativo...</div>
-            <div class="os-text-name" id="detected-os-name">Cargando...</div>
+        <!-- App 1: Etern-Notes (FEATURED & LIVE) -->
+        <article class="app-card app-card-featured">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">📋</div>
+              <span class="app-badge badge-live">● Disponible Ahora</span>
+            </div>
+
+            <h3 class="app-title">Etern-Notes</h3>
+            <p class="app-description">
+              Gestor de proyectos y tareas para desarrolladores. Incluye tableros Kanban personalizados con colores, seguimiento de plazos, prioridades y listas de control.
+            </p>
+
+            <img src="assets/etern_notes_preview.jpg" alt="Vista previa de Etern-Notes" class="app-preview-img">
           </div>
-        </div>
-      </section>
 
-      <!-- Featured Container (PDF Spaces style from Adobe reference) -->
-      <div class="featured-hero-card">
-        <div class="featured-content-left">
-          <span class="featured-pill-badge">🚀 Aplicación Destacada</span>
-          <h2 class="featured-title">Organiza todas tus tareas y proyectos con Etern-Notes</h2>
-          <p class="featured-desc">
-            Tableros Kanban nativos, seguimiento de plazos y prioridades en una interfaz limpia y sin distracciones.
-          </p>
-
-          <div class="featured-actions">
+          <div class="card-actions">
             <!-- Direct OS Download Button -->
             <a href="https://github.com/paucg06/Etern-Notes/releases" id="btn-download-etern" class="btn-primary" target="_blank">
               ⚡ Descargar Etern-Notes
@@ -80,169 +102,85 @@
                 <option value="mac_intel">🍎 macOS (Intel x64)</option>
               </select>
             </div>
+
+            <a href="https://github.com/paucg06/Etern-Notes" target="_blank" rel="noopener" class="btn-secondary" style="margin-top: 6px;">
+              ⭐ Repositorio de Etern-Notes
+            </a>
           </div>
-        </div>
+        </article>
 
-        <div class="featured-preview-wrapper">
-          <img src="assets/etern_notes_preview.jpg" alt="Vista previa de Etern-Notes" class="featured-preview-img">
-        </div>
-      </div>
+        <!-- App 2: Etern-Code (Coming Soon) -->
+        <article class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">💻</div>
+              <span class="app-badge badge-soon">En Desarrollo</span>
+            </div>
 
-    </div>
-  </div>
+            <h3 class="app-title">Etern-Code</h3>
+            <p class="app-description">
+              Gestor de fragmentos de código (code snippets) con resaltado de sintaxis multilenguaje, búsqueda instantánea y almacenamiento local cifrado.
+            </p>
+          </div>
 
-  <main class="container">
+          <div class="card-actions">
+            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+              Próximamente
+            </button>
+          </div>
+        </article>
 
-    <!-- Quick Tools Section (Adobe "Suggested Tools" layout) -->
-    <section class="quick-tools-section" style="margin-top: 40px;">
-      <h3 class="quick-tools-title">Herramientas sugeridas</h3>
-      <div class="quick-tools-grid">
-        <div class="tool-tile" onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">
-          <div class="tool-tile-icon">📋</div>
-          <span class="tool-tile-name">Etern-Notes</span>
-        </div>
-        <div class="tool-tile" onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">
-          <div class="tool-tile-icon">💻</div>
-          <span class="tool-tile-name">Etern-Code</span>
-        </div>
-        <div class="tool-tile" onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">
-          <div class="tool-tile-icon">⏱️</div>
-          <span class="tool-tile-name">Etern-Focus</span>
-        </div>
-        <div class="tool-tile" onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">
-          <div class="tool-tile-icon">🧠</div>
-          <span class="tool-tile-name">Etern-Flow</span>
-        </div>
-        <div class="tool-tile" onclick="document.getElementById('apps').scrollIntoView({behavior:'smooth'})">
-          <div class="tool-tile-icon">🎮</div>
-          <span class="tool-tile-name">Juegos Indie</span>
-        </div>
+        <!-- App 3: Etern-Focus (Coming Soon) -->
+        <article class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">⏱️</div>
+              <span class="app-badge badge-soon">Próximamente</span>
+            </div>
+
+            <h3 class="app-title">Etern-Focus</h3>
+            <p class="app-description">
+              Temporizador Pomodoro minimalista con sonidos ambientales para concentración profunda y estadísticas de sesiones de trabajo.
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+              Próximamente
+            </button>
+          </div>
+        </article>
+
+        <!-- App 4: Etern-Flow (Coming Soon) -->
+        <article class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon">🧠</div>
+              <span class="app-badge badge-soon">Próximamente</span>
+            </div>
+
+            <h3 class="app-title">Etern-Flow</h3>
+            <p class="app-description">
+              Editor de diagramas de flujo y mapas mentales vectoriales super rápido con exportación a SVG y PNG.
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+              Próximamente
+            </button>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- Tab Filter Bar (Adobe Recent / Starred style) -->
-    <div id="catalogue" class="tab-filter-container">
-      <button class="tab-btn filter-btn active" data-filter="all">Todos los proyectos</button>
-      <button class="tab-btn filter-btn" data-filter="apps">Aplicaciones</button>
-      <button class="tab-btn filter-btn" data-filter="games">Juegos Indie</button>
-    </div>
-
-    <!-- Cards Grid Showcase -->
-    <section id="apps" class="apps-grid">
-
-      <!-- App 2: Etern-Code -->
-      <article class="app-card" data-category="apps">
-        <div>
-          <div class="card-top">
-            <div class="app-icon">💻</div>
-            <span class="app-badge badge-soon">Próximamente</span>
-          </div>
-
-          <h3 class="app-title">Etern-Code</h3>
-          <p class="app-description">
-            Gestor de fragmentos de código (code snippets) con resaltado de sintaxis multilenguaje y almacenamiento cifrado.
-          </p>
-        </div>
-
-        <div class="card-actions">
-          <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
-            Próximamente
-          </button>
-        </div>
-      </article>
-
-      <!-- App 3: Etern-Focus -->
-      <article class="app-card" data-category="apps">
-        <div>
-          <div class="card-top">
-            <div class="app-icon">⏱️</div>
-            <span class="app-badge badge-soon">Próximamente</span>
-          </div>
-
-          <h3 class="app-title">Etern-Focus</h3>
-          <p class="app-description">
-            Temporizador Pomodoro minimalista con sonidos ambientales para concentración profunda y estadísticas.
-          </p>
-        </div>
-
-        <div class="card-actions">
-          <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
-            Próximamente
-          </button>
-        </div>
-      </article>
-
-      <!-- App 4: Etern-Flow -->
-      <article class="app-card" data-category="apps">
-        <div>
-          <div class="card-top">
-            <div class="app-icon">🧠</div>
-            <span class="app-badge badge-soon">Próximamente</span>
-          </div>
-
-          <h3 class="app-title">Etern-Flow</h3>
-          <p class="app-description">
-            Editor de diagramas de flujo y mapas mentales vectoriales ultra rápido con exportación en SVG y PNG.
-          </p>
-        </div>
-
-        <div class="card-actions">
-          <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
-            Próximamente
-          </button>
-        </div>
-      </article>
-
-      <!-- Game 1: Etern Runner -->
-      <article class="app-card" data-category="games">
-        <div>
-          <div class="card-top">
-            <div class="app-icon">🏃‍♂️</div>
-            <span class="app-badge badge-game">Juego Indie</span>
-          </div>
-
-          <h3 class="app-title">Etern Runner</h3>
-          <p class="app-description">
-            Endless runner en pixel art con físicas dinámicas, chiptune original y desbloqueables. Prototipo en desarrollo.
-          </p>
-        </div>
-
-        <div class="card-actions">
-          <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
-            🕹️ En Desarrollo
-          </button>
-        </div>
-      </article>
-
-      <!-- Game 2: Cosmic Jam -->
-      <article class="app-card" data-category="games">
-        <div>
-          <div class="card-top">
-            <div class="app-icon">👾</div>
-            <span class="app-badge badge-game">Game Jam</span>
-          </div>
-
-          <h3 class="app-title">Cosmic Jam</h3>
-          <p class="app-description">
-            Arcade espacial estilo retro para partidas rápidas. Creado durante una game jam de 48 horas.
-          </p>
-        </div>
-
-        <div class="card-actions">
-          <button class="btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
-            🕹️ Próxima Demo
-          </button>
-        </div>
-      </article>
-
-    </section>
-
-    <!-- Support Section (Adobe Blue Banner Style) -->
+    <!-- Buy Me a Coffee Section -->
     <section id="support" class="coffee-section">
       <div class="coffee-icon-lg">☕</div>
-      <h2 class="coffee-title">¿Te gustan nuestras herramientas y juegos?</h2>
+      <h2 class="coffee-title">¿Te gustan las aplicaciones de Etern Studio?</h2>
       <p class="coffee-subtitle">
-        Todos los proyectos de Etern Studio son 100% gratuitos y de código abierto. Si te resultan útiles, ¡puedes apoyarme invitándome a un café!
+        Todas nuestras herramientas son 100% gratuitas y de código abierto. Si te resultan útiles, ¡puedes apoyarme invitándome a un café!
       </p>
 
       <div class="coffee-tiers">
@@ -257,7 +195,7 @@
         </a>
       </div>
 
-      <button class="btn-primary trigger-coffee" style="background: #FFFFFF; color: var(--blue-700); font-weight: 800; font-size: 15px;">
+      <button class="btn-primary trigger-coffee" style="background: var(--accent-amber); color: #000; font-weight: 700;">
         ☕ Cómprame un café en Ko-fi / BuyMeACoffee
       </button>
     </section>
@@ -280,13 +218,13 @@
     <div class="modal-card">
       <button id="modal-close" class="modal-close">&times;</button>
       <div style="text-align: center;">
-        <div style="font-size: 44px; margin-bottom: 12px;">☕</div>
+        <div style="font-size: 40px; margin-bottom: 10px;">☕</div>
         <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">¡Muchas gracias por tu apoyo!</h3>
-        <p style="color: var(--ink-secondary); font-size: 14px; margin-bottom: 24px; line-height: 1.5;">
-          Cada café ayuda a mantener activo el desarrollo de herramientas y juegos libres en Etern Studio.
+        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">
+          Cada café ayuda a mantener el desarrollo de las 4 aplicaciones de Etern Studio activas y actualizadas.
         </p>
 
-        <a href="https://ko-fi.com/paucg06" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; justify-content: center;">
+        <a href="https://ko-fi.com/paucg06" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; background: #FF5E5B; color: #FFF;">
           Apoyar en Ko-fi / BuyMeACoffee ☕
         </a>
       </div>

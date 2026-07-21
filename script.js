@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Etern Studio - OS Detection, Direct Download & Category Filtering Engine
+   Etern Suite - OS Detection & Direct Download Logic
    ========================================================================== */
 
 const REPO_OWNER = 'paucg06';
@@ -31,6 +31,7 @@ function detectOS() {
   }
 
   if (platform.includes('mac') || ua.includes('macintosh') || ua.includes('mac os')) {
+    // Check if M1/M2/M3 Apple Silicon or Intel
     const isAppleSilicon = ua.includes('mac os x') && (navigator.maxTouchPoints > 0 || (window.screen && window.screen.width > 0 && navigator.hardwareConcurrency >= 8));
     if (isAppleSilicon) {
       return {
@@ -76,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateOSBanner(userOS);
   setupMainDownloadButton(userOS);
   setupCoffeeModal();
-  setupCategoryFilters();
 });
 
 // Update OS Banner in Hero
@@ -99,7 +99,7 @@ function setupMainDownloadButton(os) {
     btn.innerHTML = `${os.icon} Descargar para ${os.name}`;
     btn.href = os.url;
 
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
       showToast(`Descargando Etern-Notes para ${os.name}...`);
     });
   }
@@ -117,40 +117,6 @@ function setupMainDownloadButton(os) {
       }
     });
   }
-}
-
-// Category Filter Engine (Adobe Tab Style)
-function setupCategoryFilters() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.app-card');
-  const featuredCard = document.querySelector('.featured-hero-card');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-filter');
-
-      // Show/hide featured hero card if filter is apps or all
-      if (featuredCard) {
-        if (filter === 'games') {
-          featuredCard.style.display = 'none';
-        } else {
-          featuredCard.style.display = 'grid';
-        }
-      }
-
-      cards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        if (filter === 'all' || category === filter) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
 }
 
 // Coffee Modal Logic
@@ -179,7 +145,7 @@ function setupCoffeeModal() {
   }
 }
 
-// Toast notification (Adobe Blue Style)
+// Toast notification
 function showToast(message) {
   const toast = document.createElement('div');
   toast.className = 'toast-notification';
