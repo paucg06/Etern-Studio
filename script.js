@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Etern Studio - OS Detection, Direct Download & Category Filtering Logic
+   Etern Studio - OS Detection, Direct Download & Category Filtering Engine
    ========================================================================== */
 
 const REPO_OWNER = 'paucg06';
@@ -31,7 +31,6 @@ function detectOS() {
   }
 
   if (platform.includes('mac') || ua.includes('macintosh') || ua.includes('mac os')) {
-    // Check if M1/M2/M3 Apple Silicon or Intel
     const isAppleSilicon = ua.includes('mac os x') && (navigator.maxTouchPoints > 0 || (window.screen && window.screen.width > 0 && navigator.hardwareConcurrency >= 8));
     if (isAppleSilicon) {
       return {
@@ -100,8 +99,7 @@ function setupMainDownloadButton(os) {
     btn.innerHTML = `${os.icon} Descargar para ${os.name}`;
     btn.href = os.url;
 
-    // Direct download action notification
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       showToast(`Descargando Etern-Notes para ${os.name}...`);
     });
   }
@@ -121,11 +119,11 @@ function setupMainDownloadButton(os) {
   }
 }
 
-// Category Filter Engine (Itch.io Hub Style)
+// Category Filter Engine (Adobe Tab Style)
 function setupCategoryFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.app-card');
-  const title = document.getElementById('catalogue-title');
+  const featuredCard = document.querySelector('.featured-hero-card');
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -134,10 +132,13 @@ function setupCategoryFilters() {
 
       const filter = btn.getAttribute('data-filter');
 
-      if (title) {
-        if (filter === 'all') title.textContent = '🚀 Catálogo de Proyectos';
-        else if (filter === 'apps') title.textContent = '🛠️ Aplicaciones de Productividad';
-        else if (filter === 'games') title.textContent = '🎮 Juegos Indie y Prototipos';
+      // Show/hide featured hero card if filter is apps or all
+      if (featuredCard) {
+        if (filter === 'games') {
+          featuredCard.style.display = 'none';
+        } else {
+          featuredCard.style.display = 'grid';
+        }
       }
 
       cards.forEach(card => {
@@ -178,7 +179,7 @@ function setupCoffeeModal() {
   }
 }
 
-// Cartoon Toast notification
+// Toast notification (Adobe Blue Style)
 function showToast(message) {
   const toast = document.createElement('div');
   toast.className = 'toast-notification';
@@ -187,17 +188,16 @@ function showToast(message) {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: #FFC72C;
-    border: 3px solid #1E1E24;
-    color: #1E1E24;
+    background: #0F172A;
+    border: 1px solid #3B82F6;
+    color: #FFFFFF;
     padding: 14px 22px;
-    border-radius: 18px;
-    font-family: 'Fredoka', cursive, sans-serif;
+    border-radius: 999px;
     font-weight: 700;
-    font-size: 15px;
-    box-shadow: 5px 5px 0px #1E1E24;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
     z-index: 2000;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   `;
   document.body.appendChild(toast);
   setTimeout(() => {
