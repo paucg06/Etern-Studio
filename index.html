@@ -206,108 +206,47 @@
       display: block;
     }
 
-    /* Hero */
+    /* Hero Section (Centrado sin tarjeta flotante) */
     .hero-section {
-      padding: 60px 0 50px;
+      padding: 70px 0 55px;
+      text-align: center;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .hero-content {
+    .hero-container {
+      max-width: 860px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      align-items: center;
+      gap: 22px;
     }
 
     .hero-title {
-      font-size: 3.2rem;
+      font-size: 3.4rem;
       font-weight: 900;
-      line-height: 1.12;
+      line-height: 1.15;
       letter-spacing: -1.5px;
       color: #FFFFFF;
     }
 
     .hero-desc {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #CCCCCE;
-      line-height: 1.6;
-      max-width: 560px;
+      line-height: 1.65;
+      max-width: 680px;
     }
 
     .hero-cta-group {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-top: 6px;
-    }
-
-    .hero-card-featured {
-      background: #2A2A35;
-      border: 1px solid #34343C;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hero-card-media {
-      width: 100%;
-      aspect-ratio: 315 / 250;
-      max-height: 250px;
-      background: #16161E;
-      overflow: hidden;
-    }
-
-    .hero-card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-card-body {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .hero-card-badge {
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: #00F59B;
-    }
-
-    .hero-card-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #FFFFFF;
-    }
-
-    .hero-card-desc {
-      font-size: 0.9rem;
-      color: #CCCCCE;
-      line-height: 1.5;
-    }
-
-    .hero-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 14px;
-      border-top: 1px solid #34343C;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 8px;
     }
 
     /* Juegos Carrusel - Anti-clipping Layout */
     .games-section {
-      padding: 50px 0 70px;
+      padding: 40px 0 70px;
     }
 
     .section-title-center {
@@ -438,7 +377,7 @@
       fill: #FFFFFF;
     }
 
-    /* Carousel Nav */
+    /* Carousel Nav (Píldora Activa BLANCA #FFFFFF) */
     .carousel-nav-bar {
       display: flex;
       align-items: center;
@@ -491,7 +430,7 @@
     }
 
     .carousel-pill.active {
-      background: #8B5CF6;
+      background: #FFFFFF;
       width: 34px;
     }
 
@@ -526,19 +465,13 @@
       padding: 20px 20px 14px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
     }
 
     .app-name-title {
       font-size: 1.25rem;
       font-weight: 800;
       color: #FFFFFF;
-    }
-
-    .app-author-sub {
-      font-size: 0.85rem;
-      color: #8E8E93;
-      margin-top: 2px;
     }
 
     .app-arrow-icon {
@@ -548,7 +481,7 @@
 
     .app-preview-media {
       width: 100%;
-      height: 180px;
+      height: 200px;
       background: #16161E;
       overflow: hidden;
     }
@@ -810,44 +743,24 @@
          ==================================================================== -->
     <div id="tab-home" class="tab-view active-tab">
       
-      <!-- Hero Section -->
+      <!-- Hero Section (Limpio y centrado sin tarjeta redundante) -->
       <section class="hero-section">
-        <div class="container hero-grid">
-          <div class="hero-content">
-            <h1 class="hero-title">
-              Desarrolla, publica y juega. Videojuegos y herramientas.
-            </h1>
+        <div class="container hero-container">
+          <h1 class="hero-title">
+            Desarrolla, publica y juega. Videojuegos y herramientas.
+          </h1>
 
-            <p class="hero-desc">
-              EternoDev Studio es un estudio indie centrado en el desarrollo de videojuegos en Unity, software libre para creadores y divulgacion digital.
-            </p>
+          <p class="hero-desc">
+            EternoDev Studio es un estudio indie centrado en el desarrollo de videojuegos en Unity, software libre para creadores y divulgacion digital.
+          </p>
 
-            <div class="hero-cta-group">
-              <a href="#carousel-anchor" class="btn-pill btn-mint" style="padding: 13px 28px; font-size: 0.95rem;">
-                Explorar Juegos
-              </a>
-              <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 13px 28px; font-size: 0.95rem;">
-                Ver Aplicaciones
-              </button>
-            </div>
-          </div>
-
-          <!-- Featured Hero Card -->
-          <div class="hero-card-featured">
-            <div class="hero-card-media">
-              <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga" class="hero-card-img" />
-            </div>
-            <div class="hero-card-body">
-              <span class="hero-card-badge">Destacado en Itch.io</span>
-              <h3 class="hero-card-title">Oonga Bunga!</h3>
-              <p class="hero-card-desc">Compite con tus amigos para convertirte en el lider de la tribu. Solo habra un ganador en este combate multijugador.</p>
-              <div class="hero-card-footer">
-                <span style="font-size: 0.85rem; color: #CCCCCE;">Unity Engine &bull; Windows</span>
-                <a href="https://eternodev.itch.io/oonga-bunga" target="_blank" rel="noopener" class="btn-pill btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
-                  Jugar Ahora &rarr;
-                </a>
-              </div>
-            </div>
+          <div class="hero-cta-group">
+            <a href="#carousel-anchor" class="btn-pill btn-mint" style="padding: 13px 28px; font-size: 0.95rem;">
+              Explorar Juegos
+            </a>
+            <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 13px 28px; font-size: 0.95rem;">
+              Ver Aplicaciones
+            </button>
           </div>
         </div>
       </section>
@@ -938,7 +851,7 @@
                 </div>
               </a>
 
-              <!-- Juego 5: Space Blitz (Thumbnail 100% oficial de Itch.io) -->
+              <!-- Juego 5: Space Blitz (Thumbnail oficial) -->
               <a href="https://eternodev.itch.io/space-blitz" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
@@ -959,7 +872,7 @@
             </div>
           </div>
 
-          <!-- Controles del Carrusel -->
+          <!-- Controles del Carrusel con Píldora Activa Blanca -->
           <div class="carousel-nav-bar">
             <button id="carouselPrev" class="carousel-arrow" aria-label="Anterior">
               <svg width="16" height="16" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
@@ -1011,7 +924,7 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 2: APLICACIONES (Use in browser badge)
+         PESTANIA 2: APLICACIONES (Sin subtítulo Pau CG + Imagen más alta)
          ==================================================================== -->
     <div id="tab-apps" class="tab-view">
       <section class="apps-section" style="padding-top: 50px;">
@@ -1026,10 +939,7 @@
             <!-- App 1: BrightLight -->
             <article class="app-box-card">
               <div class="app-top-header">
-                <div>
-                  <h3 class="app-name-title">BrightLight</h3>
-                  <p class="app-author-sub">Pau CG</p>
-                </div>
+                <h3 class="app-name-title">BrightLight</h3>
                 <span class="app-arrow-icon">&rarr;</span>
               </div>
 
@@ -1056,10 +966,7 @@
             <!-- App 2: Etern-Notes -->
             <article class="app-box-card">
               <div class="app-top-header">
-                <div>
-                  <h3 class="app-name-title">Etern-Notes</h3>
-                  <p class="app-author-sub">Pau CG</p>
-                </div>
+                <h3 class="app-name-title">Etern-Notes</h3>
                 <span class="app-arrow-icon">&rarr;</span>
               </div>
 
@@ -1088,10 +995,7 @@
             <!-- App 3: Etern-Synth -->
             <article class="app-box-card">
               <div class="app-top-header">
-                <div>
-                  <h3 class="app-name-title">Etern-Synth</h3>
-                  <p class="app-author-sub">Pau CG</p>
-                </div>
+                <h3 class="app-name-title">Etern-Synth</h3>
                 <span class="app-arrow-icon">&rarr;</span>
               </div>
 
@@ -1118,10 +1022,7 @@
             <!-- App 4: Etern-Audio -->
             <article class="app-box-card">
               <div class="app-top-header">
-                <div>
-                  <h3 class="app-name-title">Etern-Audio</h3>
-                  <p class="app-author-sub">Pau CG</p>
-                </div>
+                <h3 class="app-name-title">Etern-Audio</h3>
                 <span class="app-arrow-icon">&rarr;</span>
               </div>
 
