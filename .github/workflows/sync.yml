@@ -2,8 +2,8 @@ name: Sync Itch.io & YouTube Data
 
 on:
   schedule:
-    # Se ejecuta 2 veces al dia: a la 1:00 de la tarde (13:00) y a la 1:00 de la madrugada (01:00) hora peninsular (UTC 11:00 y 23:00)
-    - cron: '0 11,23 * * *'
+    # Se ejecuta cada 2 horas (a las 00:00, 02:00, 04:00, 06:00, 08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00, 22:00)
+    - cron: '0 */2 * * *'
   # Permite ejecutarlo manualmente desde la pestania Actions de GitHub con un solo clic
   workflow_dispatch:
 
