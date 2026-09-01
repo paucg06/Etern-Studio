@@ -1,5 +1,5 @@
 // ==========================================================================
-// EternoDev Studio - Automated Sync Script (Itch.io API + YouTube RSS)
+// EternoDev Studio - Automated Sync Script (Itch.io API + YouTube Data API v3)
 // ==========================================================================
 
 const fs = require('fs');
@@ -15,6 +15,7 @@ function fetchUrl(url, options = {}) {
   });
 }
 
+// 1. Sincronización oficial de Itch.io
 async function syncItchGames() {
   const apiKey = process.env.ITCH_API_KEY;
   console.log("Sincronizando Itch.io...");
@@ -32,24 +33,24 @@ async function syncItchGames() {
             title: g.title,
             url: g.url,
             cover_url: g.cover_url,
-            short_text: g.short_text || 'Videojuego disponible en Itch.io',
+            short_text: g.short_text || 'Videojuego indie en Itch.io',
             type: g.type || 'game',
             p_windows: g.p_windows || false,
             p_linux: g.p_linux || false,
             p_osx: g.p_osx || false,
-            published: g.published || true
+            published: g.published !== false
           }));
           fs.writeFileSync('games.json', JSON.stringify(games, null, 2), 'utf-8');
-          console.log(`Itch.io API: ${games.length} juegos guardados en games.json`);
+          console.log(`Itch.io API: ${games.length} juegos actualizados en games.json`);
           return;
         }
       }
     } catch (e) {
-      console.warn("Fallo en Itch.io API autenticada, usando fallback:", e.message);
+      console.warn("Aviso Itch.io API:", e.message);
     }
   }
 
-  // Fallback public games list
+  // Lista base oficial de juegos públicos
   const defaultGames = [
     {
       title: "Oonga Bunga!",
@@ -109,36 +110,80 @@ async function syncItchGames() {
   ];
 
   fs.writeFileSync('games.json', JSON.stringify(defaultGames, null, 2), 'utf-8');
-  console.log("games.json guardado con lista oficial.");
 }
 
+// 2. Sincronización oficial de YouTube (YouTube Data API v3 con Uploads Playlist)
 async function syncYouTubeVideos() {
-  console.log("Sincronizando Videos de YouTube...");
-  
+  const apiKey = process.env.YOUTUBE_API_KEY;
+  const channelId = "UCewJv1M1YAKfLcbld6iWxWg";
+  console.log("Sincronizando YouTube...");
+
+  if (apiKey) {
+    try {
+      // 1. Obtener ID de la playlist de subidas
+      const chanRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`);
+      if (chanRes.statusCode === 200) {
+        const chanJson = JSON.parse(chanRes.body);
+        const uploadsPlaylistId = chanJson.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+
+        if (uploadsPlaylistId) {
+          // 2. Obtener los vídeos más recientes de la playlist
+          const playlistRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=12&key=${apiKey}`);
+          if (playlistRes.statusCode === 200) {
+            const playlistJson = JSON.parse(playlistRes.body);
+            const videos = (playlistJson.items || []).map(item => {
+              const s = item.snippet;
+              const videoId = s.resourceId?.videoId;
+              const thumb = s.thumbnails?.maxres?.url || s.thumbnails?.high?.url || s.thumbnails?.medium?.url || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+              return {
+                id: videoId,
+                title: s.title,
+                url: `https://www.youtube.com/watch?v=${videoId}`,
+                cover_url: thumb,
+                desc: s.description ? s.description.split('\n')[0] : 'Vídeo oficial en YouTube de @eternodev',
+                published_at: s.publishedAt,
+                channel: s.channelTitle || 'EternoDev'
+              };
+            });
+
+            if (videos.length > 0) {
+              fs.writeFileSync('videos.json', JSON.stringify(videos, null, 2), 'utf-8');
+              console.log(`YouTube Data API: ${videos.length} vídeos actualizados en videos.json`);
+              return;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn("Aviso YouTube API:", e.message);
+    }
+  }
+
+  // Lista base de vídeos oficiales de YouTube con URLs directas de Google CDN (i.ytimg.com)
   const defaultVideos = [
     {
+      id: "F1-R5hljGLM",
       title: "¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1",
       url: "https://youtu.be/F1-R5hljGLM",
-      cover_url: "assets/video1_roguelike.png",
-      desc: "Creando un videojuego roguelike con zombies y pollos en Unity desde el primer día.",
-      channel: "EternoDev",
-      date: "Reciente"
+      cover_url: "https://i.ytimg.com/vi/F1-R5hljGLM/maxresdefault.jpg",
+      desc: "👉 Después de tirarme todo el verano durmiendo hasta las 2 de la tarde, me di cuenta de que tenía que hacer algo productivo. Creando un roguelike con zombies y un pollo.",
+      channel: "Eterno - Developer"
     },
     {
+      id: "vtuber_48h",
       title: "Hice un VTUBER en 48 HORAS",
       url: "https://www.youtube.com/@eternodev",
       cover_url: "assets/video2_vtuber.png",
-      desc: "Dibujando y programando un modelo de Vtuber en tiempo récord con Krita y Unity.",
-      channel: "EternoDev",
-      date: "Especial"
+      desc: "👉 Después de darme cuenta de que tener un Vtuber es la clave para el éxito, decidí hacerme uno propio en Krita y Unity.",
+      channel: "Eterno - Developer"
     },
     {
+      id: "gamejam_48h",
       title: "Sobreviví a mi PRIMERA GameJam",
       url: "https://www.youtube.com/@eternodev",
       cover_url: "assets/video3_gamejam.png",
-      desc: "Desarrollando un videojuego completo en 48 horas sin dormir con 6 desarrolladores.",
-      channel: "EternoDev",
-      date: "GameJam"
+      desc: "👉 Un juego entre seis desarrolladores en 48 Horas sin dormir. ¿Será porque es nuestra primera GameJam?",
+      channel: "Eterno - Developer"
     }
   ];
 

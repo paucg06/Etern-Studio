@@ -1,5 +1,5 @@
 // ==========================================================================
-// EternoDev Studio - Tabbed Navigation, Games & Videos Dual Carousels
+// EternoDev Studio - Tabbed Navigation & Dual Dynamic Carousels
 // ==========================================================================
 
 let currentGameIndex = 0;
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabNavigation();
   initGamesCarousel();
   initVideosCarousel();
+  loadDynamicData();
 });
 
 // Tab Switcher
@@ -201,6 +202,51 @@ function initVideosCarousel() {
   };
 
   updateVideoCarousel();
+}
+
+// 3. Cargar datos sincronizados por GitHub Actions si existen
+async function loadDynamicData() {
+  try {
+    const vRes = await fetch(`videos.json?_t=${Date.now()}`);
+    if (vRes.ok) {
+      const videos = await vRes.json();
+      if (Array.isArray(videos) && videos.length > 0) {
+        const vTrack = document.getElementById('videoTrack');
+        if (vTrack) {
+          vTrack.innerHTML = '';
+          videos.forEach(v => {
+            const card = document.createElement('a');
+            card.href = v.url;
+            card.target = '_blank';
+            card.rel = 'noopener';
+            card.className = 'video-card-item';
+            card.innerHTML = `
+              <div class="video-thumb-box">
+                <img src="${v.cover_url}" alt="${v.title}" class="video-thumb-img" loading="lazy" />
+                <div class="video-play-overlay">
+                  <div class="video-play-btn">
+                    <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="video-content-box">
+                <h3 class="video-item-title">${v.title}</h3>
+                <p class="video-item-desc">${v.desc || ''}</p>
+                <div class="video-meta-row">
+                  <span>${v.channel || 'EternoDev'} &bull; YouTube</span>
+                  <span class="video-cta-text">Ver Vídeo &rarr;</span>
+                </div>
+              </div>
+            `;
+            vTrack.appendChild(card);
+          });
+          initVideosCarousel();
+        }
+      }
+    }
+  } catch (e) {
+    // Usar datos estáticos ya renderizados
+  }
 }
 
 window.addEventListener('resize', () => {

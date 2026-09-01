@@ -4,7 +4,7 @@ on:
   schedule:
     # Se ejecuta todos los dias a las 04:00 UTC
     - cron: '0 4 * * *'
-  # Permite ejecutarlo manualmente desde la pestania Actions de GitHub
+  # Permite ejecutarlo manualmente desde la pestania Actions de GitHub con un clic
   workflow_dispatch:
 
 permissions:
@@ -26,6 +26,7 @@ jobs:
       - name: Ejecutar Script de Sincronizacion
         env:
           ITCH_API_KEY: ${{ secrets.ITCH_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node scripts/sync_data.js
 
       - name: Guardar cambios si hay actualizaciones
