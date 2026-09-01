@@ -74,6 +74,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .brand {
@@ -217,15 +218,21 @@ header {
   fill: none;
 }
 
-/* Panel Desplegable Móvil */
+/* Panel Desplegable Móvil (Sin emojis y justo debajo de la navbar) */
 .mobile-dropdown-panel {
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   background: #2A2A35;
+  border-top: 1px solid #34343C;
   border-bottom: 1px solid #34343C;
-  padding: 16px 24px;
+  padding: 14px 24px;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  gap: 6px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6);
+  z-index: 999;
 }
 
 .mobile-dropdown-panel.open {
@@ -237,9 +244,9 @@ header {
   border: 1px solid transparent;
   color: #CCCCCE;
   font-family: var(--font-main);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  padding: 12px 18px;
+  padding: 11px 16px;
   border-radius: var(--radius-md);
   text-align: left;
   cursor: pointer;

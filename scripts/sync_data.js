@@ -10,7 +10,7 @@ function fetchUrl(url, options = {}) {
     https.get(url, options, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
-      res.on('end', () => resolve({ statusCode: res.statusCode, body: data }));
+      res.on('end', () => resolve({ statusCode: res.statusCode, body: data, headers: res.headers }));
     }).on('error', err => reject(err));
   });
 }
@@ -23,7 +23,7 @@ function formatCount(num) {
   return n.toString();
 }
 
-// Extraer metadatos detallados de cada juego (plataformas y género)
+// Extraer metadatos detallados de cada juego y verificar si es realmente público
 async function enrichGameDetails(game) {
   let genre = "Game";
   let p_browser = game.type === 'html';
@@ -33,35 +33,46 @@ async function enrichGameDetails(game) {
 
   try {
     const pageRes = await fetchUrl(game.url);
-    if (pageRes.statusCode === 200) {
-      const html = pageRes.body;
-      
-      // Buscar género
-      const genreMatch = html.match(/<td[^>]*>Genre<\/td>\s*<td[^>]*><a[^>]*>([^<]+)<\/a>/i) ||
-                         html.match(/class="game_genre"[^>]*>([^<]+)<\/div>/i);
-      if (genreMatch) genre = genreMatch[1].trim();
-
-      // Buscar plataformas
-      if (html.includes('icon-windows8') || html.includes('Download for Windows') || html.includes('.exe')) p_windows = true;
-      if (html.includes('icon-tux') || html.includes('Download for Linux') || html.includes('.deb') || html.includes('.zip')) p_linux = true;
-      if (html.includes('icon-apple') || html.includes('Download for macOS') || html.includes('.dmg')) p_osx = true;
-      if (html.includes('web_flag') || html.includes('Play in browser') || game.type === 'html') p_browser = true;
+    
+    // Si la página da error 404, 403 o no está disponible, el juego ha sido borrado u ocultado
+    if (pageRes.statusCode === 404 || pageRes.statusCode === 403 || pageRes.statusCode === 302) {
+      console.log(`Juego oculto o borrado (${game.title}): HTTP ${pageRes.statusCode}`);
+      return null;
     }
+
+    const html = pageRes.body || '';
+
+    // Si la página indica que el juego está en borrador / oculto / restringido
+    if (html.includes('This game is unavailable') || html.includes('Draft') || html.includes('Restricted') || html.includes('Access restricted')) {
+      console.log(`Juego no público (${game.title}): Marcado como privado/borrador`);
+      return null;
+    }
+
+    // Buscar género
+    const genreMatch = html.match(/<td[^>]*>Genre<\/td>\s*<td[^>]*><a[^>]*>([^<]+)<\/a>/i) ||
+                       html.match(/class="game_genre"[^>]*>([^<]+)<\/div>/i);
+    if (genreMatch) genre = genreMatch[1].trim();
+
+    // Buscar plataformas
+    if (html.includes('icon-windows8') || html.includes('Download for Windows') || html.includes('.exe')) p_windows = true;
+    if (html.includes('icon-tux') || html.includes('Download for Linux') || html.includes('.deb') || html.includes('.zip')) p_linux = true;
+    if (html.includes('icon-apple') || html.includes('Download for macOS') || html.includes('.dmg')) p_osx = true;
+    if (html.includes('web_flag') || html.includes('Play in browser') || game.type === 'html') p_browser = true;
   } catch (e) {
-    console.warn(`No se pudo enriquecer ${game.title}:`, e.message);
+    console.warn(`No se pudo verificar página pública de ${game.title}:`, e.message);
   }
 
-  // Fallbacks conocidos para géneros si no los encuentra en la página básica
+  // Diccionario de respaldo para géneros conocidos
   const genreDictionary = {
     "oonga-bunga": { genre: "Fighting", p_windows: true },
     "verdades-incompletas": { genre: "Visual Novel", p_windows: true, p_linux: true, p_osx: true, p_browser: true },
     "soap-dodger": { genre: "Action / Bullet Hell", p_windows: true, p_linux: true, p_osx: true, p_browser: true },
     "castlecat-rpg": { genre: "Adventure", p_browser: true },
     "space-blitz": { genre: "Shooter", p_browser: true },
-    "just-an-idiot-dev": { genre: "Indie", p_windows: true, p_browser: true }
+    "just-an-idiot-dev": { genre: "Adventure", p_windows: true, p_browser: true }
   };
 
-  const slug = game.url.split('/').filter(Boolean).pop();
+  const slug = (game.url || '').split('/').filter(Boolean).pop();
   if (genreDictionary[slug]) {
     const d = genreDictionary[slug];
     if (genre === "Game" && d.genre) genre = d.genre;
@@ -81,7 +92,7 @@ async function enrichGameDetails(game) {
   };
 }
 
-// 1. Sincronización oficial de Itch.io
+// 1. Sincronización oficial de Itch.io (Solo juegos públicos y activos)
 async function syncItchGames() {
   const apiKey = process.env.ITCH_API_KEY;
   console.log("Sincronizando Itch.io con API Key...");
@@ -94,7 +105,8 @@ async function syncItchGames() {
       if (res.statusCode === 200) {
         const json = JSON.parse(res.body);
         if (json.games) {
-          const rawGames = json.games.filter(g => g.published !== false);
+          // Filtrar estrictamente solo juegos publicados (ignorar borradores y ocultos)
+          const rawGames = json.games.filter(g => g.published === true || (g.published !== false && g.published_at));
           const enrichedGames = [];
 
           for (const g of rawGames) {
@@ -111,11 +123,15 @@ async function syncItchGames() {
               published: true
             };
             const enriched = await enrichGameDetails(rawObj);
-            enrichedGames.push(enriched);
+            // Solo añadir si el juego está activo y es público
+            if (enriched !== null) {
+              enrichedGames.push(enriched);
+            }
           }
 
+          // Sobrescribir games.json con la lista limpia
           fs.writeFileSync('games.json', JSON.stringify(enrichedGames, null, 2), 'utf-8');
-          console.log(`Itch.io API: ${enrichedGames.length} juegos guardados con géneros y plataformas en games.json`);
+          console.log(`Itch.io API: ${enrichedGames.length} juegos públicos activos guardados en games.json`);
           return;
         }
       }
@@ -125,7 +141,7 @@ async function syncItchGames() {
   }
 }
 
-// 2. Sincronización oficial de YouTube (YouTube Data API v3 con Estadísticas: Views, Likes, Comments)
+// 2. Sincronización oficial de YouTube (Solo vídeos públicos y activos de la playlist)
 async function syncYouTubeVideos() {
   const apiKey = process.env.YOUTUBE_API_KEY;
   const channelId = "UCewJv1M1YAKfLcbld6iWxWg";
@@ -140,14 +156,16 @@ async function syncYouTubeVideos() {
         const uploadsPlaylistId = chanJson.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
 
         if (uploadsPlaylistId) {
-          // 2. Obtener los IDs de los vídeos
+          // 2. Obtener los IDs de los vídeos activos
           const playlistRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=12&key=${apiKey}`);
           if (playlistRes.statusCode === 200) {
             const playlistJson = JSON.parse(playlistRes.body);
-            const videoIds = (playlistJson.items || []).map(i => i.snippet?.resourceId?.videoId).filter(Boolean);
+            const videoIds = (playlistJson.items || [])
+              .map(i => i.snippet?.resourceId?.videoId)
+              .filter(Boolean);
 
             if (videoIds.length > 0) {
-              // 3. Consultar estadísticas detalladas de cada vídeo (snippet + statistics)
+              // 3. Consultar estadísticas de los vídeos
               const videosRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoIds.join(',')}&key=${apiKey}`);
               if (videosRes.statusCode === 200) {
                 const videosJson = JSON.parse(videosRes.body);
@@ -171,11 +189,10 @@ async function syncYouTubeVideos() {
                   };
                 });
 
-                if (videos.length > 0) {
-                  fs.writeFileSync('videos.json', JSON.stringify(videos, null, 2), 'utf-8');
-                  console.log(`YouTube Data API: ${videos.length} vídeos con estadísticas (views, likes, comments) guardados en videos.json`);
-                  return;
-                }
+                // Sobrescribir videos.json con los vídeos activos
+                fs.writeFileSync('videos.json', JSON.stringify(videos, null, 2), 'utf-8');
+                console.log(`YouTube Data API: ${videos.length} vídeos activos guardados en videos.json`);
+                return;
               }
             }
           }
