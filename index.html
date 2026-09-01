@@ -17,7 +17,7 @@
 </head>
 <body>
 
-  <!-- Header / Barra de Navegacion con Pestanias -->
+  <!-- Header con Pestanias -->
   <header>
     <div class="container nav-wrapper">
       <div class="brand" onclick="switchTab('home')">
@@ -47,7 +47,7 @@
 
   <main>
     <!-- ====================================================================
-         PESTANIA 1: INICIO & JUEGOS (GDevelop Screenshot 1, 2, 4)
+         PESTANIA 1: INICIO & JUEGOS
          ==================================================================== -->
     <div id="tab-home" class="tab-view active-tab">
       
@@ -73,7 +73,7 @@
             </div>
           </div>
 
-          <!-- Featured Hero Card (Nadaca style) -->
+          <!-- Featured Hero Card -->
           <div class="hero-card-featured">
             <div class="hero-card-media">
               <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga" class="hero-card-img" />
@@ -93,7 +93,7 @@
         </div>
       </section>
 
-      <!-- Seccion Carrusel de Juegos (Exact GDevelop Screenshot 4) -->
+      <!-- Carrusel de Juegos (Exacto a la imagen media_1788225113477.png) -->
       <section id="carousel-anchor" class="games-section">
         <div class="container">
           <h2 class="section-title-center">Juegos publicados</h2>
@@ -107,15 +107,11 @@
                   <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga!" class="game-thumb-img" />
                 </div>
                 <div class="game-content-box">
-                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                    <span style="color: var(--accent-purple-light);">Fighting</span>
-                    <span style="color: var(--text-dim);">Windows</span>
-                  </div>
                   <h3 class="game-item-title">Oonga Bunga!</h3>
                   <p class="game-item-desc">Compite con tus amigos para convertirte en el lider de la tribu. Solo habra un ganador.</p>
-                  <div class="game-meta-row">
-                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                    <span>&rarr;</span>
+                  <div class="game-platform-icons">
+                    <svg class="platform-icon-svg" viewBox="0 0 88 88" title="Windows"><path d="M0 12.4l35.6-4.9.1 33.7-35.7.2zm35.7 33.1l-.1 33.9-35.6-4.9V45.5zm4.8-26.2L88 0v40.8l-47.5.4zm47.5 35L40.5 88V47.5l47.5.3z"/></svg>
+                    <span>Windows</span>
                   </div>
                 </div>
               </a>
@@ -126,15 +122,13 @@
                   <img src="https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png" alt="Verdades Incompletas" class="game-thumb-img" />
                 </div>
                 <div class="game-content-box">
-                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                    <span style="color: var(--accent-purple-light);">Visual Novel</span>
-                    <span style="color: var(--text-dim);">Web &bull; PC</span>
-                  </div>
                   <h3 class="game-item-title">Verdades Incompletas</h3>
                   <p class="game-item-desc">Estas muerto... Descubre quien te asesino mientras tus tres amigos investigan tu hogar.</p>
-                  <div class="game-meta-row">
-                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                    <span>&rarr;</span>
+                  <div class="game-platform-icons">
+                    <svg class="platform-icon-svg" viewBox="0 0 24 24" title="Web"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <svg class="platform-icon-svg" viewBox="0 0 88 88" title="Windows"><path d="M0 12.4l35.6-4.9.1 33.7-35.7.2zm35.7 33.1l-.1 33.9-35.6-4.9V45.5zm4.8-26.2L88 0v40.8l-47.5.4zm47.5 35L40.5 88V47.5l47.5.3z"/></svg>
+                    <svg class="platform-icon-svg" viewBox="0 0 24 24" title="Linux"><path d="M12 2C9.2 2 7 4.2 7 7v4.5c0 1.2-.4 2.3-1.2 3.1-.5.5-.8 1.2-.8 1.9 0 1.7 1.3 3 3 3 .4 0 .8-.1 1.2-.3 1.2 1.1 2.8 1.8 4.8 1.8s3.6-.7 4.8-1.8c.4.2.8.3 1.2.3 1.7 0 3-1.3 3-3 0-.7-.3-1.4-.8-1.9-.8-.8-1.2-1.9-1.2-3.1V7c0-2.8-2.2-5-5-5z"/></svg>
+                    <span>Web &bull; PC</span>
                   </div>
                 </div>
               </a>
@@ -145,15 +139,12 @@
                   <img src="https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png" alt="Soap Dodger" class="game-thumb-img" />
                 </div>
                 <div class="game-content-box">
-                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                    <span style="color: var(--accent-purple-light);">Bullet Hell</span>
-                    <span style="color: var(--text-dim);">Web &bull; PC</span>
-                  </div>
                   <h3 class="game-item-title">Soap Dodger</h3>
                   <p class="game-item-desc">Agudiza tus reflejos en este peliagudo Bullet Hell. No pierdas bocanadas de aire.</p>
-                  <div class="game-meta-row">
-                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                    <span>&rarr;</span>
+                  <div class="game-platform-icons">
+                    <svg class="platform-icon-svg" viewBox="0 0 24 24" title="Web"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <svg class="platform-icon-svg" viewBox="0 0 88 88" title="Windows"><path d="M0 12.4l35.6-4.9.1 33.7-35.7.2zm35.7 33.1l-.1 33.9-35.6-4.9V45.5zm4.8-26.2L88 0v40.8l-47.5.4zm47.5 35L40.5 88V47.5l47.5.3z"/></svg>
+                    <span>Web &bull; PC</span>
                   </div>
                 </div>
               </a>
@@ -164,15 +155,11 @@
                   <img src="https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png" alt="CastleCat RPG" class="game-thumb-img" />
                 </div>
                 <div class="game-content-box">
-                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                    <span style="color: var(--accent-purple-light);">Adventure</span>
-                    <span style="color: var(--text-dim);">Play in Browser</span>
-                  </div>
                   <h3 class="game-item-title">CastleCat RPG</h3>
                   <p class="game-item-desc">Naciste gato, pero moriras como leyenda en este juego de exploracion y mazmorras.</p>
-                  <div class="game-meta-row">
-                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                    <span>&rarr;</span>
+                  <div class="game-platform-icons">
+                    <svg class="platform-icon-svg" viewBox="0 0 24 24" title="Web"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <span>Play in Browser</span>
                   </div>
                 </div>
               </a>
@@ -183,15 +170,11 @@
                   <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
                 </div>
                 <div class="game-content-box">
-                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                    <span style="color: var(--accent-purple-light);">Arcade Shooter</span>
-                    <span style="color: var(--text-dim);">Play in Browser</span>
-                  </div>
                   <h3 class="game-item-title">Space Blitz</h3>
                   <p class="game-item-desc">Un trepidante shooter arcade donde tu nave espacial evoluciona con mejoras dinamicas.</p>
-                  <div class="game-meta-row">
-                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                    <span>&rarr;</span>
+                  <div class="game-platform-icons">
+                    <svg class="platform-icon-svg" viewBox="0 0 24 24" title="Web"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <span>Play in Browser</span>
                   </div>
                 </div>
               </a>
@@ -199,16 +182,20 @@
             </div>
           </div>
 
-          <!-- Controles del Carrusel -->
+          <!-- Controles del Carrusel con Iconos SVG -->
           <div class="carousel-nav-bar">
-            <button id="carouselPrev" class="carousel-arrow" aria-label="Anterior">&larr;</button>
+            <button id="carouselPrev" class="carousel-arrow" aria-label="Anterior">
+              <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
             <div id="carouselPills" class="carousel-pills"></div>
-            <button id="carouselNext" class="carousel-arrow" aria-label="Siguiente">&rarr;</button>
+            <button id="carouselNext" class="carousel-arrow" aria-label="Siguiente">
+              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
         </div>
       </section>
 
-      <!-- Banner Blanco de Alto Contraste (GDevelop Screenshot 3) -->
+      <!-- Banner Blanco de Alto Contraste -->
       <section class="banner-white-section">
         <div class="container banner-white-grid">
           <div>
@@ -247,7 +234,7 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 2: APLICACIONES (Exact GDevelop Screenshot 5)
+         PESTANIA 2: APLICACIONES
          ==================================================================== -->
     <div id="tab-apps" class="tab-view">
       <section class="apps-section" style="padding-top: 50px;">
@@ -281,7 +268,10 @@
                 </ul>
 
                 <div class="app-platforms-badge-row">
-                  <span>WEB &bull; BLUETOOTH &bull; MIT</span>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <svg class="platform-icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                    <span>WEB &bull; MIT</span>
+                  </div>
                   <a href="https://paucg06.github.io/BrightLight-Bluetooth/" target="_blank" rel="noopener" class="app-action-link">Abrir Web &rarr;</a>
                 </div>
               </div>
@@ -309,7 +299,11 @@
                 </ul>
 
                 <div class="app-platforms-badge-row">
-                  <span>WINDOWS &bull; LINUX &bull; MAC</span>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <svg class="platform-icon-svg" viewBox="0 0 88 88"><path d="M0 12.4l35.6-4.9.1 33.7-35.7.2zm35.7 33.1l-.1 33.9-35.6-4.9V45.5zm4.8-26.2L88 0v40.8l-47.5.4zm47.5 35L40.5 88V47.5l47.5.3z"/></svg>
+                    <svg class="platform-icon-svg" viewBox="0 0 24 24"><path d="M12 2C9.2 2 7 4.2 7 7v4.5c0 1.2-.4 2.3-1.2 3.1-.5.5-.8 1.2-.8 1.9 0 1.7 1.3 3 3 3 .4 0 .8-.1 1.2-.3 1.2 1.1 2.8 1.8 4.8 1.8s3.6-.7 4.8-1.8c.4.2.8.3 1.2.3 1.7 0 3-1.3 3-3 0-.7-.3-1.4-.8-1.9-.8-.8-1.2-1.9-1.2-3.1V7c0-2.8-2.2-5-5-5z"/></svg>
+                    <span>WIN &bull; LINUX</span>
+                  </div>
                   <a href="https://github.com/paucg06/Etern-Notes/releases" target="_blank" rel="noopener" class="app-action-link">Descargar &rarr;</a>
                 </div>
               </div>
@@ -326,7 +320,7 @@
               </div>
 
               <div class="app-preview-media">
-                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#161c2b; color:var(--text-dim); font-size:0.9rem; font-weight:700;">
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#14141c; color:var(--text-dim); font-size:0.9rem; font-weight:700;">
                   SYNTHESIZER TOOL
                 </div>
               </div>
@@ -339,8 +333,8 @@
                 </ul>
 
                 <div class="app-platforms-badge-row">
-                  <span>AUDIO &bull; SFX &bull; EN DESARROLLO</span>
-                  <span style="color:var(--text-dim);">Pronto</span>
+                  <span>AUDIO &bull; SFX</span>
+                  <span style="color:var(--text-dim);">En Desarrollo</span>
                 </div>
               </div>
             </article>
@@ -356,7 +350,7 @@
               </div>
 
               <div class="app-preview-media">
-                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#161c2b; color:var(--text-dim); font-size:0.9rem; font-weight:700;">
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#14141c; color:var(--text-dim); font-size:0.9rem; font-weight:700;">
                   SOUNDBOARD LIBRARY
                 </div>
               </div>
@@ -369,7 +363,7 @@
                 </ul>
 
                 <div class="app-platforms-badge-row">
-                  <span>DESKTOP &bull; PRONTO</span>
+                  <span>DESKTOP APP</span>
                   <span style="color:var(--text-dim);">Pronto</span>
                 </div>
               </div>
