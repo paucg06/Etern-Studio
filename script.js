@@ -1,146 +1,158 @@
 ﻿// ==========================================================================
-// Etern Studio - Interactive Controller & Itch.io Dynamic Loader
+// Etern Studio - Interactive Controller & Itch.io Dynamic Scraper
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  initGamesCarousel();
-  initDynamicItchLoader();
+  initCarousel();
+  fetchLiveItchGames();
 });
 
-// ==========================================================================
-// 1. Interactive Games Carousel (GDevelop Style)
-// ==========================================================================
-function initGamesCarousel() {
+// Carousel State
+let currentIndex = 0;
+
+function getCardsPerView() {
+  if (window.innerWidth < 768) return 1;
+  if (window.innerWidth < 1024) return 2;
+  return 3;
+}
+
+function initCarousel() {
   const track = document.getElementById('carouselTrack');
   const prevBtn = document.getElementById('carouselPrev');
   const nextBtn = document.getElementById('carouselNext');
-  const dotsContainer = document.getElementById('carouselDots');
+  const pillsContainer = document.getElementById('carouselPills');
 
-  if (!track || !prevBtn || !nextBtn) return;
+  if (!track || !prevBtn || !nextBtn || !pillsContainer) return;
 
-  let currentIndex = 0;
-  let cardsPerView = getCardsPerView();
-  let totalCards = track.children.length;
+  const totalCards = track.children.length;
+  const cardsPerView = getCardsPerView();
+  const maxIndex = Math.max(0, totalCards - cardsPerView);
 
-  function getCardsPerView() {
-    if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 1024) return 2;
-    return 3;
-  }
+  // Render Pill Indicators
+  pillsContainer.innerHTML = '';
+  const numPills = maxIndex + 1;
 
-  function renderDots() {
-    dotsContainer.innerHTML = '';
-    const maxIndex = Math.max(0, totalCards - cardsPerView);
-    const numDots = maxIndex + 1;
-
-    for (let i = 0; i < numDots; i++) {
-      const dot = document.createElement('div');
-      dot.className = `carousel-dot ${i === currentIndex ? 'active' : ''}`;
-      dot.addEventListener('click', () => {
-        currentIndex = i;
-        updateCarousel();
-      });
-      dotsContainer.appendChild(dot);
-    }
+  for (let i = 0; i < numPills; i++) {
+    const pill = document.createElement('div');
+    pill.className = `carousel-pill ${i === currentIndex ? 'active' : ''}`;
+    pill.addEventListener('click', () => {
+      currentIndex = i;
+      updateCarousel();
+    });
+    pillsContainer.appendChild(pill);
   }
 
   function updateCarousel() {
-    cardsPerView = getCardsPerView();
-    const maxIndex = Math.max(0, totalCards - cardsPerView);
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
+    const currentCardsPerView = getCardsPerView();
+    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
+    if (currentIndex > currentMax) currentIndex = currentMax;
 
-    const cardWidth = track.children[0] ? track.children[0].offsetWidth : 300;
+    const firstCard = track.children[0];
+    const cardWidth = firstCard ? firstCard.offsetWidth : 320;
     const gap = 24;
     const offset = currentIndex * (cardWidth + gap);
 
     track.style.transform = `translateX(-${offset}px)`;
 
-    // Update active dot
-    const dots = dotsContainer.querySelectorAll('.carousel-dot');
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === currentIndex);
+    // Update active pill
+    const pills = pillsContainer.querySelectorAll('.carousel-pill');
+    pills.forEach((pill, idx) => {
+      pill.classList.toggle('active', idx === currentIndex);
     });
 
-    prevBtn.style.opacity = currentIndex === 0 ? '0.4' : '1';
-    nextBtn.style.opacity = currentIndex >= maxIndex ? '0.4' : '1';
+    prevBtn.style.opacity = currentIndex === 0 ? '0.35' : '1';
+    nextBtn.style.opacity = currentIndex >= currentMax ? '0.35' : '1';
   }
 
-  prevBtn.addEventListener('click', () => {
+  prevBtn.onclick = () => {
     if (currentIndex > 0) {
       currentIndex--;
       updateCarousel();
     }
-  });
+  };
 
-  nextBtn.addEventListener('click', () => {
-    const maxIndex = Math.max(0, totalCards - cardsPerView);
-    if (currentIndex < maxIndex) {
+  nextBtn.onclick = () => {
+    const currentCardsPerView = getCardsPerView();
+    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
+    if (currentIndex < currentMax) {
       currentIndex++;
       updateCarousel();
     }
-  });
+  };
 
-  window.addEventListener('resize', () => {
-    cardsPerView = getCardsPerView();
-    renderDots();
-    updateCarousel();
-  });
+  window.onresize = () => {
+    initCarousel();
+  };
 
-  renderDots();
   updateCarousel();
 }
 
-// ==========================================================================
-// 2. Dynamic Itch.io Games Fetcher
-// ==========================================================================
-async function initDynamicItchLoader() {
+// Dynamic Live Itch.io Scraper
+async function fetchLiveItchGames() {
   const username = "eternodev";
   const track = document.getElementById('carouselTrack');
   if (!track) return;
 
   try {
-    // Intento de conexión al feed RSS público de Itch.io mediante CORS proxy seguro
-    const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://${username}.itch.io/feed.xml`);
-    if (!response.ok) return;
-    
-    const data = await response.json();
-    if (data.status === 'ok' && data.items && data.items.length > 0) {
-      // Limpiar datos estáticos y renderizar los juegos públicos de Itch.io
-      track.innerHTML = '';
-      data.items.forEach(item => {
+    // Consulta en vivo al perfil de Itch.io mediante un proxy CORS seguro
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://${username}.itch.io/`)}`;
+    const res = await fetch(proxyUrl);
+    if (!res.ok) return;
+
+    const data = await res.json();
+    if (!data.contents) return;
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data.contents, 'text/html');
+    const gameCells = doc.querySelectorAll('.game_cell');
+
+    if (gameCells && gameCells.length > 0) {
+      track.innerHTML = ''; // Limpiar y renderizar juegos en vivo
+
+      gameCells.forEach(cell => {
+        const titleLink = cell.querySelector('.game_title a.title');
+        const imgEl = cell.querySelector('img');
+        const textEl = cell.querySelector('.game_text');
+        const genreEl = cell.querySelector('.game_genre');
+
+        if (!titleLink) return;
+
+        const title = titleLink.textContent.trim();
+        const link = titleLink.href;
+        const thumb = (imgEl && (imgEl.getAttribute('data-lazy_src') || imgEl.src)) || 'https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png';
+        const desc = textEl ? textEl.textContent.trim() : 'Videojuego disponible en Itch.io';
+        const genre = genreEl ? genreEl.textContent.trim() : 'Indie Game';
+
         const card = document.createElement('a');
-        card.href = item.link;
+        card.href = link;
         card.target = '_blank';
         card.rel = 'noopener';
-        card.className = 'game-card';
+        card.className = 'game-card-item';
 
-        // Extraer imagen si existe
-        const thumbnail = item.thumbnail || (item.enclosure ? item.enclosure.link : 'https://img.itch.zone/aW1nLzE2NTg1MTY1LnBuZw==/315x250%23c/default.png');
-        
         card.innerHTML = `
-          <div class="game-cover-wrapper">
-            <img src="${thumbnail}" alt="${item.title}" class="game-cover-img" onerror="this.src='assets/game_placeholder.png'" />
+          <div class="game-thumb-box">
+            <img src="${thumb}" alt="${title}" class="game-thumb-img" loading="lazy" />
           </div>
-          <div class="game-body">
-            <div class="game-tags-row">
-              <span class="game-tag highlight">Itch.io</span>
-              <span class="game-tag">Unity</span>
+          <div class="game-content-box">
+            <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
+              <span style="color: var(--accent-purple-light);">${genre}</span>
+              <span style="color: var(--text-sub);">Itch.io</span>
             </div>
-            <h3 class="game-title">${item.title}</h3>
-            <p class="game-desc">${item.description.replace(/<[^>]*>?/gm, '').substring(0, 95)}...</p>
-            <div class="game-card-footer">
-              <span>Jugar Ahora</span>
-              <span>↗</span>
+            <h3 class="game-item-title">${title}</h3>
+            <p class="game-item-desc">${desc}</p>
+            <div class="game-meta-row">
+              <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
+              <span>&rarr;</span>
             </div>
           </div>
         `;
         track.appendChild(card);
       });
 
-      // Reinicializar carrusel
-      initGamesCarousel();
+      // Reinicializar carrusel con los datos dinámicos
+      initCarousel();
     }
-  } catch (err) {
-    console.log("Usando proyectos preconfigurados de Itch.io:", err);
+  } catch (e) {
+    console.log("Cargando juegos preconfigurados de Itch.io:", e);
   }
 }
