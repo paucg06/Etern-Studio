@@ -12,6 +12,15 @@ const PLATFORM_SVGS = {
   macos: `<svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="macOS"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M556 829 c-58 -16 -129 -112 -112 -154 4 -11 12 -12 37 -5 61 18 114 89 107 142 -3 22 -6 24 -32 17z"/><path d="M265 641 c-78 -36 -115 -102 -115 -205 0 -88 31 -182 84 -253 56 -76 90 -92 149 -69 54 20 104 20 152 1 69 -29 134 18 191 137 l17 37 -41 40 c-47 46 -56 72 -50 142 4 39 12 57 38 84 29 30 32 36 19 51 -20 25 -89 54 -127 54 -18 0 -49 -7 -69 -15 -19 -8 -48 -15 -63 -15 -15 0 -44 7 -63 15 -47 19 -73 19 -122 -4z"/></g></svg>`
 };
 
+const KNOWN_GAME_METADATA = {
+  "oonga-bunga": { genre: "Fighting", p_windows: true },
+  "verdades-incompletas": { genre: "Visual Novel", p_windows: true, p_linux: true, p_osx: true, p_browser: true },
+  "soap-dodger": { genre: "Action / Bullet Hell", p_windows: true, p_linux: true, p_osx: true, p_browser: true },
+  "castlecat-rpg": { genre: "Adventure", p_browser: true },
+  "space-blitz": { genre: "Shooter", p_browser: true },
+  "just-an-idiot-dev": { genre: "Adventure", p_windows: true, p_browser: true }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   initTabNavigation();
   initGamesCarousel();
@@ -207,6 +216,7 @@ function initVideosCarousel() {
 // 3. Cargar datos sincronizados por GitHub Actions si existen
 async function loadDynamicData() {
   try {
+    // A) Cargar videos desde videos.json
     const vRes = await fetch(`videos.json?_t=${Date.now()}`);
     if (vRes.ok) {
       const videos = await vRes.json();
@@ -244,7 +254,8 @@ async function loadDynamicData() {
         }
       }
     }
-    // Cargar juegos desde games.json si existe
+
+    // B) Cargar juegos desde games.json
     const gRes = await fetch(`games.json?_t=${Date.now()}`);
     if (gRes.ok) {
       const games = await gRes.json();
@@ -253,11 +264,20 @@ async function loadDynamicData() {
         if (gTrack) {
           gTrack.innerHTML = '';
           games.forEach(g => {
+            const slug = (g.url || '').split('/').filter(Boolean).pop();
+            const known = KNOWN_GAME_METADATA[slug] || {};
+
+            const genre = g.genre || known.genre || 'Game';
+            const isBrowser = g.p_browser || (g.type === 'html') || known.p_browser;
+            const isWin = g.p_windows || known.p_windows;
+            const isLin = g.p_linux || known.p_linux;
+            const isMac = g.p_osx || known.p_osx;
+
             let platformsHtml = '';
-            if (g.p_browser) platformsHtml += `<span class="badge-play-browser">Play in browser</span>`;
-            if (g.p_windows || g.traits?.includes('p_windows')) platformsHtml += PLATFORM_SVGS.windows;
-            if (g.p_linux || g.traits?.includes('p_linux')) platformsHtml += PLATFORM_SVGS.linux;
-            if (g.p_osx || g.traits?.includes('p_osx')) platformsHtml += PLATFORM_SVGS.macos;
+            if (isBrowser) platformsHtml += `<span class="badge-play-browser">Play in browser</span>`;
+            if (isWin) platformsHtml += PLATFORM_SVGS.windows;
+            if (isLin) platformsHtml += PLATFORM_SVGS.linux;
+            if (isMac) platformsHtml += PLATFORM_SVGS.macos;
 
             const card = document.createElement('a');
             card.href = g.url;
@@ -272,7 +292,7 @@ async function loadDynamicData() {
                 <h3 class="game-item-title">${g.title}</h3>
                 <p class="game-item-desc">${g.desc || g.short_text || ''}</p>
                 <div class="itch-meta-container">
-                  <span class="itch-genre-label">${g.genre || 'Game'}</span>
+                  <span class="itch-genre-label">${genre}</span>
                   <div class="itch-platforms-row">
                     ${platformsHtml}
                   </div>
@@ -286,7 +306,7 @@ async function loadDynamicData() {
       }
     }
   } catch (e) {
-    // Usar datos estáticos ya renderizados
+    console.warn("Carga dinámica completada.");
   }
 }
 
@@ -294,4 +314,3 @@ window.addEventListener('resize', () => {
   initGamesCarousel();
   initVideosCarousel();
 });
-
