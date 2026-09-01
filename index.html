@@ -27,7 +27,6 @@
       --text-main: #FFFFFF;
       --text-muted: #CCCCCE;
       --text-dim: #8E8E93;
-      --text-genre: #E2E8F0;
 
       --accent-purple: #7C3AED;
       --accent-purple-light: #8B5CF6;
@@ -178,13 +177,12 @@
     }
 
     .btn-white {
-      background: #FFFFFF !important;
-      color: #0F172A !important;
-      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      color: #0B121E;
     }
 
     .btn-white:hover {
-      background: #F1F5F9 !important;
+      background: #F1F5F9;
       transform: translateY(-1px);
     }
 
@@ -371,12 +369,12 @@
       padding: 18px 20px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       flex-grow: 1;
     }
 
     .game-item-title {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 800;
       color: #FFFFFF;
     }
@@ -391,39 +389,37 @@
       overflow: hidden;
     }
 
-    /* Itch.io Meta Badges con Iconos y Texto Aumentados */
+    /* Itch.io Meta Badges & User Custom SVGs (+20% size) */
     .itch-meta-container {
       margin-top: auto;
       padding-top: 10px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
 
     .itch-genre-label {
-      font-size: 0.92rem;
-      color: var(--text-genre);
-      font-weight: 700;
-      letter-spacing: 0.2px;
+      font-size: 0.82rem;
+      color: #8E8E93;
+      font-weight: 600;
     }
 
     .itch-platforms-row {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       flex-wrap: wrap;
     }
 
     .badge-play-browser {
-      background: #E2E8F0;
-      color: #0F172A;
-      font-size: 0.78rem;
+      background: #d8d8d8;
+      color: #1a1a1a;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 3px 9px;
+      padding: 3px 8px;
       border-radius: 4px;
       line-height: 1.3;
-      display: inline-flex;
-      align-items: center;
+      letter-spacing: 0.2px;
     }
 
     .itch-platform-svg {
@@ -434,13 +430,12 @@
       fill: #8E8E93;
       flex-shrink: 0;
       display: inline-block;
-      transition: fill 0.15s, transform 0.15s;
+      transition: fill 0.15s;
     }
 
     .game-card-item:hover .itch-platform-svg,
     .app-box-card:hover .itch-platform-svg {
       fill: #FFFFFF;
-      transform: scale(1.05);
     }
 
     /* Carousel Nav */
@@ -453,8 +448,8 @@
     }
 
     .carousel-arrow {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: #2A2A35;
       border: 1px solid #34343C;
@@ -472,8 +467,8 @@
     }
 
     .carousel-arrow svg {
-      width: 18px !important;
-      height: 18px !important;
+      width: 16px !important;
+      height: 16px !important;
       stroke: #FFFFFF;
       stroke-width: 2.5;
       fill: none;
@@ -857,7 +852,7 @@
         </div>
       </section>
 
-      <!-- Carrusel de Juegos (Exacto al estilo Itch.io con iconos y textos ampliados) -->
+      <!-- Carrusel de Juegos (Exacto al estilo Itch.io / GDevelop con tus SVG) -->
       <section id="carousel-anchor" class="games-section">
         <div class="container">
           <h2 class="section-title-center">Juegos publicados</h2>
@@ -943,10 +938,10 @@
                 </div>
               </a>
 
-              <!-- Juego 5: Space Blitz -->
+              <!-- Juego 5: Space Blitz (Thumbnail 100% oficial de Itch.io) -->
               <a href="https://eternodev.itch.io/space-blitz" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
-                  <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
+                  <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Space Blitz</h3>
@@ -967,11 +962,11 @@
           <!-- Controles del Carrusel -->
           <div class="carousel-nav-bar">
             <button id="carouselPrev" class="carousel-arrow" aria-label="Anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <div id="carouselPills" class="carousel-pills"></div>
             <button id="carouselNext" class="carousel-arrow" aria-label="Siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
             </button>
           </div>
         </div>
@@ -1016,7 +1011,7 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 2: APLICACIONES (Exact GDevelop Screenshot 5)
+         PESTANIA 2: APLICACIONES (Use in browser badge)
          ==================================================================== -->
     <div id="tab-apps" class="tab-view">
       <section class="apps-section" style="padding-top: 50px;">
@@ -1051,7 +1046,7 @@
 
                 <div class="app-platforms-badge-row">
                   <div class="itch-platforms-row">
-                    <span class="badge-play-browser">Play in browser</span>
+                    <span class="badge-play-browser">Use in browser</span>
                   </div>
                   <a href="https://paucg06.github.io/BrightLight-Bluetooth/" target="_blank" rel="noopener" class="app-action-link">Abrir Web &rarr;</a>
                 </div>

@@ -1,10 +1,10 @@
 // ==========================================================================
-// EternoDev Studio - Tabbed Navigation & Dynamic Live Itch.io Scraper
+// EternoDev Studio - Tabbed Navigation & Real-time Live Itch.io Scraper
 // ==========================================================================
 
 let currentCarouselIndex = 0;
 
-// Iconos vectoriales oficiales del usuario (Windows, Linux, macOS)
+// Iconos vectoriales personalizados del usuario (Windows, Linux, macOS)
 const PLATFORM_SVGS = {
   windows: `<svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Windows"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M675 785 c-44 -7 -119 -18 -167 -25 l-88 -12 0 -134 0 -134 185 0 186 0 -3 157 c-3 132 -5 158 -18 159 -8 1 -51 -4 -95 -11z"/><path d="M220 721 l-115 -16 -3 -112 -3 -113 136 0 135 0 0 130 c0 118 -2 130 -17 129 -10 -1 -70 -9 -133 -18z"/><path d="M100 325 c0 -132 -14 -117 125 -135 44 -6 95 -13 113 -16 l32 -5 0 136 0 135 -135 0 -135 0 0 -115z"/><path d="M420 302 l0 -139 178 -24 c97 -14 180 -22 185 -19 4 4 6 76 5 161 l-3 154 -182 3 -183 2 0 -138z"/></g></svg>`,
   linux: `<svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Linux"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M350 837 c-170 -40 -225 -148 -213 -419 4 -112 3 -131 -21 -211 -14 -48 -26 -90 -26 -93 0 -3 21 -4 47 -2 l47 3 11 48 10 48 36 -31 c42 -34 79 -50 118 -50 28 0 184 70 213 97 15 13 17 12 23 -9 4 -13 14 -42 22 -65 l16 -43 97 0 98 0 -42 83 -43 82 -6 156 c-8 189 -27 264 -87 331 -22 25 -58 53 -81 62 -57 23 -152 28 -219 13z m199 -293 c19 -18 25 -36 28 -81 4 -67 -4 -85 -36 -76 -18 5 -21 10 -16 31 7 28 -10 78 -30 86 -19 7 -55 -22 -55 -45 0 -34 -44 -21 -48 14 -4 36 18 69 60 90 38 19 63 14 97 -19z m-265 -15 c28 -33 36 -89 12 -89 -7 0 -16 9 -19 20 -3 11 -13 23 -22 27 -27 10 -48 -25 -41 -69 7 -41 -6 -51 -24 -19 -23 43 -2 140 32 154 26 11 37 6 62 -24z m172 -153 c98 -44 109 -51 112 -69 5 -27 -15 -45 -100 -88 -109 -55 -139 -53 -218 12 -35 30 -60 58 -58 67 2 8 32 37 67 65 75 57 95 58 197 13z"/><path d="M223 315 c-20 -53 139 -84 255 -50 41 13 52 20 52 37 0 17 -4 19 -27 13 -64 -16 -199 -17 -237 -1 -32 13 -38 14 -43 1z"/></g></svg>`,
@@ -135,29 +135,65 @@ function initCarousel() {
   updateCarousel();
 }
 
-// Scraper en Vivo de Itch.io con actualizacion de portadas, iconos y generos
+// Scraper en Vivo de Itch.io con Bypass de Caché y Múltiples Proxies
 async function fetchLiveItchGames() {
   const username = "eternodev";
   const track = document.getElementById('carouselTrack');
   if (!track) return;
 
+  const timestamp = Date.now();
+  const targetUrl = `https://${username}.itch.io/?_t=${timestamp}`;
+
+  // Lista de proxies CORS con tiempo de espera
+  const proxies = [
+    `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}&disableCache=true`,
+    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
+    `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`
+  ];
+
+  let rawHtml = null;
+
+  for (const proxy of proxies) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
+      
+      const res = await fetch(proxy, { signal: controller.signal });
+      clearTimeout(timeoutId);
+
+      if (!res.ok) continue;
+
+      const contentType = res.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        const json = await res.json();
+        rawHtml = json.contents || json.data || json;
+      } else {
+        rawHtml = await res.text();
+      }
+
+      if (rawHtml && typeof rawHtml === 'string' && rawHtml.includes('game_cell')) {
+        break; // Éxito
+      }
+    } catch (e) {
+      // Intentar con el siguiente proxy
+    }
+  }
+
+  if (!rawHtml || typeof rawHtml !== 'string' || !rawHtml.includes('game_cell')) {
+    console.log("Itch.io Live: Utilizando datos oficiales precargados.");
+    return;
+  }
+
   try {
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://${username}.itch.io/`)}`;
-    const res = await fetch(proxyUrl);
-    if (!res.ok) return;
-
-    const data = await res.json();
-    if (!data.contents) return;
-
     const parser = new DOMParser();
-    const doc = parser.parseFromString(data.contents, 'text/html');
+    const doc = parser.parseFromString(rawHtml, 'text/html');
     const gameCells = doc.querySelectorAll('.game_cell');
 
     if (gameCells && gameCells.length > 0) {
       track.innerHTML = '';
 
       gameCells.forEach(cell => {
-        const titleLink = cell.querySelector('.game_title a.title');
+        const titleLink = cell.querySelector('.game_title a.title, .game_title a');
         const imgEl = cell.querySelector('img');
         const textEl = cell.querySelector('.game_text');
         const genreEl = cell.querySelector('.game_genre');
@@ -167,26 +203,34 @@ async function fetchLiveItchGames() {
 
         const title = titleLink.textContent.trim();
         const link = titleLink.href;
-        const thumb = (imgEl && (imgEl.getAttribute('data-lazy_src') || imgEl.getAttribute('srcset') || imgEl.src)) || 'https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png';
+        
+        let thumb = (imgEl && (imgEl.getAttribute('data-lazy_src') || imgEl.src)) || 'https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png';
+        // Asegurar que use HTTPS
+        if (thumb.startsWith('http://')) thumb = thumb.replace('http://', 'https://');
+
         const desc = textEl ? textEl.textContent.trim() : 'Videojuego disponible en Itch.io';
         const genre = genreEl ? genreEl.textContent.trim() : 'Game';
 
+        // Analizar plataformas e iconos
         let hasBrowser = false;
         let hasWindows = false;
         let hasLinux = false;
         let hasMac = false;
 
         if (platformEl) {
-          if (platformEl.querySelector('.web_flag') || platformEl.textContent.includes('browser')) {
+          const platText = platformEl.textContent.toLowerCase();
+          const platHtml = platformEl.innerHTML.toLowerCase();
+
+          if (platformEl.querySelector('.web_flag') || platText.includes('browser') || platHtml.includes('web_flag')) {
             hasBrowser = true;
           }
-          if (platformEl.querySelector('.icon-windows8') || platformEl.querySelector('[title*="Windows"]')) {
+          if (platformEl.querySelector('.icon-windows8') || platHtml.includes('windows') || platHtml.includes('win8')) {
             hasWindows = true;
           }
-          if (platformEl.querySelector('.icon-tux') || platformEl.querySelector('[title*="Linux"]')) {
+          if (platformEl.querySelector('.icon-tux') || platHtml.includes('linux') || platHtml.includes('tux')) {
             hasLinux = true;
           }
-          if (platformEl.querySelector('.icon-apple') || platformEl.querySelector('[title*="macOS"]') || platformEl.querySelector('[title*="Mac"]')) {
+          if (platformEl.querySelector('.icon-apple') || platHtml.includes('macos') || platHtml.includes('apple') || platHtml.includes('mac')) {
             hasMac = true;
           }
         }
@@ -230,8 +274,9 @@ async function fetchLiveItchGames() {
       });
 
       initCarousel();
+      console.log(`Itch.io Live: ${gameCells.length} juegos actualizados en tiempo real.`);
     }
   } catch (e) {
-    console.log("Itch.io live update: datos precargados activos.", e);
+    console.log("Itch.io Live Error:", e);
   }
 }
