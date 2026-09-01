@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "id": 3533624,
+    "title": "CastleCat RPG",
+    "url": "https://eternodev.itch.io/castlecat-rpg",
+    "cover_url": "https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png",
+    "short_text": "¡Naciste gato, pero morirás como leyenda!",
+    "type": "html",
+    "p_windows": false,
+    "p_linux": true,
+    "p_osx": false,
+    "published": true,
+    "genre": "Adventure",
+    "p_browser": true
+  },
+  {
+    "id": 4244918,
+    "title": "Oonga Bunga!",
+    "url": "https://eternodev.itch.io/oonga-bunga",
+    "cover_url": "https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png",
+    "short_text": "Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?",
+    "type": "default",
+    "p_windows": true,
+    "p_linux": true,
+    "p_osx": false,
+    "published": true,
+    "genre": "Fighting",
+    "p_browser": false
+  },
+  {
+    "id": 3269482,
+    "title": "Soap Dodger",
+    "url": "https://eternodev.itch.io/soap-dodger",
+    "cover_url": "https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png",
+    "short_text": "Agudiza tus reflejos en este peliagudo Bullet Hell. ¡No pierdas bocanadas de aire en tan punzante cámara!",
+    "type": "html",
+    "p_windows": true,
+    "p_linux": true,
+    "p_osx": true,
+    "published": true,
+    "genre": "Action",
+    "p_browser": true
+  },
+  {
+    "id": 4692794,
+    "title": "Space Blitz",
+    "url": "https://eternodev.itch.io/space-blitz",
+    "cover_url": "https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png",
+    "short_text": "Un trepidante shooter arcade donde tu nave evoluciona con mejoras visuales dinámicas.",
+    "type": "html",
+    "p_windows": false,
+    "p_linux": false,
+    "p_osx": false,
+    "published": true,
+    "genre": "Shooter",
+    "p_browser": true
+  },
+  {
+    "id": 3974299,
+    "title": "Verdades Incompletas",
+    "url": "https://eternodev.itch.io/verdades-incompletas",
+    "cover_url": "https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png",
+    "short_text": "Estás muerto... Descubre quién te asesinó mientras tus tres amigos investigan tu hogar.",
+    "type": "html",
+    "p_windows": true,
+    "p_linux": true,
+    "p_osx": true,
+    "published": true,
+    "genre": "Visual Novel",
+    "p_browser": true
+  }
+]
