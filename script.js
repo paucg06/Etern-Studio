@@ -1,8 +1,9 @@
 // ==========================================================================
-// EternoDev Studio - Tabbed Navigation & Real-time Live Sync Engine
+// EternoDev Studio - Tabbed Navigation, Games & Videos Dual Carousels
 // ==========================================================================
 
-let currentCarouselIndex = 0;
+let currentGameIndex = 0;
+let currentVideoIndex = 0;
 
 // Iconos vectoriales personalizados del usuario (Windows, Linux, macOS)
 const PLATFORM_SVGS = {
@@ -13,8 +14,8 @@ const PLATFORM_SVGS = {
 
 document.addEventListener('DOMContentLoaded', () => {
   initTabNavigation();
-  initCarousel();
-  fetchLiveItchGames();
+  initGamesCarousel();
+  initVideosCarousel();
 });
 
 // Tab Switcher
@@ -41,7 +42,9 @@ function switchTab(tabId) {
   }
 
   if (tabId === 'home') {
-    setTimeout(initCarousel, 50);
+    setTimeout(initGamesCarousel, 50);
+  } else if (tabId === 'videos') {
+    setTimeout(initVideosCarousel, 50);
   }
 }
 
@@ -49,21 +52,21 @@ window.switchTab = switchTab;
 
 function initTabNavigation() {
   const hash = window.location.hash.replace('#', '');
-  if (['home', 'apps', 'devlogs', 'about', 'community', 'juegos', 'videos'].includes(hash)) {
+  if (['home', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(hash)) {
     if (hash === 'juegos') switchTab('home');
-    else if (hash === 'videos') switchTab('devlogs');
+    else if (hash === 'sobre-mi') switchTab('about');
     else switchTab(hash);
   }
 }
 
-// Carousel Calculations
 function getCardsPerView() {
   if (window.innerWidth < 768) return 1;
   if (window.innerWidth <= 1024) return 2;
   return 3;
 }
 
-function initCarousel() {
+// 1. Carrusel de Juegos
+function initGamesCarousel() {
   const track = document.getElementById('carouselTrack');
   const prevBtn = document.getElementById('carouselPrev');
   const nextBtn = document.getElementById('carouselNext');
@@ -80,9 +83,9 @@ function initCarousel() {
 
   for (let i = 0; i < numPills; i++) {
     const pill = document.createElement('div');
-    pill.className = `carousel-pill ${i === currentCarouselIndex ? 'active' : ''}`;
+    pill.className = `carousel-pill ${i === currentGameIndex ? 'active' : ''}`;
     pill.addEventListener('click', () => {
-      currentCarouselIndex = i;
+      currentGameIndex = i;
       updateCarousel();
     });
     pillsContainer.appendChild(pill);
@@ -91,7 +94,7 @@ function initCarousel() {
   function updateCarousel() {
     const currentCardsPerView = getCardsPerView();
     const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentCarouselIndex > currentMax) currentCarouselIndex = currentMax;
+    if (currentGameIndex > currentMax) currentGameIndex = currentMax;
 
     const firstCard = track.children[0];
     if (!firstCard) return;
@@ -99,22 +102,22 @@ function initCarousel() {
     const cardRect = firstCard.getBoundingClientRect();
     const cardWidth = cardRect.width;
     const gap = 20;
-    const offset = currentCarouselIndex * (cardWidth + gap);
+    const offset = currentGameIndex * (cardWidth + gap);
 
     track.style.transform = `translateX(-${offset}px)`;
 
     const pills = pillsContainer.querySelectorAll('.carousel-pill');
     pills.forEach((pill, idx) => {
-      pill.classList.toggle('active', idx === currentCarouselIndex);
+      pill.classList.toggle('active', idx === currentGameIndex);
     });
 
-    prevBtn.style.opacity = currentCarouselIndex === 0 ? '0.35' : '1';
-    nextBtn.style.opacity = currentCarouselIndex >= currentMax ? '0.35' : '1';
+    prevBtn.style.opacity = currentGameIndex === 0 ? '0.35' : '1';
+    nextBtn.style.opacity = currentGameIndex >= currentMax ? '0.35' : '1';
   }
 
   prevBtn.onclick = () => {
-    if (currentCarouselIndex > 0) {
-      currentCarouselIndex--;
+    if (currentGameIndex > 0) {
+      currentGameIndex--;
       updateCarousel();
     }
   };
@@ -122,154 +125,85 @@ function initCarousel() {
   nextBtn.onclick = () => {
     const currentCardsPerView = getCardsPerView();
     const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentCarouselIndex < currentMax) {
-      currentCarouselIndex++;
+    if (currentGameIndex < currentMax) {
+      currentGameIndex++;
       updateCarousel();
     }
-  };
-
-  window.onresize = () => {
-    initCarousel();
   };
 
   updateCarousel();
 }
 
-// Scraper en Vivo de Itch.io
-async function fetchLiveItchGames() {
-  const username = "eternodev";
-  const track = document.getElementById('carouselTrack');
-  if (!track) return;
+// 2. Carrusel de Vídeos de YouTube
+function initVideosCarousel() {
+  const track = document.getElementById('videoTrack');
+  const prevBtn = document.getElementById('videoPrev');
+  const nextBtn = document.getElementById('videoNext');
+  const pillsContainer = document.getElementById('videoPills');
 
-  const timestamp = Date.now();
-  const targetUrl = `https://${username}.itch.io/?_t=${timestamp}`;
+  if (!track || !prevBtn || !nextBtn || !pillsContainer) return;
 
-  const proxies = [
-    `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}&disableCache=true`,
-    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
-    `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`
-  ];
+  const totalCards = track.children.length;
+  const cardsPerView = getCardsPerView();
+  const maxIndex = Math.max(0, totalCards - cardsPerView);
 
-  let rawHtml = null;
+  pillsContainer.innerHTML = '';
+  const numPills = maxIndex + 1;
 
-  for (const proxy of proxies) {
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000);
-      
-      const res = await fetch(proxy, { signal: controller.signal });
-      clearTimeout(timeoutId);
-
-      if (!res.ok) continue;
-
-      const contentType = res.headers.get("content-type") || "";
-      if (contentType.includes("application/json")) {
-        const json = await res.json();
-        rawHtml = json.contents || json.data || json;
-      } else {
-        rawHtml = await res.text();
-      }
-
-      if (rawHtml && typeof rawHtml === 'string' && rawHtml.includes('game_cell')) {
-        break;
-      }
-    } catch (e) {}
+  for (let i = 0; i < numPills; i++) {
+    const pill = document.createElement('div');
+    pill.className = `carousel-pill ${i === currentVideoIndex ? 'active' : ''}`;
+    pill.addEventListener('click', () => {
+      currentVideoIndex = i;
+      updateVideoCarousel();
+    });
+    pillsContainer.appendChild(pill);
   }
 
-  if (!rawHtml || typeof rawHtml !== 'string' || !rawHtml.includes('game_cell')) {
-    return;
+  function updateVideoCarousel() {
+    const currentCardsPerView = getCardsPerView();
+    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
+    if (currentVideoIndex > currentMax) currentVideoIndex = currentMax;
+
+    const firstCard = track.children[0];
+    if (!firstCard) return;
+
+    const cardRect = firstCard.getBoundingClientRect();
+    const cardWidth = cardRect.width;
+    const gap = 20;
+    const offset = currentVideoIndex * (cardWidth + gap);
+
+    track.style.transform = `translateX(-${offset}px)`;
+
+    const pills = pillsContainer.querySelectorAll('.carousel-pill');
+    pills.forEach((pill, idx) => {
+      pill.classList.toggle('active', idx === currentVideoIndex);
+    });
+
+    prevBtn.style.opacity = currentVideoIndex === 0 ? '0.35' : '1';
+    nextBtn.style.opacity = currentVideoIndex >= currentMax ? '0.35' : '1';
   }
 
-  try {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(rawHtml, 'text/html');
-    const gameCells = doc.querySelectorAll('.game_cell');
-
-    if (gameCells && gameCells.length > 0) {
-      track.innerHTML = '';
-
-      gameCells.forEach(cell => {
-        const titleLink = cell.querySelector('.game_title a.title, .game_title a');
-        const imgEl = cell.querySelector('img');
-        const textEl = cell.querySelector('.game_text');
-        const genreEl = cell.querySelector('.game_genre');
-        const platformEl = cell.querySelector('.game_platform');
-
-        if (!titleLink) return;
-
-        const title = titleLink.textContent.trim();
-        const link = titleLink.href;
-        
-        let thumb = (imgEl && (imgEl.getAttribute('data-lazy_src') || imgEl.src)) || 'https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png';
-        if (thumb.startsWith('http://')) thumb = thumb.replace('http://', 'https://');
-
-        const desc = textEl ? textEl.textContent.trim() : 'Videojuego disponible en Itch.io';
-        const genre = genreEl ? genreEl.textContent.trim() : 'Game';
-
-        let hasBrowser = false;
-        let hasWindows = false;
-        let hasLinux = false;
-        let hasMac = false;
-
-        if (platformEl) {
-          const platText = platformEl.textContent.toLowerCase();
-          const platHtml = platformEl.innerHTML.toLowerCase();
-
-          if (platformEl.querySelector('.web_flag') || platText.includes('browser') || platHtml.includes('web_flag')) {
-            hasBrowser = true;
-          }
-          if (platformEl.querySelector('.icon-windows8') || platHtml.includes('windows') || platHtml.includes('win8')) {
-            hasWindows = true;
-          }
-          if (platformEl.querySelector('.icon-tux') || platHtml.includes('linux') || platHtml.includes('tux')) {
-            hasLinux = true;
-          }
-          if (platformEl.querySelector('.icon-apple') || platHtml.includes('macos') || platHtml.includes('apple') || platHtml.includes('mac')) {
-            hasMac = true;
-          }
-        }
-
-        let platformsHtml = '';
-        if (hasBrowser) {
-          platformsHtml += `<span class="badge-play-browser">Play in browser</span>`;
-        }
-        if (hasWindows) {
-          platformsHtml += PLATFORM_SVGS.windows;
-        }
-        if (hasLinux) {
-          platformsHtml += PLATFORM_SVGS.linux;
-        }
-        if (hasMac) {
-          platformsHtml += PLATFORM_SVGS.macos;
-        }
-
-        const card = document.createElement('a');
-        card.href = link;
-        card.target = '_blank';
-        card.rel = 'noopener';
-        card.className = 'game-card-item';
-
-        card.innerHTML = `
-          <div class="game-thumb-box">
-            <img src="${thumb}" alt="${title}" class="game-thumb-img" loading="lazy" />
-          </div>
-          <div class="game-content-box">
-            <h3 class="game-item-title">${title}</h3>
-            <p class="game-item-desc">${desc}</p>
-            <div class="itch-meta-container">
-              <span class="itch-genre-label">${genre}</span>
-              <div class="itch-platforms-row">
-                ${platformsHtml}
-              </div>
-            </div>
-          </div>
-        `;
-        track.appendChild(card);
-      });
-
-      initCarousel();
+  prevBtn.onclick = () => {
+    if (currentVideoIndex > 0) {
+      currentVideoIndex--;
+      updateVideoCarousel();
     }
-  } catch (e) {
-    console.log("Itch.io Live Error:", e);
-  }
+  };
+
+  nextBtn.onclick = () => {
+    const currentCardsPerView = getCardsPerView();
+    const currentMax = Math.max(0, track.children.length - currentCardsPerView);
+    if (currentVideoIndex < currentMax) {
+      currentVideoIndex++;
+      updateVideoCarousel();
+    }
+  };
+
+  updateVideoCarousel();
 }
+
+window.addEventListener('resize', () => {
+  initGamesCarousel();
+  initVideosCarousel();
+});
