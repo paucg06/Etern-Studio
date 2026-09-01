@@ -58,7 +58,7 @@ a {
   padding: 0 24px;
 }
 
-/* Header & Tabs */
+/* Header & Responsive Tabs */
 header {
   position: sticky;
   top: 0;
@@ -67,13 +67,15 @@ header {
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid #34343C;
   z-index: 1000;
-  padding: 14px 0;
+  padding: 12px 0;
 }
 
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .brand {
@@ -81,6 +83,7 @@ header {
   align-items: center;
   gap: 12px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .brand-icon {
@@ -103,24 +106,39 @@ header {
   color: #FFFFFF;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
+
 .nav-tabs {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   list-style: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0;
+}
+
+.nav-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-tab-btn {
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   color: #CCCCCE;
   font-family: var(--font-main);
   font-weight: 600;
-  font-size: 0.95rem;
-  padding: 8px 18px;
+  font-size: 0.92rem;
+  padding: 8px 16px;
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.15s;
+  flex-shrink: 0;
 }
 
 .nav-tab-btn:hover {
@@ -138,6 +156,7 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .btn-pill {
@@ -774,10 +793,31 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .nav-tabs { display: none; }
-  .hero-title { font-size: 2.3rem; }
+  .nav-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .nav-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .nav-tabs {
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+  }
+  .hero-section { padding: 45px 0 35px; }
+  .hero-title { font-size: 2.2rem; }
   .banner-white-title { font-size: 2rem; }
   .apps-grid-layout { grid-template-columns: 1fr; }
   .community-grid-layout { grid-template-columns: 1fr; }
   .game-card-item, .video-card-item { flex: 0 0 100%; }
+  .footer-flex {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
 }

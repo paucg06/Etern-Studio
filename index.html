@@ -71,7 +71,7 @@
       padding: 0 24px;
     }
 
-    /* Header & Navegacion */
+    /* Header & Navegacion Responsive */
     header {
       position: sticky;
       top: 0;
@@ -80,13 +80,15 @@
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid #34343C;
       z-index: 1000;
-      padding: 14px 0;
+      padding: 12px 0;
     }
 
     .nav-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .brand {
@@ -94,6 +96,7 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     .brand-icon {
@@ -116,24 +119,39 @@
       color: #FFFFFF;
     }
 
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
     .nav-tabs {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       list-style: none;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none; /* Firefox */
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 0;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
     }
 
     .nav-tab-btn {
       background: transparent;
-      border: none;
+      border: 1px solid transparent;
       color: #CCCCCE;
       font-family: var(--font-main);
       font-weight: 600;
-      font-size: 0.95rem;
-      padding: 8px 18px;
+      font-size: 0.92rem;
+      padding: 8px 16px;
       border-radius: var(--radius-pill);
       cursor: pointer;
       transition: all 0.15s;
+      flex-shrink: 0;
     }
 
     .nav-tab-btn:hover {
@@ -151,6 +169,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-shrink: 0;
     }
 
     .btn-pill {
@@ -164,6 +183,7 @@
       transition: all 0.2s;
       border: none;
       cursor: pointer;
+      text-align: center;
     }
 
     .btn-mint {
@@ -321,7 +341,7 @@
       transform: scale(1.04);
     }
 
-    /* Boton de Play Negro Semitransparente (#16161E con transparencia) */
+    /* Boton de Play Negro Semitransparente */
     .video-play-overlay {
       position: absolute;
       inset: 0;
@@ -787,23 +807,55 @@
     }
 
     @media (max-width: 768px) {
-      .nav-tabs { display: none; }
-      .hero-title { font-size: 2.3rem; }
+      .nav-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+      }
+      .nav-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+      .nav-tabs {
+        width: 100%;
+        justify-content: flex-start;
+        padding-bottom: 4px;
+      }
+      .hero-section { padding: 45px 0 35px; }
+      .hero-title { font-size: 2.2rem; }
       .banner-white-title { font-size: 2rem; }
       .apps-grid-layout { grid-template-columns: 1fr; }
       .community-grid-layout { grid-template-columns: 1fr; }
       .game-card-item, .video-card-item { flex: 0 0 100%; }
+      .footer-flex {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header con Pestanias -->
+  <!-- Header con Pestanias Responsive -->
   <header>
     <div class="container nav-wrapper">
-      <div class="brand" onclick="switchTab('home')">
-        <div class="brand-icon">E</div>
-        <span class="brand-title">EternoDev Studio</span>
+      <div class="nav-top-row">
+        <div class="brand" onclick="switchTab('home')">
+          <div class="brand-icon">E</div>
+          <span class="brand-title">EternoDev Studio</span>
+        </div>
+
+        <div class="nav-actions">
+          <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="btn-pill btn-white" style="padding: 7px 14px; font-size: 0.82rem;">
+            Itch.io
+          </a>
+          <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="btn-pill btn-outline" style="padding: 7px 14px; font-size: 0.82rem;">
+            GitHub
+          </a>
+        </div>
       </div>
 
       <nav>
@@ -815,21 +867,12 @@
           <li><button class="nav-tab-btn" data-target="community" onclick="switchTab('community')">Comunidad</button></li>
         </ul>
       </nav>
-
-      <div class="nav-actions">
-        <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="btn-pill btn-white">
-          Itch.io
-        </a>
-        <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="btn-pill btn-outline">
-          GitHub
-        </a>
-      </div>
     </div>
   </header>
 
   <main>
     <!-- ====================================================================
-         PESTANIA 1: INICIO & JUEGOS (5 Juegos Oficiales Públicos)
+         PESTANIA 1: INICIO & JUEGOS
          ==================================================================== -->
     <div id="tab-home" class="tab-view active-tab">
       
@@ -855,7 +898,7 @@
         </div>
       </section>
 
-      <!-- Carrusel de Juegos (Exacto al estilo Itch.io / GDevelop con tus SVG) -->
+      <!-- Carrusel de Juegos -->
       <section id="carousel-anchor" class="carousel-section">
         <div class="container">
           <h2 class="section-title-center">Juegos publicados</h2>
@@ -941,7 +984,7 @@
                 </div>
               </a>
 
-              <!-- Juego 5: Space Blitz (Thumbnail oficial) -->
+              <!-- Juego 5: Space Blitz -->
               <a href="https://eternodev.itch.io/space-blitz" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
@@ -1001,7 +1044,7 @@
             </div>
             <div class="banner-stat-item">
               <span class="stat-title">Filosofia</span>
-              <span class="stat-content">Software Open Source</span>
+              <span class="stat-content">Software Independiente</span>
             </div>
             <div class="banner-stat-item">
               <span class="stat-title">Estudios</span>
@@ -1142,7 +1185,7 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 3: VÍDEOS (Portadas Oficiales + Botón Play Negro Semitransparente)
+         PESTANIA 3: VÍDEOS
          ==================================================================== -->
     <div id="tab-videos" class="tab-view">
       <section class="carousel-section" style="padding-top: 50px;">
@@ -1158,7 +1201,7 @@
               <!-- Video 1: Roguelike DevLog 1 -->
               <a href="https://youtu.be/F1-R5hljGLM" target="_blank" rel="noopener" class="video-card-item">
                 <div class="video-thumb-box">
-                  <img src="assets/video1_roguelike.png" alt="¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1" class="video-thumb-img" />
+                  <img src="https://i.ytimg.com/vi/F1-R5hljGLM/maxresdefault.jpg" alt="¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1" class="video-thumb-img" />
                   <div class="video-play-overlay">
                     <div class="video-play-btn">
                       <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1176,9 +1219,9 @@
               </a>
 
               <!-- Video 2: VTuber en 48 Horas -->
-              <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="video-card-item">
+              <a href="https://www.youtube.com/watch?v=bRbhRWQvqs8" target="_blank" rel="noopener" class="video-card-item">
                 <div class="video-thumb-box">
-                  <img src="assets/video2_vtuber.png" alt="Hice un VTUBER en 48 HORAS" class="video-thumb-img" />
+                  <img src="https://i.ytimg.com/vi/bRbhRWQvqs8/maxresdefault.jpg" alt="Hice un VTUBER en 48 HORAS" class="video-thumb-img" />
                   <div class="video-play-overlay">
                     <div class="video-play-btn">
                       <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1196,9 +1239,9 @@
               </a>
 
               <!-- Video 3: GameJam -->
-              <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="video-card-item">
+              <a href="https://www.youtube.com/watch?v=DFR5UtAuHTw" target="_blank" rel="noopener" class="video-card-item">
                 <div class="video-thumb-box">
-                  <img src="assets/video3_gamejam.png" alt="Sobreviví a mi PRIMERA GameJam" class="video-thumb-img" />
+                  <img src="https://i.ytimg.com/vi/DFR5UtAuHTw/maxresdefault.jpg" alt="Sobreviví a mi PRIMERA GameJam" class="video-thumb-img" />
                   <div class="video-play-overlay">
                     <div class="video-play-btn">
                       <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1245,7 +1288,7 @@
               Actualmente estoy creando videojuegos tipo roguelike, estudiando mi carrera universitaria y compartiendo el camino en YouTube y TikTok.
             </p>
 
-            <div style="display: flex; gap: 14px; margin-top: 24px;">
+            <div style="display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap;">
               <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="btn-pill btn-white" style="border: 1px solid #CBD5E1; color: #0F172A; font-weight: 800;">
                 YouTube &rarr;
               </a>
@@ -1266,7 +1309,7 @@
             </div>
             <div class="banner-stat-item">
               <span class="stat-title">Filosofia</span>
-              <span class="stat-content">Open Source &bull; Independiente</span>
+              <span class="stat-content">Software Independiente</span>
             </div>
             <div class="banner-stat-item">
               <span class="stat-title">Estudios</span>
@@ -1348,7 +1391,7 @@
   <!-- Footer -->
   <footer>
     <div class="container footer-flex">
-      <p>&copy; 2026 EternoDev Studio por <strong>Pau CG (EternoDev)</strong>. Licencia MIT.</p>
+      <p>&copy; 2026 EternoDev Studio por <strong>Pau CG (EternoDev)</strong>. Todos los derechos reservados.</p>
       
       <div class="footer-nav-links">
         <a href="https://eternodev.itch.io" target="_blank" rel="noopener">Itch.io</a>
