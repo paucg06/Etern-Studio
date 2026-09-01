@@ -1,28 +1,27 @@
 ﻿/* ==========================================================================
-   Etern Studio - Exact GDevelop UI Clone (Clean Dark Theme, Zero Emojis)
+   Etern Studio - GDevelop Exact Clone (Clean Dark Theme, Zero Emojis)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* GDevelop Exact Palette */
   --bg-page: #10141e;
-  --bg-card: #171d2c;
-  --bg-card-hover: #1e2638;
-  --bg-card-border: #252e42;
-  --bg-card-border-hover: #4f46e5;
+  --bg-surface: #141926;
+  --bg-card: #181d29;
+  --bg-card-hover: #1f2737;
+  --bg-card-inner: #0f121a;
+  --bg-border: #262d3d;
+  --bg-border-hover: #4f46e5;
 
   --text-main: #FFFFFF;
   --text-muted: #94A3B8;
-  --text-sub: #64748B;
+  --text-dim: #64748B;
 
-  /* Accents */
   --accent-purple: #7C3AED;
   --accent-purple-light: #8B5CF6;
   --accent-mint: #00F59B;
   --accent-mint-hover: #00D587;
-  --accent-cyan: #06B6D4;
-  --accent-blue: #3B82F6;
+  --accent-blue: #38BDF8;
 
   --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --radius-sm: 6px;
@@ -51,23 +50,26 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .container {
   max-width: 1260px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-/* ==========================================================================
-   Top Navigation Bar (GDevelop Header)
-   ========================================================================== */
+/* Header & Tab Navigation */
 header {
   position: sticky;
   top: 0;
-  background: rgba(16, 20, 30, 0.95);
+  background: rgba(16, 20, 30, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--bg-card-border);
-  z-index: 100;
+  border-bottom: 1px solid var(--bg-border);
+  z-index: 1000;
   padding: 14px 0;
 }
 
@@ -81,8 +83,7 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none;
-  color: #fff;
+  cursor: pointer;
 }
 
 .brand-icon {
@@ -104,29 +105,41 @@ header {
   letter-spacing: -0.4px;
 }
 
-.nav-links {
+.nav-tabs {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 12px;
   list-style: none;
 }
 
-.nav-link {
+.nav-tab-btn {
+  background: transparent;
+  border: none;
   color: var(--text-muted);
-  text-decoration: none;
+  font-family: var(--font-main);
   font-weight: 600;
-  font-size: 0.92rem;
-  transition: color 0.15s;
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.nav-link:hover {
+.nav-tab-btn:hover {
   color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-tab-btn.active {
+  color: #FFFFFF;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-border);
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .btn-pill {
@@ -134,7 +147,6 @@ header {
   border-radius: var(--radius-pill);
   font-weight: 700;
   font-size: 0.88rem;
-  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -164,8 +176,8 @@ header {
 }
 
 .btn-outline {
-  background: #171d2c;
-  border: 1px solid var(--bg-card-border);
+  background: var(--bg-card);
+  border: 1px solid var(--bg-border);
   color: #FFFFFF;
 }
 
@@ -174,13 +186,24 @@ header {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* ==========================================================================
-   Hero Section (GDevelop Screenshot 1)
-   ========================================================================== */
+/* Tab Views Management */
+.tab-view {
+  display: none;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.tab-view.active-tab {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section */
 .hero-section {
-  padding: 70px 0 60px;
-  position: relative;
-  background: #10141e;
+  padding: 60px 0 50px;
 }
 
 .hero-grid {
@@ -197,7 +220,7 @@ header {
 }
 
 .hero-title {
-  font-size: 3.3rem;
+  font-size: 3.2rem;
   font-weight: 900;
   line-height: 1.12;
   letter-spacing: -1.5px;
@@ -218,10 +241,9 @@ header {
   margin-top: 6px;
 }
 
-/* Featured Hero Floating Card (Nadaca style) */
 .hero-card-featured {
-  background: #181e2e;
-  border: 1px solid var(--bg-card-border);
+  background: var(--bg-card);
+  border: 1px solid var(--bg-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -235,7 +257,6 @@ header {
   max-height: 250px;
   background: #0d111a;
   overflow: hidden;
-  position: relative;
 }
 
 .hero-card-img {
@@ -248,14 +269,13 @@ header {
   padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .hero-card-badge {
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
   color: var(--accent-mint);
 }
 
@@ -275,26 +295,23 @@ header {
   align-items: center;
   justify-content: space-between;
   padding-top: 14px;
-  border-top: 1px solid var(--bg-card-border);
+  border-top: 1px solid var(--bg-border);
 }
 
-/* ==========================================================================
-   Section 2: Juegos Publicados (Carousel - GDevelop Screenshot 2)
-   ========================================================================== */
+/* Games Carousel Section (Exact GDevelop Screenshot 4) */
 .games-section {
-  padding: 80px 0;
-  background: #0d111a;
+  padding: 60px 0 80px;
 }
 
 .section-title-center {
   font-size: 2.3rem;
   font-weight: 900;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   letter-spacing: -0.8px;
 }
 
-.carousel-container {
+.carousel-viewport {
   position: relative;
   overflow: hidden;
   padding: 10px 0 24px;
@@ -309,11 +326,9 @@ header {
 .game-card-item {
   flex: 0 0 calc(33.333% - 16px);
   background: var(--bg-card);
-  border: 1px solid var(--bg-card-border);
+  border: 1px solid var(--bg-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  text-decoration: none;
-  color: inherit;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s, border-color 0.2s;
@@ -321,7 +336,7 @@ header {
 
 .game-card-item:hover {
   transform: translateY(-4px);
-  border-color: var(--bg-card-border-hover);
+  border-color: var(--bg-border-hover);
 }
 
 .game-thumb-box {
@@ -373,27 +388,27 @@ header {
   color: var(--accent-purple-light);
 }
 
-/* Carousel Indicators & Arrows */
 .carousel-nav-bar {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .carousel-arrow {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: var(--bg-card);
-  border: 1px solid var(--bg-card-border);
+  border: 1px solid var(--bg-border);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s;
+  font-size: 1.1rem;
 }
 
 .carousel-arrow:hover {
@@ -410,7 +425,7 @@ header {
   width: 24px;
   height: 4px;
   border-radius: 2px;
-  background: #252e42;
+  background: var(--bg-border);
   cursor: pointer;
   transition: background 0.25s, width 0.25s;
 }
@@ -420,13 +435,11 @@ header {
   width: 40px;
 }
 
-/* ==========================================================================
-   Section 3: High-Contrast White Banner (GDevelop Screenshot 3)
-   ========================================================================== */
+/* High Contrast White Banner */
 .banner-white-section {
   background: #FFFFFF;
   color: #0F172A;
-  padding: 80px 0;
+  padding: 70px 0;
   margin: 40px 0;
 }
 
@@ -491,74 +504,74 @@ header {
   font-size: 1rem;
 }
 
-/* ==========================================================================
-   Section 4: Apps Grid (GDevelop Screenshot 4)
-   ========================================================================== */
-.apps-section {
-  padding: 80px 0;
-  background: #10141e;
-}
-
-.apps-header-box {
-  text-align: center;
-  margin-bottom: 48px;
-}
-
-.apps-header-title {
-  font-size: 2.4rem;
-  font-weight: 900;
-  margin-bottom: 10px;
-}
-
-.apps-header-sub {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-}
-
-.apps-grid-cards {
+/* Apps Section (Exact GDevelop Screenshot 5) */
+.apps-grid-layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 40px;
 }
 
 .app-box-card {
   background: var(--bg-card);
-  border: 1px solid var(--bg-card-border);
+  border: 1px solid var(--bg-border);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   transition: transform 0.2s, border-color 0.2s;
 }
 
 .app-box-card:hover {
   transform: translateY(-4px);
-  border-color: var(--bg-card-border-hover);
+  border-color: var(--bg-border-hover);
 }
 
 .app-top-header {
+  padding: 20px 20px 14px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
 .app-name-title {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #FFFFFF;
 }
 
 .app-author-sub {
   font-size: 0.85rem;
-  color: var(--text-sub);
+  color: var(--text-dim);
   margin-top: 2px;
 }
 
 .app-arrow-icon {
-  width: 22px;
-  height: 22px;
+  font-size: 1.2rem;
   color: var(--text-muted);
+}
+
+.app-preview-media {
+  width: 100%;
+  height: 180px;
+  background: #0d111a;
+  overflow: hidden;
+}
+
+.app-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.app-details-dark {
+  background: var(--bg-card-inner);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
 }
 
 .app-bullets-container {
@@ -566,56 +579,56 @@ header {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin: 6px 0;
 }
 
 .app-bullet-point {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: #CBD5E1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
+  line-height: 1.4;
 }
 
 .app-bullet-point::before {
-  content: '';
-  width: 5px;
-  height: 5px;
-  background: var(--accent-purple-light);
-  border-radius: 50%;
-  flex-shrink: 0;
+  content: '•';
+  color: var(--accent-mint);
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
-.app-card-buttons {
+.app-platforms-badge-row {
   margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 16px;
-  border-top: 1px solid var(--bg-card-border);
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ==========================================================================
-   Section 5: Community Links Grid
-   ========================================================================== */
-.community-section {
-  padding: 80px 0 100px;
-  background: #0d111a;
+.app-action-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent-mint);
 }
 
+/* Community Grid */
 .community-grid-layout {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  margin-top: 40px;
 }
 
 .community-link-card {
   background: var(--bg-card);
-  border: 1px solid var(--bg-card-border);
+  border: 1px solid var(--bg-border);
   border-radius: var(--radius-lg);
   padding: 22px;
-  text-decoration: none;
-  color: inherit;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -644,14 +657,12 @@ header {
   line-height: 1.4;
 }
 
-/* ==========================================================================
-   Footer
-   ========================================================================== */
+/* Footer */
 footer {
   background: #090c14;
-  border-top: 1px solid var(--bg-card-border);
+  border-top: 1px solid var(--bg-border);
   padding: 36px 0;
-  color: var(--text-sub);
+  color: var(--text-dim);
   font-size: 0.9rem;
 }
 
@@ -670,7 +681,6 @@ footer {
 
 .footer-nav-links a {
   color: var(--text-muted);
-  text-decoration: none;
 }
 
 .footer-nav-links a:hover {
@@ -678,19 +688,18 @@ footer {
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
+  .apps-grid-layout { grid-template-columns: repeat(2, 1fr); }
+  .community-grid-layout { grid-template-columns: repeat(2, 1fr); }
   .hero-grid { grid-template-columns: 1fr; }
   .banner-white-grid { grid-template-columns: 1fr; }
-  .apps-grid-cards { grid-template-columns: repeat(2, 1fr); }
-  .community-grid-layout { grid-template-columns: repeat(2, 1fr); }
-  .game-card-item { flex: 0 0 calc(50% - 12px); }
 }
 
 @media (max-width: 768px) {
-  .nav-links { display: none; }
+  .nav-tabs { display: none; }
   .hero-title { font-size: 2.3rem; }
   .banner-white-title { font-size: 2rem; }
-  .apps-grid-cards { grid-template-columns: 1fr; }
+  .apps-grid-layout { grid-template-columns: 1fr; }
   .community-grid-layout { grid-template-columns: 1fr; }
   .game-card-item { flex: 0 0 100%; }
 }

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Etern Studio - Videojuegos Indie y Software Open Source</title>
-  <meta name="description" content="Etern Studio: Videojuegos indie desarrollados en Unity, aplicaciones de código abierto y contenido digital por EternoDev (Pau CG)." />
+  <title>Etern Studio - Videojuegos Indie y Software</title>
+  <meta name="description" content="Etern Studio: Videojuegos indie desarrollados en Unity, aplicaciones de codigo abierto y contenido digital por EternoDev (Pau CG)." />
   
   <link rel="icon" type="image/png" sizes="192x192" href="https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png" />
   
@@ -17,20 +17,20 @@
 </head>
 <body>
 
-  <!-- Header / Barra de Navegacion (GDevelop Layout) -->
+  <!-- Header / Barra de Navegacion con Pestanias -->
   <header>
     <div class="container nav-wrapper">
-      <a href="#" class="brand">
+      <div class="brand" onclick="switchTab('home')">
         <div class="brand-icon">E</div>
         <span class="brand-title">Etern Studio</span>
-      </a>
+      </div>
 
       <nav>
-        <ul class="nav-links">
-          <li><a href="#juegos" class="nav-link">Juegos</a></li>
-          <li><a href="#sobre-mi" class="nav-link">Sobre Mi</a></li>
-          <li><a href="#apps" class="nav-link">Aplicaciones</a></li>
-          <li><a href="#comunidad" class="nav-link">Comunidad</a></li>
+        <ul class="nav-tabs">
+          <li><button class="nav-tab-btn active" data-target="home" onclick="switchTab('home')">Juegos</button></li>
+          <li><button class="nav-tab-btn" data-target="apps" onclick="switchTab('apps')">Aplicaciones</button></li>
+          <li><button class="nav-tab-btn" data-target="about" onclick="switchTab('about')">Sobre Mi</button></li>
+          <li><button class="nav-tab-btn" data-target="community" onclick="switchTab('community')">Comunidad</button></li>
         </ul>
       </nav>
 
@@ -46,407 +46,451 @@
   </header>
 
   <main>
-    <!-- Hero Section (GDevelop Screenshot 1) -->
-    <section class="hero-section">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <h1 class="hero-title">
-            Desarrolla, publica y juega. Videojuegos y herramientas.
-          </h1>
+    <!-- ====================================================================
+         PESTANIA 1: INICIO & JUEGOS (GDevelop Screenshot 1, 2, 4)
+         ==================================================================== -->
+    <div id="tab-home" class="tab-view active-tab">
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <h1 class="hero-title">
+              Desarrolla, publica y juega. Videojuegos y herramientas.
+            </h1>
 
-          <p class="hero-desc">
-            Etern Studio es un estudio indie centrado en el desarrollo de videojuegos en Unity, software libre para creadores y divulgacion digital.
-          </p>
+            <p class="hero-desc">
+              Etern Studio es un estudio indie centrado en el desarrollo de videojuegos en Unity, software libre para creadores y divulgacion digital.
+            </p>
 
-          <div class="hero-cta-group">
-            <a href="#juegos" class="btn-pill btn-mint" style="padding: 13px 28px; font-size: 0.95rem;">
-              Explorar Juegos
-            </a>
-            <a href="#apps" class="btn-pill btn-outline" style="padding: 13px 28px; font-size: 0.95rem;">
-              Ver Aplicaciones
-            </a>
-          </div>
-        </div>
-
-        <!-- Featured Hero Card (Nadaca style) -->
-        <div class="hero-card-featured">
-          <div class="hero-card-media">
-            <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga" class="hero-card-img" />
-          </div>
-          <div class="hero-card-body">
-            <span class="hero-card-badge">Destacado en Itch.io</span>
-            <h3 class="hero-card-title">Oonga Bunga!</h3>
-            <p class="hero-card-desc">Compite con tus amigos para convertirte en el lider de la tribu. Solo habra un ganador en este combate multijugador.</p>
-            <div class="hero-card-footer">
-              <span style="font-size: 0.85rem; color: var(--text-muted);">Unity Engine &bull; Windows</span>
-              <a href="https://eternodev.itch.io/oonga-bunga" target="_blank" rel="noopener" class="btn-pill btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
-                Jugar Ahora &rarr;
+            <div class="hero-cta-group">
+              <a href="#carousel-anchor" class="btn-pill btn-mint" style="padding: 13px 28px; font-size: 0.95rem;">
+                Explorar Juegos
               </a>
+              <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 13px 28px; font-size: 0.95rem;">
+                Ver Aplicaciones
+              </button>
+            </div>
+          </div>
+
+          <!-- Featured Hero Card (Nadaca style) -->
+          <div class="hero-card-featured">
+            <div class="hero-card-media">
+              <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga" class="hero-card-img" />
+            </div>
+            <div class="hero-card-body">
+              <span class="hero-card-badge">Destacado en Itch.io</span>
+              <h3 class="hero-card-title">Oonga Bunga!</h3>
+              <p class="hero-card-desc">Compite con tus amigos para convertirte en el lider de la tribu. Solo habra un ganador en este combate multijugador.</p>
+              <div class="hero-card-footer">
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Unity Engine &bull; Windows</span>
+                <a href="https://eternodev.itch.io/oonga-bunga" target="_blank" rel="noopener" class="btn-pill btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
+                  Jugar Ahora &rarr;
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Seccion 2: Juegos Publicados (Carrusel - GDevelop Screenshot 2) -->
-    <section id="juegos" class="games-section">
-      <div class="container">
-        <h2 class="section-title-center">Juegos publicados</h2>
+      <!-- Seccion Carrusel de Juegos (Exact GDevelop Screenshot 4) -->
+      <section id="carousel-anchor" class="games-section">
+        <div class="container">
+          <h2 class="section-title-center">Juegos publicados</h2>
 
-        <div class="carousel-container">
-          <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrack">
+              
+              <!-- Juego 1: Oonga Bunga! -->
+              <a href="https://eternodev.itch.io/oonga-bunga" target="_blank" rel="noopener" class="game-card-item">
+                <div class="game-thumb-box">
+                  <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga!" class="game-thumb-img" />
+                </div>
+                <div class="game-content-box">
+                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
+                    <span style="color: var(--accent-purple-light);">Fighting</span>
+                    <span style="color: var(--text-dim);">Windows</span>
+                  </div>
+                  <h3 class="game-item-title">Oonga Bunga!</h3>
+                  <p class="game-item-desc">Compite con tus amigos para convertirte en el lider de la tribu. Solo habra un ganador.</p>
+                  <div class="game-meta-row">
+                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
+                    <span>&rarr;</span>
+                  </div>
+                </div>
+              </a>
+
+              <!-- Juego 2: Verdades Incompletas -->
+              <a href="https://eternodev.itch.io/verdades-incompletas" target="_blank" rel="noopener" class="game-card-item">
+                <div class="game-thumb-box">
+                  <img src="https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png" alt="Verdades Incompletas" class="game-thumb-img" />
+                </div>
+                <div class="game-content-box">
+                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
+                    <span style="color: var(--accent-purple-light);">Visual Novel</span>
+                    <span style="color: var(--text-dim);">Web &bull; PC</span>
+                  </div>
+                  <h3 class="game-item-title">Verdades Incompletas</h3>
+                  <p class="game-item-desc">Estas muerto... Descubre quien te asesino mientras tus tres amigos investigan tu hogar.</p>
+                  <div class="game-meta-row">
+                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
+                    <span>&rarr;</span>
+                  </div>
+                </div>
+              </a>
+
+              <!-- Juego 3: Soap Dodger -->
+              <a href="https://eternodev.itch.io/soap-dodger" target="_blank" rel="noopener" class="game-card-item">
+                <div class="game-thumb-box">
+                  <img src="https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png" alt="Soap Dodger" class="game-thumb-img" />
+                </div>
+                <div class="game-content-box">
+                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
+                    <span style="color: var(--accent-purple-light);">Bullet Hell</span>
+                    <span style="color: var(--text-dim);">Web &bull; PC</span>
+                  </div>
+                  <h3 class="game-item-title">Soap Dodger</h3>
+                  <p class="game-item-desc">Agudiza tus reflejos en este peliagudo Bullet Hell. No pierdas bocanadas de aire.</p>
+                  <div class="game-meta-row">
+                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
+                    <span>&rarr;</span>
+                  </div>
+                </div>
+              </a>
+
+              <!-- Juego 4: CastleCat RPG -->
+              <a href="https://eternodev.itch.io/castlecat-rpg" target="_blank" rel="noopener" class="game-card-item">
+                <div class="game-thumb-box">
+                  <img src="https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png" alt="CastleCat RPG" class="game-thumb-img" />
+                </div>
+                <div class="game-content-box">
+                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
+                    <span style="color: var(--accent-purple-light);">Adventure</span>
+                    <span style="color: var(--text-dim);">Play in Browser</span>
+                  </div>
+                  <h3 class="game-item-title">CastleCat RPG</h3>
+                  <p class="game-item-desc">Naciste gato, pero moriras como leyenda en este juego de exploracion y mazmorras.</p>
+                  <div class="game-meta-row">
+                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
+                    <span>&rarr;</span>
+                  </div>
+                </div>
+              </a>
+
+              <!-- Juego 5: Space Blitz -->
+              <a href="https://eternodev.itch.io/space-blitz" target="_blank" rel="noopener" class="game-card-item">
+                <div class="game-thumb-box">
+                  <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
+                </div>
+                <div class="game-content-box">
+                  <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
+                    <span style="color: var(--accent-purple-light);">Arcade Shooter</span>
+                    <span style="color: var(--text-dim);">Play in Browser</span>
+                  </div>
+                  <h3 class="game-item-title">Space Blitz</h3>
+                  <p class="game-item-desc">Un trepidante shooter arcade donde tu nave espacial evoluciona con mejoras dinamicas.</p>
+                  <div class="game-meta-row">
+                    <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
+                    <span>&rarr;</span>
+                  </div>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Controles del Carrusel -->
+          <div class="carousel-nav-bar">
+            <button id="carouselPrev" class="carousel-arrow" aria-label="Anterior">&larr;</button>
+            <div id="carouselPills" class="carousel-pills"></div>
+            <button id="carouselNext" class="carousel-arrow" aria-label="Siguiente">&rarr;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Banner Blanco de Alto Contraste (GDevelop Screenshot 3) -->
+      <section class="banner-white-section">
+        <div class="container banner-white-grid">
+          <div>
+            <h2 class="banner-white-title">Creacion de videojuegos <span>realmente intuitiva</span></h2>
+            <p class="banner-white-desc">
+              Soy un desarrollador de videojuegos indie que lucha contra los errores de Unity, crea herramientas de software libre y suenia con pollos legendarios. 
+              Actualmente compagino la creacion de proyectos con mis estudios universitarios y la creacion de contenido digital.
+            </p>
+
+            <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="btn-pill btn-white" style="border: 1px solid #CBD5E1; color: #0F172A; font-weight: 800;">
+              Ver Canal de YouTube &rarr;
+            </a>
+          </div>
+
+          <div class="banner-stats-box">
+            <div class="banner-stat-item">
+              <span class="stat-title">Motor Principal</span>
+              <span class="stat-content">Unity &bull; C#</span>
+            </div>
+            <div class="banner-stat-item">
+              <span class="stat-title">Meta YouTube</span>
+              <span class="stat-content">7.000 Subs (Apertura Discord)</span>
+            </div>
+            <div class="banner-stat-item">
+              <span class="stat-title">Filosofia</span>
+              <span class="stat-content">Software Open Source</span>
+            </div>
+            <div class="banner-stat-item">
+              <span class="stat-title">Estudios</span>
+              <span class="stat-content">Carrera Universitaria</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ====================================================================
+         PESTANIA 2: APLICACIONES (Exact GDevelop Screenshot 5)
+         ==================================================================== -->
+    <div id="tab-apps" class="tab-view">
+      <section class="apps-section" style="padding-top: 50px;">
+        <div class="container">
+          <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
+            <h2 class="section-title-center" style="margin-bottom: 8px;">Aplicaciones creadas por Etern Studio</h2>
+            <p style="color: var(--text-muted); font-size: 1.05rem;">Software nativo y herramientas web disenadas para potenciar tu flujo de trabajo y productividad.</p>
+          </div>
+
+          <div class="apps-grid-layout">
             
-            <!-- Juego 1: Oonga Bunga! -->
-            <a href="https://eternodev.itch.io/oonga-bunga" target="_blank" rel="noopener" class="game-card-item">
-              <div class="game-thumb-box">
-                <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga!" class="game-thumb-img" />
-              </div>
-              <div class="game-content-box">
-                <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                  <span style="color: var(--accent-purple-light);">Fighting</span>
-                  <span style="color: var(--text-sub);">Windows</span>
+            <!-- App 1: BrightLight -->
+            <article class="app-box-card">
+              <div class="app-top-header">
+                <div>
+                  <h3 class="app-name-title">BrightLight</h3>
+                  <p class="app-author-sub">Pau CG</p>
                 </div>
-                <h3 class="game-item-title">Oonga Bunga!</h3>
-                <p class="game-item-desc">Compite con tus amigos para convertirte en el lider de la tribu. Solo habra un ganador.</p>
-                <div class="game-meta-row">
-                  <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                  <span>&rarr;</span>
-                </div>
+                <span class="app-arrow-icon">&rarr;</span>
               </div>
-            </a>
 
-            <!-- Juego 2: Verdades Incompletas -->
-            <a href="https://eternodev.itch.io/verdades-incompletas" target="_blank" rel="noopener" class="game-card-item">
-              <div class="game-thumb-box">
-                <img src="https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png" alt="Verdades Incompletas" class="game-thumb-img" />
+              <div class="app-preview-media">
+                <img src="https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png" alt="BrightLight" class="app-preview-img" onerror="this.style.background='#1e2638'" />
               </div>
-              <div class="game-content-box">
-                <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                  <span style="color: var(--accent-purple-light);">Visual Novel</span>
-                  <span style="color: var(--text-sub);">Web &bull; Windows &bull; Linux</span>
-                </div>
-                <h3 class="game-item-title">Verdades Incompletas</h3>
-                <p class="game-item-desc">Estas muerto... Descubre quien te asesino mientras tus tres amigos investigan tu hogar.</p>
-                <div class="game-meta-row">
-                  <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                  <span>&rarr;</span>
-                </div>
-              </div>
-            </a>
 
-            <!-- Juego 3: Soap Dodger -->
-            <a href="https://eternodev.itch.io/soap-dodger" target="_blank" rel="noopener" class="game-card-item">
-              <div class="game-thumb-box">
-                <img src="https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png" alt="Soap Dodger" class="game-thumb-img" />
-              </div>
-              <div class="game-content-box">
-                <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                  <span style="color: var(--accent-purple-light);">Bullet Hell</span>
-                  <span style="color: var(--text-sub);">Web &bull; PC</span>
-                </div>
-                <h3 class="game-item-title">Soap Dodger</h3>
-                <p class="game-item-desc">Agudiza tus reflejos en este peliagudo Bullet Hell. No pierdas bocanadas de aire.</p>
-                <div class="game-meta-row">
-                  <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                  <span>&rarr;</span>
-                </div>
-              </div>
-            </a>
+              <div class="app-details-dark">
+                <ul class="app-bullets-container">
+                  <li class="app-bullet-point">100% Web Bluetooth API sin instalacion previa</li>
+                  <li class="app-bullet-point">Control multi-luz sincronizado e individual</li>
+                  <li class="app-bullet-point">Soporte para bombillas Triones / HappyLighting</li>
+                </ul>
 
-            <!-- Juego 4: CastleCat RPG -->
-            <a href="https://eternodev.itch.io/castlecat-rpg" target="_blank" rel="noopener" class="game-card-item">
-              <div class="game-thumb-box">
-                <img src="https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png" alt="CastleCat RPG" class="game-thumb-img" />
-              </div>
-              <div class="game-content-box">
-                <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                  <span style="color: var(--accent-purple-light);">Adventure</span>
-                  <span style="color: var(--text-sub);">Play in Browser</span>
-                </div>
-                <h3 class="game-item-title">CastleCat RPG</h3>
-                <p class="game-item-desc">Naciste gato, pero moriras como leyenda en este juego de exploracion y mazmorras.</p>
-                <div class="game-meta-row">
-                  <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                  <span>&rarr;</span>
+                <div class="app-platforms-badge-row">
+                  <span>WEB &bull; BLUETOOTH &bull; MIT</span>
+                  <a href="https://paucg06.github.io/BrightLight-Bluetooth/" target="_blank" rel="noopener" class="app-action-link">Abrir Web &rarr;</a>
                 </div>
               </div>
-            </a>
+            </article>
 
-            <!-- Juego 5: Space Blitz -->
-            <a href="https://eternodev.itch.io/space-blitz" target="_blank" rel="noopener" class="game-card-item">
-              <div class="game-thumb-box">
-                <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
-              </div>
-              <div class="game-content-box">
-                <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
-                  <span style="color: var(--accent-purple-light);">Arcade Shooter</span>
-                  <span style="color: var(--text-sub);">Play in Browser</span>
+            <!-- App 2: Etern-Notes -->
+            <article class="app-box-card">
+              <div class="app-top-header">
+                <div>
+                  <h3 class="app-name-title">Etern-Notes</h3>
+                  <p class="app-author-sub">Pau CG</p>
                 </div>
-                <h3 class="game-item-title">Space Blitz</h3>
-                <p class="game-item-desc">Un trepidante shooter arcade donde tu nave espacial evoluciona con mejoras visuales dinamicas.</p>
-                <div class="game-meta-row">
-                  <span style="color: var(--accent-mint);">Jugar en Itch.io</span>
-                  <span>&rarr;</span>
+                <span class="app-arrow-icon">&rarr;</span>
+              </div>
+
+              <div class="app-preview-media">
+                <img src="assets/etern_notes_preview.jpg" alt="Etern-Notes" class="app-preview-img" onerror="this.style.background='#1e2638'" />
+              </div>
+
+              <div class="app-details-dark">
+                <ul class="app-bullets-container">
+                  <li class="app-bullet-point">Gestor Kanban y bloc de notas de alta velocidad</li>
+                  <li class="app-bullet-point">Multiplataforma para Windows, Linux y macOS</li>
+                  <li class="app-bullet-point">Almacenamiento local seguro y privado</li>
+                </ul>
+
+                <div class="app-platforms-badge-row">
+                  <span>WINDOWS &bull; LINUX &bull; MAC</span>
+                  <a href="https://github.com/paucg06/Etern-Notes/releases" target="_blank" rel="noopener" class="app-action-link">Descargar &rarr;</a>
                 </div>
               </div>
-            </a>
+            </article>
+
+            <!-- App 3: Etern-Synth -->
+            <article class="app-box-card">
+              <div class="app-top-header">
+                <div>
+                  <h3 class="app-name-title">Etern-Synth</h3>
+                  <p class="app-author-sub">Pau CG</p>
+                </div>
+                <span class="app-arrow-icon">&rarr;</span>
+              </div>
+
+              <div class="app-preview-media">
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#161c2b; color:var(--text-dim); font-size:0.9rem; font-weight:700;">
+                  SYNTHESIZER TOOL
+                </div>
+              </div>
+
+              <div class="app-details-dark">
+                <ul class="app-bullets-container">
+                  <li class="app-bullet-point">Generador de efectos de sonido retro 8-bit</li>
+                  <li class="app-bullet-point">Modulacion de parametros y ondas sonoras</li>
+                  <li class="app-bullet-point">Exportacion directa a WAV y MP3</li>
+                </ul>
+
+                <div class="app-platforms-badge-row">
+                  <span>AUDIO &bull; SFX &bull; EN DESARROLLO</span>
+                  <span style="color:var(--text-dim);">Pronto</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- App 4: Etern-Audio -->
+            <article class="app-box-card">
+              <div class="app-top-header">
+                <div>
+                  <h3 class="app-name-title">Etern-Audio</h3>
+                  <p class="app-author-sub">Pau CG</p>
+                </div>
+                <span class="app-arrow-icon">&rarr;</span>
+              </div>
+
+              <div class="app-preview-media">
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#161c2b; color:var(--text-dim); font-size:0.9rem; font-weight:700;">
+                  SOUNDBOARD LIBRARY
+                </div>
+              </div>
+
+              <div class="app-details-dark">
+                <ul class="app-bullets-container">
+                  <li class="app-bullet-point">Buscador y reproductor rapido de audio</li>
+                  <li class="app-bullet-point">Atajos globales para streamers y edicion</li>
+                  <li class="app-bullet-point">Optimizada para creadores de contenido</li>
+                </ul>
+
+                <div class="app-platforms-badge-row">
+                  <span>DESKTOP &bull; PRONTO</span>
+                  <span style="color:var(--text-dim);">Pronto</span>
+                </div>
+              </div>
+            </article>
 
           </div>
         </div>
+      </section>
+    </div>
 
-        <!-- Barra de Navegacion del Carrusel (Flechas y Pildoras) -->
-        <div class="carousel-nav-bar">
-          <button id="carouselPrev" class="carousel-arrow" aria-label="Anterior">
-            &larr;
-          </button>
-          
-          <div id="carouselPills" class="carousel-pills"></div>
+    <!-- ====================================================================
+         PESTANIA 3: SOBRE MI
+         ==================================================================== -->
+    <div id="tab-about" class="tab-view">
+      <section class="banner-white-section" style="margin: 0; padding: 90px 0; min-height: 75vh;">
+        <div class="container banner-white-grid">
+          <div>
+            <h2 class="banner-white-title">Desarrollador de videojuegos y <span>creador de software</span></h2>
+            <p class="banner-white-desc">
+              Hola, soy <strong>Pau CG (EternoDev)</strong>. Desarrollador indie luchando contra los errores de Unity y creador de herramientas de software libre.
+              Actualmente estoy creando videojuegos tipo roguelike, estudiando mi carrera universitaria y compartiendo el camino en YouTube y TikTok.
+            </p>
 
-          <button id="carouselNext" class="carousel-arrow" aria-label="Siguiente">
-            &rarr;
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Seccion 3: Banner Blanco de Alto Contraste (GDevelop Screenshot 3) -->
-    <section id="sobre-mi" class="banner-white-section">
-      <div class="container banner-white-grid">
-        <div>
-          <h2 class="banner-white-title">Creacion de videojuegos <span>realmente intuitiva</span></h2>
-          <p class="banner-white-desc">
-            Soy un desarrollador de videojuegos indie que lucha contra los errores de Unity, crea herramientas de software libre y suenia con pollos legendarios. 
-            Actualmente compagino la creacion de proyectos con mis estudios universitarios y la creacion de contenido digital.
-          </p>
-
-          <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="btn-pill btn-white" style="border: 1px solid #CBD5E1; color: #0F172A; font-weight: 800;">
-            Ver Canal de YouTube &rarr;
-          </a>
-        </div>
-
-        <!-- Caja de Metricas y Filosofia -->
-        <div class="banner-stats-box">
-          <div class="banner-stat-item">
-            <span class="stat-title">Motor Principal</span>
-            <span class="stat-content">Unity &bull; C#</span>
-          </div>
-          <div class="banner-stat-item">
-            <span class="stat-title">Meta YouTube</span>
-            <span class="stat-content">7.000 Subs (Apertura Discord)</span>
-          </div>
-          <div class="banner-stat-item">
-            <span class="stat-title">Filosofia</span>
-            <span class="stat-content">Software Open Source</span>
-          </div>
-          <div class="banner-stat-item">
-            <span class="stat-title">Estudios</span>
-            <span class="stat-content">Carrera Universitaria</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Seccion 4: Grid de Aplicaciones y Software (GDevelop Screenshot 4) -->
-    <section id="apps" class="apps-section">
-      <div class="container">
-        <div class="apps-header-box">
-          <h2 class="apps-header-title">Aplicaciones y herramientas</h2>
-          <p class="apps-header-sub">Software nativo y herramientas web disenadas por Etern Studio</p>
-        </div>
-
-        <div class="apps-grid-cards">
-          
-          <!-- App 1: BrightLight -->
-          <article class="app-box-card">
-            <div class="app-top-header">
-              <div>
-                <h3 class="app-name-title">BrightLight</h3>
-                <p class="app-author-sub">Etern Studio &bull; Pau CG</p>
-              </div>
-              <span class="app-arrow-icon">&rarr;</span>
-            </div>
-
-            <ul class="app-bullets-container">
-              <li class="app-bullet-point">100% Web Bluetooth API sin instalacion</li>
-              <li class="app-bullet-point">Control multi-luz sincronizado e individual</li>
-              <li class="app-bullet-point">Protocolo GATT para bombillas y tiras BLE</li>
-            </ul>
-
-            <div class="app-card-buttons">
-              <a href="https://paucg06.github.io/BrightLight-Bluetooth/" target="_blank" rel="noopener" class="btn-pill btn-mint" style="justify-content: center;">
-                Abrir Web App en Vivo
+            <div style="display: flex; gap: 14px; margin-top: 24px;">
+              <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="btn-pill btn-white" style="border: 1px solid #CBD5E1; color: #0F172A; font-weight: 800;">
+                YouTube &rarr;
               </a>
-              <a href="https://github.com/paucg06/BrightLight-Bluetooth" target="_blank" rel="noopener" class="btn-pill btn-outline" style="justify-content: center; font-size: 0.8rem;">
-                Repositorio en GitHub
+              <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="btn-pill btn-white" style="border: 1px solid #CBD5E1; color: #0F172A; font-weight: 800;">
+                GitHub &rarr;
               </a>
             </div>
-          </article>
-
-          <!-- App 2: Etern-Notes -->
-          <article class="app-box-card">
-            <div class="app-top-header">
-              <div>
-                <h3 class="app-name-title">Etern-Notes</h3>
-                <p class="app-author-sub">Etern Studio &bull; Pau CG</p>
-              </div>
-              <span class="app-arrow-icon">&rarr;</span>
-            </div>
-
-            <ul class="app-bullets-container">
-              <li class="app-bullet-point">Gestor Kanban y notas para desarrolladores</li>
-              <li class="app-bullet-point">Multiplataforma para Windows, Linux y macOS</li>
-              <li class="app-bullet-point">Almacenamiento local rapido y seguro</li>
-            </ul>
-
-            <div class="app-card-buttons">
-              <a href="https://github.com/paucg06/Etern-Notes/releases" target="_blank" rel="noopener" class="btn-pill btn-outline" style="justify-content: center;">
-                Descargar Releases
-              </a>
-              <a href="https://github.com/paucg06/Etern-Notes" target="_blank" rel="noopener" class="btn-pill btn-outline" style="justify-content: center; font-size: 0.8rem;">
-                Repositorio en GitHub
-              </a>
-            </div>
-          </article>
-
-          <!-- App 3: Etern-Synth -->
-          <article class="app-box-card">
-            <div class="app-top-header">
-              <div>
-                <h3 class="app-name-title">Etern-Synth</h3>
-                <p class="app-author-sub">Etern Studio &bull; Pau CG</p>
-              </div>
-              <span class="app-arrow-icon">&rarr;</span>
-            </div>
-
-            <ul class="app-bullets-container">
-              <li class="app-bullet-point">Sintetizador de efectos de sonido retro 8-bit</li>
-              <li class="app-bullet-point">Modulacion de ondas y parametros en tiempo real</li>
-              <li class="app-bullet-point">Exportacion directa a formato WAV y MP3</li>
-            </ul>
-
-            <div class="app-card-buttons">
-              <button class="btn-pill btn-outline" disabled style="justify-content: center; opacity: 0.5; cursor: not-allowed;">
-                En Desarrollo
-              </button>
-            </div>
-          </article>
-
-          <!-- App 4: Etern-Audio -->
-          <article class="app-box-card">
-            <div class="app-top-header">
-              <div>
-                <h3 class="app-name-title">Etern-Audio</h3>
-                <p class="app-author-sub">Etern Studio &bull; Pau CG</p>
-              </div>
-              <span class="app-arrow-icon">&rarr;</span>
-            </div>
-
-            <ul class="app-bullets-container">
-              <li class="app-bullet-point">Libreria y buscador rapido de audio</li>
-              <li class="app-bullet-point">Atajos globales para streamers y edicion</li>
-              <li class="app-bullet-point">Integracion con software de grabacion</li>
-            </ul>
-
-            <div class="app-card-buttons">
-              <button class="btn-pill btn-outline" disabled style="justify-content: center; opacity: 0.5; cursor: not-allowed;">
-                En Desarrollo
-              </button>
-            </div>
-          </article>
-
-          <!-- App 5: Etern-Ref -->
-          <article class="app-box-card">
-            <div class="app-top-header">
-              <div>
-                <h3 class="app-name-title">Etern-Ref</h3>
-                <p class="app-author-sub">Etern Studio &bull; Pau CG</p>
-              </div>
-              <span class="app-arrow-icon">&rarr;</span>
-            </div>
-
-            <ul class="app-bullets-container">
-              <li class="app-bullet-point">Lienzo infinito para referencias visuales</li>
-              <li class="app-bullet-point">Mapas conceptuales y esquemas relacionales</li>
-              <li class="app-bullet-point">Modo flotante para desarrollo de videojuegos</li>
-            </ul>
-
-            <div class="app-card-buttons">
-              <button class="btn-pill btn-outline" disabled style="justify-content: center; opacity: 0.5; cursor: not-allowed;">
-                En Desarrollo
-              </button>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Seccion 5: Redes y Comunidad -->
-    <section id="comunidad" class="community-section">
-      <div class="container">
-        <h2 class="section-title-center" style="margin-bottom: 36px;">Comunidad y Redes</h2>
-
-        <div class="community-grid-layout">
-          
-          <!-- YouTube -->
-          <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="community-link-card">
-            <div class="comm-title">YouTube</div>
-            <div class="comm-handle">@eternodev</div>
-            <p class="comm-desc">Devlogs de videojuegos, desarrollo indie en Unity y tutoriales tecnicos.</p>
-          </a>
-
-          <!-- TikTok Gaming -->
-          <a href="https://www.tiktok.com/@eternodev" target="_blank" rel="noopener" class="community-link-card">
-            <div class="comm-title">TikTok Gaming</div>
-            <div class="comm-handle">@eternodev</div>
-            <p class="comm-desc">Clips de desarrollo, mecanicas de juegos y humor de programador.</p>
-          </a>
-
-          <!-- Instagram Gaming -->
-          <a href="https://instagram.com/eternodev" target="_blank" rel="noopener" class="community-link-card">
-            <div class="comm-title">Instagram Gaming</div>
-            <div class="comm-handle">@eternodev</div>
-            <p class="comm-desc">Stories del dia a dia, capturas de proyectos y novedades.</p>
-          </a>
-
-          <!-- Discord Goal -->
-          <div class="community-link-card" style="border-color: rgba(124, 58, 237, 0.4);">
-            <div class="comm-title">Servidor de Discord</div>
-            <div class="comm-handle">Meta: 7.000 Subs</div>
-            <p class="comm-desc">Apertura oficial del servidor de la comunidad al llegar a 7k en YouTube.</p>
           </div>
 
-          <!-- TikTok Manhwas -->
-          <a href="https://www.tiktok.com/@eternomanhwas" target="_blank" rel="noopener" class="community-link-card">
-            <div class="comm-title">TikTok Manhwas</div>
-            <div class="comm-handle">@eternomanhwas</div>
-            <p class="comm-desc">Recomendaciones de manhwas y mangas de accion y fantasia.</p>
-          </a>
-
-          <!-- Instagram Manhwas -->
-          <a href="https://instagram.com/eternomanhwas" target="_blank" rel="noopener" class="community-link-card">
-            <div class="comm-title">Instagram Manhwas</div>
-            <div class="comm-handle">@eternomanhwas</div>
-            <p class="comm-desc">Paneles visuales y resenias de manhwas recomendados.</p>
-          </a>
-
-          <!-- Itch.io Hub -->
-          <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="community-link-card">
-            <div class="comm-title">Itch.io Hub</div>
-            <div class="comm-handle">eternodev.itch.io</div>
-            <p class="comm-desc">Perfil oficial donde se publican todos los videojuegos jugables.</p>
-          </a>
-
-          <!-- GitHub Profile -->
-          <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="community-link-card">
-            <div class="comm-title">GitHub Profile</div>
-            <div class="comm-handle">@paucg06</div>
-            <p class="comm-desc">Repositorios de codigo abierto, utilidades y aplicaciones web.</p>
-          </a>
-
+          <div class="banner-stats-box">
+            <div class="banner-stat-item">
+              <span class="stat-title">Motor Principal</span>
+              <span class="stat-content">Unity (C#)</span>
+            </div>
+            <div class="banner-stat-item">
+              <span class="stat-title">Meta de YouTube</span>
+              <span class="stat-content">7.000 Subs (Apertura Discord)</span>
+            </div>
+            <div class="banner-stat-item">
+              <span class="stat-title">Filosofia</span>
+              <span class="stat-content">Open Source &bull; Independiente</span>
+            </div>
+            <div class="banner-stat-item">
+              <span class="stat-title">Estudios</span>
+              <span class="stat-content">Estudiante Universitario</span>
+            </div>
+            <div class="banner-stat-item">
+              <span class="stat-title">Perfil de Juegos</span>
+              <span class="stat-content">eternodev.itch.io</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+
+    <!-- ====================================================================
+         PESTANIA 4: COMUNIDAD
+         ==================================================================== -->
+    <div id="tab-community" class="tab-view">
+      <section class="community-section" style="padding-top: 60px;">
+        <div class="container">
+          <h2 class="section-title-center" style="margin-bottom: 12px;">Comunidad y Redes</h2>
+          <p style="text-align:center; color:var(--text-muted); margin-bottom:40px;">Sigue el desarrollo de los videojuegos, conoce nuevos proyectos o descubre recomendaciones.</p>
+
+          <div class="community-grid-layout">
+            <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="community-link-card">
+              <div class="comm-title">YouTube</div>
+              <div class="comm-handle">@eternodev</div>
+              <p class="comm-desc">Devlogs de videojuegos, desarrollo indie en Unity y tutoriales tecnicos.</p>
+            </a>
+
+            <a href="https://www.tiktok.com/@eternodev" target="_blank" rel="noopener" class="community-link-card">
+              <div class="comm-title">TikTok Gaming</div>
+              <div class="comm-handle">@eternodev</div>
+              <p class="comm-desc">Clips de desarrollo, mecanicas de juegos y humor de programador.</p>
+            </a>
+
+            <a href="https://instagram.com/eternodev" target="_blank" rel="noopener" class="community-link-card">
+              <div class="comm-title">Instagram Gaming</div>
+              <div class="comm-handle">@eternodev</div>
+              <p class="comm-desc">Stories del dia a dia, capturas de proyectos y novedades.</p>
+            </a>
+
+            <div class="community-link-card" style="border-color: rgba(124, 58, 237, 0.4);">
+              <div class="comm-title">Servidor de Discord</div>
+              <div class="comm-handle">Meta: 7.000 Subs</div>
+              <p class="comm-desc">Apertura oficial del servidor de la comunidad al llegar a 7k en YouTube.</p>
+            </div>
+
+            <a href="https://www.tiktok.com/@eternomanhwas" target="_blank" rel="noopener" class="community-link-card">
+              <div class="comm-title">TikTok Manhwas</div>
+              <div class="comm-handle">@eternomanhwas</div>
+              <p class="comm-desc">Recomendaciones de manhwas y mangas de accion y fantasia.</p>
+            </a>
+
+            <a href="https://instagram.com/eternomanhwas" target="_blank" rel="noopener" class="community-link-card">
+              <div class="comm-title">Instagram Manhwas</div>
+              <div class="comm-handle">@eternomanhwas</div>
+              <p class="comm-desc">Paneles visuales y resenias de manhwas recomendados.</p>
+            </a>
+
+            <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="community-link-card">
+              <div class="comm-title">Itch.io Hub</div>
+              <div class="comm-handle">eternodev.itch.io</div>
+              <p class="comm-desc">Perfil oficial donde se publican todos los videojuegos jugables.</p>
+            </a>
+
+            <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="community-link-card">
+              <div class="comm-title">GitHub Profile</div>
+              <div class="comm-handle">@paucg06</div>
+              <p class="comm-desc">Repositorios de codigo abierto, utilidades y aplicaciones web.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <!-- Footer -->

@@ -1,15 +1,56 @@
 ﻿// ==========================================================================
-// Etern Studio - Interactive Controller & Itch.io Dynamic Scraper
+// Etern Studio - Tabbed Navigation & Dynamic Games Carousel
 // ==========================================================================
 
+let currentCarouselIndex = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
+  initTabNavigation();
   initCarousel();
   fetchLiveItchGames();
 });
 
-// Carousel State
-let currentIndex = 0;
+// Tab Switcher
+function switchTab(tabId) {
+  const tabs = document.querySelectorAll('.tab-view');
+  const buttons = document.querySelectorAll('.nav-tab-btn');
 
+  tabs.forEach(tab => {
+    tab.classList.remove('active-tab');
+  });
+
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('data-target') === tabId) {
+      btn.classList.add('active');
+    }
+  });
+
+  const targetTab = document.getElementById(`tab-${tabId}`);
+  if (targetTab) {
+    targetTab.classList.add('active-tab');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.replaceState(null, null, `#${tabId}`);
+  }
+
+  // Si volvemos a la pestaña de juegos, refrescar carrusel
+  if (tabId === 'home') {
+    setTimeout(initCarousel, 50);
+  }
+}
+
+window.switchTab = switchTab;
+
+function initTabNavigation() {
+  const hash = window.location.hash.replace('#', '');
+  if (['home', 'apps', 'about', 'community', 'juegos', 'sobre-mi'].includes(hash)) {
+    if (hash === 'juegos') switchTab('home');
+    else if (hash === 'sobre-mi') switchTab('about');
+    else switchTab(hash);
+  }
+}
+
+// Carousel Implementation
 function getCardsPerView() {
   if (window.innerWidth < 768) return 1;
   if (window.innerWidth < 1024) return 2;
@@ -28,15 +69,14 @@ function initCarousel() {
   const cardsPerView = getCardsPerView();
   const maxIndex = Math.max(0, totalCards - cardsPerView);
 
-  // Render Pill Indicators
   pillsContainer.innerHTML = '';
   const numPills = maxIndex + 1;
 
   for (let i = 0; i < numPills; i++) {
     const pill = document.createElement('div');
-    pill.className = `carousel-pill ${i === currentIndex ? 'active' : ''}`;
+    pill.className = `carousel-pill ${i === currentCarouselIndex ? 'active' : ''}`;
     pill.addEventListener('click', () => {
-      currentIndex = i;
+      currentCarouselIndex = i;
       updateCarousel();
     });
     pillsContainer.appendChild(pill);
@@ -45,28 +85,27 @@ function initCarousel() {
   function updateCarousel() {
     const currentCardsPerView = getCardsPerView();
     const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentIndex > currentMax) currentIndex = currentMax;
+    if (currentCarouselIndex > currentMax) currentCarouselIndex = currentMax;
 
     const firstCard = track.children[0];
-    const cardWidth = firstCard ? firstCard.offsetWidth : 320;
+    const cardWidth = firstCard ? firstCard.offsetWidth : 340;
     const gap = 24;
-    const offset = currentIndex * (cardWidth + gap);
+    const offset = currentCarouselIndex * (cardWidth + gap);
 
     track.style.transform = `translateX(-${offset}px)`;
 
-    // Update active pill
     const pills = pillsContainer.querySelectorAll('.carousel-pill');
     pills.forEach((pill, idx) => {
-      pill.classList.toggle('active', idx === currentIndex);
+      pill.classList.toggle('active', idx === currentCarouselIndex);
     });
 
-    prevBtn.style.opacity = currentIndex === 0 ? '0.35' : '1';
-    nextBtn.style.opacity = currentIndex >= currentMax ? '0.35' : '1';
+    prevBtn.style.opacity = currentCarouselIndex === 0 ? '0.35' : '1';
+    nextBtn.style.opacity = currentCarouselIndex >= currentMax ? '0.35' : '1';
   }
 
   prevBtn.onclick = () => {
-    if (currentIndex > 0) {
-      currentIndex--;
+    if (currentCarouselIndex > 0) {
+      currentCarouselIndex--;
       updateCarousel();
     }
   };
@@ -74,8 +113,8 @@ function initCarousel() {
   nextBtn.onclick = () => {
     const currentCardsPerView = getCardsPerView();
     const currentMax = Math.max(0, track.children.length - currentCardsPerView);
-    if (currentIndex < currentMax) {
-      currentIndex++;
+    if (currentCarouselIndex < currentMax) {
+      currentCarouselIndex++;
       updateCarousel();
     }
   };
@@ -87,14 +126,13 @@ function initCarousel() {
   updateCarousel();
 }
 
-// Dynamic Live Itch.io Scraper
+// Dynamic Live Itch.io Scraper (CORS Proxy Seguro)
 async function fetchLiveItchGames() {
   const username = "eternodev";
   const track = document.getElementById('carouselTrack');
   if (!track) return;
 
   try {
-    // Consulta en vivo al perfil de Itch.io mediante un proxy CORS seguro
     const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://${username}.itch.io/`)}`;
     const res = await fetch(proxyUrl);
     if (!res.ok) return;
@@ -107,7 +145,7 @@ async function fetchLiveItchGames() {
     const gameCells = doc.querySelectorAll('.game_cell');
 
     if (gameCells && gameCells.length > 0) {
-      track.innerHTML = ''; // Limpiar y renderizar juegos en vivo
+      track.innerHTML = '';
 
       gameCells.forEach(cell => {
         const titleLink = cell.querySelector('.game_title a.title');
@@ -136,7 +174,7 @@ async function fetchLiveItchGames() {
           <div class="game-content-box">
             <div class="game-meta-row" style="margin-top:0; padding-top:0; border:none;">
               <span style="color: var(--accent-purple-light);">${genre}</span>
-              <span style="color: var(--text-sub);">Itch.io</span>
+              <span style="color: var(--text-dim);">Itch.io</span>
             </div>
             <h3 class="game-item-title">${title}</h3>
             <p class="game-item-desc">${desc}</p>
@@ -149,10 +187,9 @@ async function fetchLiveItchGames() {
         track.appendChild(card);
       });
 
-      // Reinicializar carrusel con los datos dinámicos
       initCarousel();
     }
   } catch (e) {
-    console.log("Cargando juegos preconfigurados de Itch.io:", e);
+    console.log("Usando juegos preconfigurados de Itch.io:", e);
   }
 }
