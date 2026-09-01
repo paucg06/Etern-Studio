@@ -32,7 +32,6 @@
       --accent-purple-light: #8B5CF6;
       --accent-mint: #00F59B;
       --accent-mint-hover: #00D587;
-      --accent-red: #FF0033;
 
       --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --radius-sm: 6px;
@@ -245,7 +244,7 @@
       margin-top: 8px;
     }
 
-    /* Carrusel de Juegos & Videos - Layout Anti-clipping */
+    /* Carrusel de Juegos & Videos */
     .carousel-section {
       padding: 40px 0 70px;
     }
@@ -285,6 +284,7 @@
       flex-direction: column;
       transition: transform 0.2s, border-color 0.2s;
       box-sizing: border-box;
+      cursor: pointer;
     }
 
     .game-card-item:hover,
@@ -321,10 +321,11 @@
       transform: scale(1.04);
     }
 
+    /* Boton de Play Negro Semitransparente (#16161E con transparencia) */
     .video-play-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -332,31 +333,35 @@
     }
 
     .video-card-item:hover .video-play-overlay {
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.35);
     }
 
     .video-play-btn {
-      width: 46px;
-      height: 46px;
-      background: #FF0000;
+      width: 52px;
+      height: 52px;
+      background: rgba(22, 22, 30, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #FFFFFF;
-      box-shadow: 0 4px 14px rgba(255, 0, 0, 0.4);
-      transition: transform 0.2s;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
     }
 
     .video-card-item:hover .video-play-btn {
-      transform: scale(1.1);
+      transform: scale(1.12);
+      background: rgba(42, 42, 53, 0.95);
+      border-color: rgba(255, 255, 255, 0.45);
     }
 
     .video-play-btn svg {
       width: 18px;
       height: 18px;
       fill: #FFFFFF;
-      margin-left: 2px;
+      margin-left: 3px;
     }
 
     .game-content-box,
@@ -389,14 +394,27 @@
 
     .video-meta-row {
       margin-top: auto;
-      padding-top: 10px;
+      padding-top: 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: #8E8E93;
       font-weight: 600;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .video-cta-text {
+      color: #00F59B;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.15s;
+    }
+
+    .video-card-item:hover .video-cta-text {
+      color: #00D587;
     }
 
     /* Itch.io Meta Badges & User Custom SVGs */
@@ -1124,7 +1142,7 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 3: VÍDEOS (Carrusel Idéntico al de Juegos en formato 3x3)
+         PESTANIA 3: VÍDEOS (Portadas Oficiales + Botón Play Negro Semitransparente)
          ==================================================================== -->
     <div id="tab-videos" class="tab-view">
       <section class="carousel-section" style="padding-top: 50px;">
@@ -1140,7 +1158,7 @@
               <!-- Video 1: Roguelike DevLog 1 -->
               <a href="https://youtu.be/F1-R5hljGLM" target="_blank" rel="noopener" class="video-card-item">
                 <div class="video-thumb-box">
-                  <img src="https://img.youtube.com/vi/F1-R5hljGLM/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/F1-R5hljGLM/hqdefault.jpg'" alt="¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1" class="video-thumb-img" />
+                  <img src="assets/video1_roguelike.png" alt="¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1" class="video-thumb-img" />
                   <div class="video-play-overlay">
                     <div class="video-play-btn">
                       <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1152,7 +1170,7 @@
                   <p class="video-item-desc">Creando un videojuego roguelike con zombies y pollos en Unity desde el primer día.</p>
                   <div class="video-meta-row">
                     <span>EternoDev &bull; YouTube</span>
-                    <span style="color: #00F59B;">Ver Vídeo &rarr;</span>
+                    <span class="video-cta-text">Ver Vídeo &rarr;</span>
                   </div>
                 </div>
               </a>
@@ -1160,7 +1178,7 @@
               <!-- Video 2: VTuber en 48 Horas -->
               <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="video-card-item">
                 <div class="video-thumb-box">
-                  <img src="assets/vtuber_thumb.jpg" onerror="this.src='https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png'" alt="Hice un VTUBER en 48 HORAS" class="video-thumb-img" />
+                  <img src="assets/video2_vtuber.png" alt="Hice un VTUBER en 48 HORAS" class="video-thumb-img" />
                   <div class="video-play-overlay">
                     <div class="video-play-btn">
                       <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1172,7 +1190,7 @@
                   <p class="video-item-desc">Dibujando y programando un modelo de Vtuber en tiempo récord con Krita y Unity.</p>
                   <div class="video-meta-row">
                     <span>EternoDev &bull; YouTube</span>
-                    <span style="color: #00F59B;">Ver Vídeo &rarr;</span>
+                    <span class="video-cta-text">Ver Vídeo &rarr;</span>
                   </div>
                 </div>
               </a>
@@ -1180,7 +1198,7 @@
               <!-- Video 3: GameJam -->
               <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="video-card-item">
                 <div class="video-thumb-box">
-                  <img src="assets/gamejam_thumb.jpg" onerror="this.src='https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png'" alt="Sobreviví a mi PRIMERA GameJam" class="video-thumb-img" />
+                  <img src="assets/video3_gamejam.png" alt="Sobreviví a mi PRIMERA GameJam" class="video-thumb-img" />
                   <div class="video-play-overlay">
                     <div class="video-play-btn">
                       <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1189,10 +1207,10 @@
                 </div>
                 <div class="video-content-box">
                   <h3 class="video-item-title">Sobreviví a mi PRIMERA GameJam</h3>
-                  <p class="video-item-desc">Desarrollando un videojuego completo en 48 horas sin dormir con 6 personas.</p>
+                  <p class="video-item-desc">Desarrollando un videojuego completo en 48 horas sin dormir con 6 desarrolladores.</p>
                   <div class="video-meta-row">
                     <span>EternoDev &bull; YouTube</span>
-                    <span style="color: #00F59B;">Ver Vídeo &rarr;</span>
+                    <span class="video-cta-text">Ver Vídeo &rarr;</span>
                   </div>
                 </div>
               </a>

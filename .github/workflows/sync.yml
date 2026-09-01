@@ -1,0 +1,36 @@
+name: Sync Itch.io & YouTube Data
+
+on:
+  schedule:
+    # Se ejecuta todos los dias a las 04:00 UTC
+    - cron: '0 4 * * *'
+  # Permite ejecutarlo manualmente desde la pestania Actions de GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repositorio
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Ejecutar Script de Sincronizacion
+        env:
+          ITCH_API_KEY: ${{ secrets.ITCH_API_KEY }}
+        run: node scripts/sync_data.js
+
+      - name: Guardar cambios si hay actualizaciones
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add games.json videos.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync Itch.io games and YouTube videos [skip ci]" && git push)

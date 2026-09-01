@@ -231,8 +231,8 @@ header {
   margin-top: 8px;
 }
 
-/* Games Carousel */
-.games-section {
+/* Carousels Section */
+.carousel-section {
   padding: 40px 0 70px;
 }
 
@@ -259,7 +259,8 @@ header {
   will-change: transform;
 }
 
-.game-card-item {
+.game-card-item,
+.video-card-item {
   flex: 0 0 calc((100% - 40px) / 3);
   min-width: 0;
   background: #2A2A35;
@@ -270,9 +271,11 @@ header {
   flex-direction: column;
   transition: transform 0.2s, border-color 0.2s;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
-.game-card-item:hover {
+.game-card-item:hover,
+.video-card-item:hover {
   transform: translateY(-4px);
   border-color: rgba(255, 255, 255, 0.25);
 }
@@ -284,14 +287,72 @@ header {
   overflow: hidden;
 }
 
-.game-thumb-img {
+.video-thumb-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #16161E;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-thumb-img,
+.video-thumb-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.3s ease;
 }
 
-.game-content-box {
+.video-card-item:hover .video-thumb-img {
+  transform: scale(1.04);
+}
+
+/* Boton Play Negro Semitransparente */
+.video-play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.video-card-item:hover .video-play-overlay {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.video-play-btn {
+  width: 52px;
+  height: 52px;
+  background: rgba(22, 22, 30, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.video-card-item:hover .video-play-btn {
+  transform: scale(1.12);
+  background: rgba(42, 42, 53, 0.95);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.video-play-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: #FFFFFF;
+  margin-left: 3px;
+}
+
+.game-content-box,
+.video-content-box {
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
@@ -299,13 +360,16 @@ header {
   flex-grow: 1;
 }
 
-.game-item-title {
-  font-size: 1.18rem;
+.game-item-title,
+.video-item-title {
+  font-size: 1.15rem;
   font-weight: 800;
   color: #FFFFFF;
+  line-height: 1.35;
 }
 
-.game-item-desc {
+.game-item-desc,
+.video-item-desc {
   font-size: 0.88rem;
   color: #CCCCCE;
   line-height: 1.45;
@@ -315,6 +379,32 @@ header {
   overflow: hidden;
 }
 
+.video-meta-row {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #8E8E93;
+  font-weight: 600;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.video-cta-text {
+  color: #00F59B;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s;
+}
+
+.video-card-item:hover .video-cta-text {
+  color: #00D587;
+}
+
+/* Itch.io Meta Badges & Platform SVGs */
 .itch-meta-container {
   margin-top: auto;
   padding-top: 10px;
@@ -676,7 +766,7 @@ footer {
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .game-card-item { flex: 0 0 calc((100% - 20px) / 2); }
+  .game-card-item, .video-card-item { flex: 0 0 calc((100% - 20px) / 2); }
   .apps-grid-layout { grid-template-columns: repeat(2, 1fr); }
   .community-grid-layout { grid-template-columns: repeat(2, 1fr); }
   .hero-grid { grid-template-columns: 1fr; }
@@ -689,5 +779,5 @@ footer {
   .banner-white-title { font-size: 2rem; }
   .apps-grid-layout { grid-template-columns: 1fr; }
   .community-grid-layout { grid-template-columns: 1fr; }
-  .game-card-item { flex: 0 0 100%; }
+  .game-card-item, .video-card-item { flex: 0 0 100%; }
 }
