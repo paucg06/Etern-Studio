@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Etern Studio - Videojuegos Indie y Software</title>
-  <meta name="description" content="Etern Studio: Videojuegos indie desarrollados en Unity, aplicaciones de codigo abierto y contenido digital por EternoDev (Pau CG)." />
+  <title>EternoDev Studio - Videojuegos Indie y Software</title>
+  <meta name="description" content="EternoDev Studio: Videojuegos indie desarrollados en Unity, aplicaciones de codigo abierto y contenido digital por EternoDev (Pau CG)." />
   
   <link rel="icon" type="image/png" sizes="192x192" href="https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png" />
   
@@ -365,7 +365,7 @@
       padding: 18px 20px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       flex-grow: 1;
     }
 
@@ -385,27 +385,54 @@
       overflow: hidden;
     }
 
-    .game-platform-icons {
+    /* Itch.io Exact Meta Style (media_1788225801904.png) */
+    .itch-meta-container {
       margin-top: auto;
       padding-top: 10px;
       display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #8E8E93;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .itch-genre-label {
       font-size: 0.82rem;
+      color: #8E8E93;
       font-weight: 600;
     }
 
-    .platform-icon-svg {
-      width: 16px !important;
-      height: 16px !important;
-      max-width: 16px;
-      max-height: 16px;
-      fill: currentColor;
-      flex-shrink: 0;
-      display: inline-block;
+    .itch-platforms-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
+    .badge-play-browser {
+      background: #d8d8d8;
+      color: #1a1a1a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      line-height: 1.3;
+    }
+
+    .itch-platform-svg {
+      width: 14px !important;
+      height: 14px !important;
+      max-width: 14px;
+      max-height: 14px;
+      fill: #8E8E93;
+      flex-shrink: 0;
+      display: inline-block;
+      transition: fill 0.15s;
+    }
+
+    .game-card-item:hover .itch-platform-svg {
+      fill: #FFFFFF;
+    }
+
+    /* Carousel Nav */
     .carousel-nav-bar {
       display: flex;
       align-items: center;
@@ -747,7 +774,7 @@
     <div class="container nav-wrapper">
       <div class="brand" onclick="switchTab('home')">
         <div class="brand-icon">E</div>
-        <span class="brand-title">Etern Studio</span>
+        <span class="brand-title">EternoDev Studio</span>
       </div>
 
       <nav>
@@ -785,7 +812,7 @@
             </h1>
 
             <p class="hero-desc">
-              Etern Studio es un estudio indie centrado en el desarrollo de videojuegos en Unity, software libre para creadores y divulgacion digital.
+              EternoDev Studio es un estudio indie centrado en el desarrollo de videojuegos en Unity, software libre para creadores y divulgacion digital.
             </p>
 
             <div class="hero-cta-group">
@@ -818,7 +845,7 @@
         </div>
       </section>
 
-      <!-- Carrusel de Juegos (Exacto a la imagen media_1788225113477.png) -->
+      <!-- Carrusel de Juegos (Exacto al estilo Itch.io / GDevelop) -->
       <section id="carousel-anchor" class="games-section">
         <div class="container">
           <h2 class="section-title-center">Juegos publicados</h2>
@@ -834,9 +861,13 @@
                 <div class="game-content-box">
                   <h3 class="game-item-title">Oonga Bunga!</h3>
                   <p class="game-item-desc">Compite con tus amigos para convertirte en el lider de la tribu. Solo habra un ganador.</p>
-                  <div class="game-platform-icons">
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 88 88"><path d="M0 12.4l35.6-4.9.1 33.7-35.7.2zm35.7 33.1l-.1 33.9-35.6-4.9V45.5zm4.8-26.2L88 0v40.8l-47.5.4zm47.5 35L40.5 88V47.5l47.5.3z"/></svg>
-                    <span>Windows</span>
+                  
+                  <!-- Itch.io exact meta -->
+                  <div class="itch-meta-container">
+                    <span class="itch-genre-label">Fighting</span>
+                    <div class="itch-platforms-row">
+                      <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="Windows"><path d="M0 2.222L6.47 1.34v6.248H0V2.222zm0 6.012h6.47v6.257L0 13.626V8.234zm7.25-6.993L16 0v7.588H7.25V1.241zm8.75 7H7.25v7.604L16 14.774V8.241z"/></svg>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -849,10 +880,16 @@
                 <div class="game-content-box">
                   <h3 class="game-item-title">Verdades Incompletas</h3>
                   <p class="game-item-desc">Estas muerto... Descubre quien te asesino mientras tus tres amigos investigan tu hogar.</p>
-                  <div class="game-platform-icons">
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 88 88"><path d="M0 12.4l35.6-4.9.1 33.7-35.7.2zm35.7 33.1l-.1 33.9-35.6-4.9V45.5zm4.8-26.2L88 0v40.8l-47.5.4zm47.5 35L40.5 88V47.5l47.5.3z"/></svg>
-                    <span>Web &bull; PC</span>
+                  
+                  <!-- Itch.io exact meta -->
+                  <div class="itch-meta-container">
+                    <span class="itch-genre-label">Visual Novel</span>
+                    <div class="itch-platforms-row">
+                      <span class="badge-play-browser">Play in browser</span>
+                      <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="Windows"><path d="M0 2.222L6.47 1.34v6.248H0V2.222zm0 6.012h6.47v6.257L0 13.626V8.234zm7.25-6.993L16 0v7.588H7.25V1.241zm8.75 7H7.25v7.604L16 14.774V8.241z"/></svg>
+                      <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="Linux"><path d="M7.994.002C6.14.02 4.67 1.48 4.67 3.33v3.41c-.7.6-1.14 1.48-1.14 2.47 0 1.25.7 2.32 1.73 2.87-.2.66-.33 1.37-.33 2.11 0 .2.02.39.05.58-.93.26-1.61 1.11-1.61 2.12 0 1.22.99 2.21 2.21 2.21.64 0 1.22-.27 1.63-.71.86.37 1.83.58 2.86.58 1.03 0 2-.21 2.86-.58.41.44.99.71 1.63.71 1.22 0 2.21-.99 2.21-2.21 0-1.01-.68-1.86-1.61-2.12.03-.19.05-.38.05-.58 0-.74-.13-1.45-.33-2.11 1.03-.55 1.73-1.62 1.73-2.87 0-.99-.44-1.87-1.14-2.47V3.33c0-1.85-1.47-3.31-3.324-3.328h-.062z"/></svg>
+                      <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="macOS"><path d="M11.182.008C11.148-.03 9.67.23 8.76 1.3c-.808.95-1.127 2.37-.96 3.42 1.07.08 2.45-.58 3.25-1.53.76-.9 1.18-2.22.132-3.182zm2.08 4.792c-1.74-.09-3.21 1-4.04 1-.85 0-2.07-.94-3.41-.91-1.75.03-3.37 1.02-4.26 2.59-1.82 3.14-.47 7.78 1.3 10.33.86 1.25 1.89 2.64 3.24 2.59 1.31-.05 1.8-.84 3.39-.84 1.58 0 2.03.84 3.4.81 1.41-.02 2.3-1.25 3.16-2.5 1-1.45 1.41-2.86 1.43-2.93-.03-.02-2.74-1.05-2.77-4.18-.03-2.61 2.14-3.86 2.24-3.93-1.23-1.79-3.13-1.99-3.68-2.03z"/></svg>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -865,10 +902,16 @@
                 <div class="game-content-box">
                   <h3 class="game-item-title">Soap Dodger</h3>
                   <p class="game-item-desc">Agudiza tus reflejos en este peliagudo Bullet Hell. No pierdas bocanadas de aire.</p>
-                  <div class="game-platform-icons">
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 88 88"><path d="M0 12.4l35.6-4.9.1 33.7-35.7.2zm35.7 33.1l-.1 33.9-35.6-4.9V45.5zm4.8-26.2L88 0v40.8l-47.5.4zm47.5 35L40.5 88V47.5l47.5.3z"/></svg>
-                    <span>Web &bull; PC</span>
+                  
+                  <!-- Itch.io exact meta -->
+                  <div class="itch-meta-container">
+                    <span class="itch-genre-label">Action / Bullet Hell</span>
+                    <div class="itch-platforms-row">
+                      <span class="badge-play-browser">Play in browser</span>
+                      <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="Windows"><path d="M0 2.222L6.47 1.34v6.248H0V2.222zm0 6.012h6.47v6.257L0 13.626V8.234zm7.25-6.993L16 0v7.588H7.25V1.241zm8.75 7H7.25v7.604L16 14.774V8.241z"/></svg>
+                      <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="Linux"><path d="M7.994.002C6.14.02 4.67 1.48 4.67 3.33v3.41c-.7.6-1.14 1.48-1.14 2.47 0 1.25.7 2.32 1.73 2.87-.2.66-.33 1.37-.33 2.11 0 .2.02.39.05.58-.93.26-1.61 1.11-1.61 2.12 0 1.22.99 2.21 2.21 2.21.64 0 1.22-.27 1.63-.71.86.37 1.83.58 2.86.58 1.03 0 2-.21 2.86-.58.41.44.99.71 1.63.71 1.22 0 2.21-.99 2.21-2.21 0-1.01-.68-1.86-1.61-2.12.03-.19.05-.38.05-.58 0-.74-.13-1.45-.33-2.11 1.03-.55 1.73-1.62 1.73-2.87 0-.99-.44-1.87-1.14-2.47V3.33c0-1.85-1.47-3.31-3.324-3.328h-.062z"/></svg>
+                      <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="macOS"><path d="M11.182.008C11.148-.03 9.67.23 8.76 1.3c-.808.95-1.127 2.37-.96 3.42 1.07.08 2.45-.58 3.25-1.53.76-.9 1.18-2.22.132-3.182zm2.08 4.792c-1.74-.09-3.21 1-4.04 1-.85 0-2.07-.94-3.41-.91-1.75.03-3.37 1.02-4.26 2.59-1.82 3.14-.47 7.78 1.3 10.33.86 1.25 1.89 2.64 3.24 2.59 1.31-.05 1.8-.84 3.39-.84 1.58 0 2.03.84 3.4.81 1.41-.02 2.3-1.25 3.16-2.5 1-1.45 1.41-2.86 1.43-2.93-.03-.02-2.74-1.05-2.77-4.18-.03-2.61 2.14-3.86 2.24-3.93-1.23-1.79-3.13-1.99-3.68-2.03z"/></svg>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -881,9 +924,13 @@
                 <div class="game-content-box">
                   <h3 class="game-item-title">CastleCat RPG</h3>
                   <p class="game-item-desc">Naciste gato, pero moriras como leyenda en este juego de exploracion y mazmorras.</p>
-                  <div class="game-platform-icons">
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                    <span>Play in Browser</span>
+                  
+                  <!-- Itch.io exact meta -->
+                  <div class="itch-meta-container">
+                    <span class="itch-genre-label">Adventure</span>
+                    <div class="itch-platforms-row">
+                      <span class="badge-play-browser">Play in browser</span>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -896,9 +943,13 @@
                 <div class="game-content-box">
                   <h3 class="game-item-title">Space Blitz</h3>
                   <p class="game-item-desc">Un trepidante shooter arcade donde tu nave espacial evoluciona con mejoras dinamicas.</p>
-                  <div class="game-platform-icons">
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                    <span>Play in Browser</span>
+                  
+                  <!-- Itch.io exact meta -->
+                  <div class="itch-meta-container">
+                    <span class="itch-genre-label">Shooter</span>
+                    <div class="itch-platforms-row">
+                      <span class="badge-play-browser">Play in browser</span>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -964,7 +1015,7 @@
       <section class="apps-section" style="padding-top: 50px;">
         <div class="container">
           <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
-            <h2 class="section-title-center" style="margin-bottom: 8px;">Aplicaciones creadas por Etern Studio</h2>
+            <h2 class="section-title-center" style="margin-bottom: 8px;">Aplicaciones creadas por EternoDev Studio</h2>
             <p style="color: #CCCCCE; font-size: 1.05rem;">Software nativo y herramientas web disenadas para potenciar tu flujo de trabajo y productividad.</p>
           </div>
 
@@ -992,9 +1043,8 @@
                 </ul>
 
                 <div class="app-platforms-badge-row">
-                  <div style="display:flex; align-items:center; gap:6px;">
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                    <span>WEB &bull; MIT</span>
+                  <div class="itch-platforms-row">
+                    <span class="badge-play-browser">Play in browser</span>
                   </div>
                   <a href="https://paucg06.github.io/BrightLight-Bluetooth/" target="_blank" rel="noopener" class="app-action-link">Abrir Web &rarr;</a>
                 </div>
@@ -1023,9 +1073,10 @@
                 </ul>
 
                 <div class="app-platforms-badge-row">
-                  <div style="display:flex; align-items:center; gap:6px;">
-                    <svg class="platform-icon-svg" width="16" height="16" viewBox="0 0 88 88"><path d="M0 12.4l35.6-4.9.1 33.7-35.7.2zm35.7 33.1l-.1 33.9-35.6-4.9V45.5zm4.8-26.2L88 0v40.8l-47.5.4zm47.5 35L40.5 88V47.5l47.5.3z"/></svg>
-                    <span>WIN &bull; LINUX</span>
+                  <div class="itch-platforms-row">
+                    <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="Windows"><path d="M0 2.222L6.47 1.34v6.248H0V2.222zm0 6.012h6.47v6.257L0 13.626V8.234zm7.25-6.993L16 0v7.588H7.25V1.241zm8.75 7H7.25v7.604L16 14.774V8.241z"/></svg>
+                    <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="Linux"><path d="M7.994.002C6.14.02 4.67 1.48 4.67 3.33v3.41c-.7.6-1.14 1.48-1.14 2.47 0 1.25.7 2.32 1.73 2.87-.2.66-.33 1.37-.33 2.11 0 .2.02.39.05.58-.93.26-1.61 1.11-1.61 2.12 0 1.22.99 2.21 2.21 2.21.64 0 1.22-.27 1.63-.71.86.37 1.83.58 2.86.58 1.03 0 2-.21 2.86-.58.41.44.99.71 1.63.71 1.22 0 2.21-.99 2.21-2.21 0-1.01-.68-1.86-1.61-2.12.03-.19.05-.38.05-.58 0-.74-.13-1.45-.33-2.11 1.03-.55 1.73-1.62 1.73-2.87 0-.99-.44-1.87-1.14-2.47V3.33c0-1.85-1.47-3.31-3.324-3.328h-.062z"/></svg>
+                    <svg class="itch-platform-svg" viewBox="0 0 16 16" width="14" height="14" title="macOS"><path d="M11.182.008C11.148-.03 9.67.23 8.76 1.3c-.808.95-1.127 2.37-.96 3.42 1.07.08 2.45-.58 3.25-1.53.76-.9 1.18-2.22.132-3.182zm2.08 4.792c-1.74-.09-3.21 1-4.04 1-.85 0-2.07-.94-3.41-.91-1.75.03-3.37 1.02-4.26 2.59-1.82 3.14-.47 7.78 1.3 10.33.86 1.25 1.89 2.64 3.24 2.59 1.31-.05 1.8-.84 3.39-.84 1.58 0 2.03.84 3.4.81 1.41-.02 2.3-1.25 3.16-2.5 1-1.45 1.41-2.86 1.43-2.93-.03-.02-2.74-1.05-2.77-4.18-.03-2.61 2.14-3.86 2.24-3.93-1.23-1.79-3.13-1.99-3.68-2.03z"/></svg>
                   </div>
                   <a href="https://github.com/paucg06/Etern-Notes/releases" target="_blank" rel="noopener" class="app-action-link">Descargar &rarr;</a>
                 </div>
@@ -1056,7 +1107,7 @@
                 </ul>
 
                 <div class="app-platforms-badge-row">
-                  <span>AUDIO &bull; SFX</span>
+                  <span style="color:#8E8E93;">AUDIO &bull; SFX</span>
                   <span style="color:#8E8E93;">En Desarrollo</span>
                 </div>
               </div>
@@ -1086,7 +1137,7 @@
                 </ul>
 
                 <div class="app-platforms-badge-row">
-                  <span>DESKTOP APP</span>
+                  <span style="color:#8E8E93;">DESKTOP APP</span>
                   <span style="color:#8E8E93;">Pronto</span>
                 </div>
               </div>
@@ -1213,7 +1264,7 @@
   <!-- Footer -->
   <footer>
     <div class="container footer-flex">
-      <p>&copy; 2026 Etern Studio por <strong>Pau CG (EternoDev)</strong>. Licencia MIT.</p>
+      <p>&copy; 2026 EternoDev Studio por <strong>Pau CG (EternoDev)</strong>. Licencia MIT.</p>
       
       <div class="footer-nav-links">
         <a href="https://eternodev.itch.io" target="_blank" rel="noopener">Itch.io</a>
