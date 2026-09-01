@@ -1,5 +1,5 @@
 // ==========================================================================
-// EternoDev Studio - Tabbed Navigation & Real-time Live Itch.io Scraper
+// EternoDev Studio - Tabbed Navigation & Real-time Live Sync Engine
 // ==========================================================================
 
 let currentCarouselIndex = 0;
@@ -49,9 +49,9 @@ window.switchTab = switchTab;
 
 function initTabNavigation() {
   const hash = window.location.hash.replace('#', '');
-  if (['home', 'apps', 'about', 'community', 'juegos', 'sobre-mi'].includes(hash)) {
+  if (['home', 'apps', 'devlogs', 'about', 'community', 'juegos', 'videos'].includes(hash)) {
     if (hash === 'juegos') switchTab('home');
-    else if (hash === 'sobre-mi') switchTab('about');
+    else if (hash === 'videos') switchTab('devlogs');
     else switchTab(hash);
   }
 }
@@ -135,7 +135,7 @@ function initCarousel() {
   updateCarousel();
 }
 
-// Scraper en Vivo de Itch.io con Bypass de Caché y Múltiples Proxies
+// Scraper en Vivo de Itch.io
 async function fetchLiveItchGames() {
   const username = "eternodev";
   const track = document.getElementById('carouselTrack');
@@ -144,7 +144,6 @@ async function fetchLiveItchGames() {
   const timestamp = Date.now();
   const targetUrl = `https://${username}.itch.io/?_t=${timestamp}`;
 
-  // Lista de proxies CORS con tiempo de espera
   const proxies = [
     `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}&disableCache=true`,
     `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
@@ -172,15 +171,12 @@ async function fetchLiveItchGames() {
       }
 
       if (rawHtml && typeof rawHtml === 'string' && rawHtml.includes('game_cell')) {
-        break; // Éxito
+        break;
       }
-    } catch (e) {
-      // Intentar con el siguiente proxy
-    }
+    } catch (e) {}
   }
 
   if (!rawHtml || typeof rawHtml !== 'string' || !rawHtml.includes('game_cell')) {
-    console.log("Itch.io Live: Utilizando datos oficiales precargados.");
     return;
   }
 
@@ -205,13 +201,11 @@ async function fetchLiveItchGames() {
         const link = titleLink.href;
         
         let thumb = (imgEl && (imgEl.getAttribute('data-lazy_src') || imgEl.src)) || 'https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png';
-        // Asegurar que use HTTPS
         if (thumb.startsWith('http://')) thumb = thumb.replace('http://', 'https://');
 
         const desc = textEl ? textEl.textContent.trim() : 'Videojuego disponible en Itch.io';
         const genre = genreEl ? genreEl.textContent.trim() : 'Game';
 
-        // Analizar plataformas e iconos
         let hasBrowser = false;
         let hasWindows = false;
         let hasLinux = false;
@@ -274,7 +268,6 @@ async function fetchLiveItchGames() {
       });
 
       initCarousel();
-      console.log(`Itch.io Live: ${gameCells.length} juegos actualizados en tiempo real.`);
     }
   } catch (e) {
     console.log("Itch.io Live Error:", e);

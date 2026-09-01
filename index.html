@@ -206,7 +206,7 @@
       display: block;
     }
 
-    /* Hero Section (Centrado sin tarjeta flotante) */
+    /* Hero Section */
     .hero-section {
       padding: 70px 0 55px;
       text-align: center;
@@ -244,7 +244,7 @@
       margin-top: 8px;
     }
 
-    /* Juegos Carrusel - Anti-clipping Layout */
+    /* Juegos Carrusel */
     .games-section {
       padding: 40px 0 70px;
     }
@@ -544,6 +544,98 @@
       color: #00F59B;
     }
 
+    /* Seccion Devlogs / Videos de YouTube */
+    .devlogs-section {
+      padding: 60px 0 80px;
+    }
+
+    .devlogs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .devlog-card {
+      background: #2A2A35;
+      border: 1px solid #34343C;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .devlog-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .devlog-video-box {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      position: relative;
+    }
+
+    .devlog-video-box iframe,
+    .devlog-video-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: none;
+    }
+
+    .devlog-content-box {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-grow: 1;
+      background: #2A2A35;
+    }
+
+    .devlog-channel-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #8E8E93;
+    }
+
+    .devlog-channel-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #FF0000;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .devlog-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.35;
+    }
+
+    .devlog-desc-bubble {
+      background: #16161E;
+      border-left: 3px solid #7C3AED;
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.85rem;
+      color: #CCCCCE;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-top: auto;
+    }
+
     /* Banner Blanco Sobre Mi */
     .banner-white-section {
       background: #FFFFFF;
@@ -693,6 +785,7 @@
       .game-card-item { flex: 0 0 calc((100% - 20px) / 2); }
       .apps-grid-layout { grid-template-columns: repeat(2, 1fr); }
       .community-grid-layout { grid-template-columns: repeat(2, 1fr); }
+      .devlogs-grid { grid-template-columns: 1fr; }
       .hero-grid { grid-template-columns: 1fr; }
       .banner-white-grid { grid-template-columns: 1fr; }
     }
@@ -703,6 +796,7 @@
       .banner-white-title { font-size: 2rem; }
       .apps-grid-layout { grid-template-columns: 1fr; }
       .community-grid-layout { grid-template-columns: 1fr; }
+      .devlogs-grid { grid-template-columns: 1fr; }
       .game-card-item { flex: 0 0 100%; }
     }
   </style>
@@ -721,6 +815,7 @@
         <ul class="nav-tabs">
           <li><button class="nav-tab-btn active" data-target="home" onclick="switchTab('home')">Juegos</button></li>
           <li><button class="nav-tab-btn" data-target="apps" onclick="switchTab('apps')">Aplicaciones</button></li>
+          <li><button class="nav-tab-btn" data-target="devlogs" onclick="switchTab('devlogs')">DevLogs</button></li>
           <li><button class="nav-tab-btn" data-target="about" onclick="switchTab('about')">Sobre Mi</button></li>
           <li><button class="nav-tab-btn" data-target="community" onclick="switchTab('community')">Comunidad</button></li>
         </ul>
@@ -743,7 +838,7 @@
          ==================================================================== -->
     <div id="tab-home" class="tab-view active-tab">
       
-      <!-- Hero Section (Limpio y centrado sin tarjeta redundante) -->
+      <!-- Hero Section -->
       <section class="hero-section">
         <div class="container hero-container">
           <h1 class="hero-title">
@@ -765,7 +860,7 @@
         </div>
       </section>
 
-      <!-- Carrusel de Juegos (Exacto al estilo Itch.io / GDevelop con tus SVG) -->
+      <!-- Carrusel de Juegos (Incluye TODOS los 6 juegos publicados en Itch.io) -->
       <section id="carousel-anchor" class="games-section">
         <div class="container">
           <h2 class="section-title-center">Juegos publicados</h2>
@@ -773,7 +868,26 @@
           <div class="carousel-viewport">
             <div class="carousel-track" id="carouselTrack">
               
-              <!-- Juego 1: Oonga Bunga! -->
+              <!-- Juego 1: Just An Idiot Dev (Nuevo) -->
+              <a href="https://eternodev.itch.io/just-an-idiot-dev" target="_blank" rel="noopener" class="game-card-item">
+                <div class="game-thumb-box">
+                  <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Just An Idiot Dev" class="game-thumb-img" />
+                </div>
+                <div class="game-content-box">
+                  <h3 class="game-item-title">Just An Idiot Dev</h3>
+                  <p class="game-item-desc">Nuevo juego indie publicado en Itch.io por EternoDev Studio.</p>
+                  
+                  <div class="itch-meta-container">
+                    <span class="itch-genre-label">Indie</span>
+                    <div class="itch-platforms-row">
+                      <span class="badge-play-browser">Play in browser</span>
+                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Windows"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M675 785 c-44 -7 -119 -18 -167 -25 l-88 -12 0 -134 0 -134 185 0 186 0 -3 157 c-3 132 -5 158 -18 159 -8 1 -51 -4 -95 -11z"/><path d="M220 721 l-115 -16 -3 -112 -3 -113 136 0 135 0 0 130 c0 118 -2 130 -17 129 -10 -1 -70 -9 -133 -18z"/><path d="M100 325 c0 -132 -14 -117 125 -135 44 -6 95 -13 113 -16 l32 -5 0 136 0 135 -135 0 -135 0 0 -115z"/><path d="M420 302 l0 -139 178 -24 c97 -14 180 -22 185 -19 4 4 6 76 5 161 l-3 154 -182 3 -183 2 0 -138z"/></g></svg>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <!-- Juego 2: Oonga Bunga! -->
               <a href="https://eternodev.itch.io/oonga-bunga" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga!" class="game-thumb-img" />
@@ -791,7 +905,7 @@
                 </div>
               </a>
 
-              <!-- Juego 2: Verdades Incompletas -->
+              <!-- Juego 3: Verdades Incompletas -->
               <a href="https://eternodev.itch.io/verdades-incompletas" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png" alt="Verdades Incompletas" class="game-thumb-img" />
@@ -812,7 +926,7 @@
                 </div>
               </a>
 
-              <!-- Juego 3: Soap Dodger -->
+              <!-- Juego 4: Soap Dodger -->
               <a href="https://eternodev.itch.io/soap-dodger" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png" alt="Soap Dodger" class="game-thumb-img" />
@@ -833,7 +947,7 @@
                 </div>
               </a>
 
-              <!-- Juego 4: CastleCat RPG -->
+              <!-- Juego 5: CastleCat RPG -->
               <a href="https://eternodev.itch.io/castlecat-rpg" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png" alt="CastleCat RPG" class="game-thumb-img" />
@@ -851,7 +965,7 @@
                 </div>
               </a>
 
-              <!-- Juego 5: Space Blitz (Thumbnail oficial) -->
+              <!-- Juego 6: Space Blitz (Thumbnail oficial) -->
               <a href="https://eternodev.itch.io/space-blitz" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
@@ -924,7 +1038,7 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 2: APLICACIONES (Sin subtítulo Pau CG + Imagen más alta)
+         PESTANIA 2: APLICACIONES
          ==================================================================== -->
     <div id="tab-apps" class="tab-view">
       <section class="apps-section" style="padding-top: 50px;">
@@ -1052,7 +1166,77 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 3: SOBRE MI
+         PESTANIA 3: DEVLOGS & VIDEOS DE YOUTUBE (Exact Discord Layout)
+         ==================================================================== -->
+    <div id="tab-devlogs" class="tab-view">
+      <section class="devlogs-section" style="padding-top: 50px;">
+        <div class="container">
+          <div style="text-align: center; max-width: 800px; margin: 0 auto 10px;">
+            <h2 class="section-title-center" style="margin-bottom: 8px;">DevLogs & Vídeos Oficiales</h2>
+            <p style="color: #CCCCCE; font-size: 1.05rem;">Diario de desarrollo en YouTube: progreso, GameJams y anécdotas de programación.</p>
+          </div>
+
+          <div class="devlogs-grid">
+            
+            <!-- Video 1: DevLog 1 (Más reciente arriba) -->
+            <article class="devlog-card">
+              <div class="devlog-video-box">
+                <iframe src="https://www.youtube.com/embed/F1-R5hljGLM" title="¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div class="devlog-content-box">
+                <div class="devlog-channel-badge">Eterno - Developer &bull; YouTube</div>
+                <h3 class="devlog-title">¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1</h3>
+                <div class="devlog-desc-bubble">
+                  👉 Después de tirarme todo el verano durmiendo hasta las 2 de la tarde, me di cuenta de que tenía que hacer algo productivo. Y después de horas recorriendo YouTube, fue el mismísimo Jesucristo quien me iluminó a crear juegos, ¿será fácil no? No. Crear videojuegos no es fácil, pero mi motivación es fuerte... Yo quiero ser rico, así que haré un roguelike de zombies con un ¡¡POLLO!! Ohhh, síí...
+                </div>
+              </div>
+            </article>
+
+            <!-- Video 2: VTuber en 48 Horas -->
+            <article class="devlog-card">
+              <div class="devlog-video-box">
+                <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" style="display:block; width:100%; height:100%; position:relative;">
+                  <img src="https://img.youtube.com/vi/F1-R5hljGLM/hqdefault.jpg" alt="Hice un VTUBER en 48 HORAS" />
+                  <div style="position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center;">
+                    <div style="width:50px; height:50px; background:#FF0000; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.4rem;">▶</div>
+                  </div>
+                </a>
+              </div>
+              <div class="devlog-content-box">
+                <div class="devlog-channel-badge">Eterno - Developer &bull; YouTube</div>
+                <h3 class="devlog-title">Hice un VTUBER en 48 HORAS</h3>
+                <div class="devlog-desc-bubble">
+                  👉 Después de darme cuenta de que tener un Vtuber es la clave para el éxito en YouTube, decidí que tendría que hacerme uno propio, y mejor si lo hago en poco tiempo. ¿Qué tal dos días? Eso es suficiente, ¿no? Pues parece que el autoguardado de Krita no piensa lo mismo. Dibujar un oso me llevó más tiempo del que podría imaginar. ¿Será porque es un Vtuber Furro? ¡¿Espera, soy furrooo?!
+                </div>
+              </div>
+            </article>
+
+            <!-- Video 3: Primera GameJam -->
+            <article class="devlog-card">
+              <div class="devlog-video-box">
+                <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" style="display:block; width:100%; height:100%; position:relative;">
+                  <img src="https://img.youtube.com/vi/F1-R5hljGLM/mqdefault.jpg" alt="Sobreviví a mi PRIMERA GameJam" />
+                  <div style="position:absolute; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center;">
+                    <div style="width:50px; height:50px; background:#FF0000; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.4rem;">▶</div>
+                  </div>
+                </a>
+              </div>
+              <div class="devlog-content-box">
+                <div class="devlog-channel-badge">Eterno - Developer &bull; YouTube</div>
+                <h3 class="devlog-title">Sobreviví a mi PRIMERA GameJam</h3>
+                <div class="devlog-desc-bubble">
+                  👉 Después de años viendo a otros desarrolladores participando en GameJams, decidí que tendría que hacer lo mismo, y mejor si obligo a mis amigos a venir. ¿Un juego entre seis desarrolladores en 48 Horas? Eso es muy fácil, ¿no? Pues parece que mis altos conocimientos sobre el desarrollo de videojuegos no estaban de acuerdo. Crear un juego con tan poco tiempo es complicado. ¿Será porque es nuestra primera GameJam? ¡¿Espera, tengo que dormir en el suelo?!
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ====================================================================
+         PESTANIA 4: SOBRE MI
          ==================================================================== -->
     <div id="tab-about" class="tab-view">
       <section class="banner-white-section" style="margin: 0; padding: 90px 0; min-height: 75vh;">
@@ -1101,7 +1285,7 @@
     </div>
 
     <!-- ====================================================================
-         PESTANIA 4: COMUNIDAD
+         PESTANIA 5: COMUNIDAD
          ==================================================================== -->
     <div id="tab-community" class="tab-view">
       <section class="community-section" style="padding-top: 60px;">
