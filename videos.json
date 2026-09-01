@@ -6,7 +6,11 @@
     "cover_url": "https://i.ytimg.com/vi/DFR5UtAuHTw/maxresdefault.jpg",
     "desc": "¡Ding! Espera... ¿La Global Game Jam 2025?",
     "published_at": "2025-10-11T10:30:06Z",
-    "channel": "EternoDev"
+    "channel": "EternoDev",
+    "views": "151",
+    "raw_views": 151,
+    "likes": "16",
+    "comments": "7"
   },
   {
     "id": "bRbhRWQvqs8",
@@ -15,7 +19,11 @@
     "cover_url": "https://i.ytimg.com/vi/bRbhRWQvqs8/maxresdefault.jpg",
     "desc": "¡Voy a hacer un Vtuber Furro! Espera... ¿Qué?",
     "published_at": "2025-04-20T16:45:32Z",
-    "channel": "EternoDev"
+    "channel": "EternoDev",
+    "views": "144",
+    "raw_views": 144,
+    "likes": "14",
+    "comments": "13"
   },
   {
     "id": "F1-R5hIjGLM",
@@ -24,6 +32,10 @@
     "cover_url": "https://i.ytimg.com/vi/F1-R5hIjGLM/maxresdefault.jpg",
     "desc": "Por favor Unity, ¡¡ten piedad!!",
     "published_at": "2024-11-22T15:00:31Z",
-    "channel": "EternoDev"
+    "channel": "EternoDev",
+    "views": "180",
+    "raw_views": 180,
+    "likes": "16",
+    "comments": "24"
   }
 ]
