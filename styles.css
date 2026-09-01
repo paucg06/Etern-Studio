@@ -67,15 +67,13 @@ header {
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid #34343C;
   z-index: 1000;
-  padding: 12px 0;
+  padding: 14px 0;
 }
 
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
 }
 
 .brand {
@@ -83,7 +81,6 @@ header {
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  flex-shrink: 0;
 }
 
 .brand-icon {
@@ -106,7 +103,7 @@ header {
   color: #FFFFFF;
 }
 
-nav {
+.desktop-nav {
   display: flex;
   align-items: center;
 }
@@ -114,17 +111,8 @@ nav {
 .nav-tabs {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   list-style: none;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  padding: 4px 0;
-}
-
-.nav-tabs::-webkit-scrollbar {
-  display: none;
 }
 
 .nav-tab-btn {
@@ -134,11 +122,10 @@ nav {
   font-family: var(--font-main);
   font-weight: 600;
   font-size: 0.92rem;
-  padding: 8px 16px;
+  padding: 8px 18px;
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.15s;
-  flex-shrink: 0;
 }
 
 .nav-tab-btn:hover {
@@ -149,18 +136,17 @@ nav {
 .nav-tab-btn.active {
   color: #FFFFFF;
   background: #2A2A35;
-  border: 1px solid #34343C;
+  border-color: #34343C;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-shrink: 0;
 }
 
 .btn-pill {
-  padding: 9px 20px;
+  padding: 8px 18px;
   border-radius: var(--radius-pill);
   font-weight: 700;
   font-size: 0.88rem;
@@ -201,6 +187,75 @@ nav {
 .btn-outline:hover {
   background: #343442;
   border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Botón Hamburguesa Móvil */
+.mobile-menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: #2A2A35;
+  border: 1px solid #34343C;
+  border-radius: 8px;
+  color: #FFFFFF;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mobile-menu-toggle:hover {
+  background: #343442;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-menu-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: #FFFFFF;
+  stroke-width: 2.2;
+  fill: none;
+}
+
+/* Panel Desplegable Móvil */
+.mobile-dropdown-panel {
+  display: none;
+  background: #2A2A35;
+  border-bottom: 1px solid #34343C;
+  padding: 16px 24px;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-dropdown-panel.open {
+  display: flex;
+}
+
+.mobile-dropdown-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #CCCCCE;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: 100%;
+}
+
+.mobile-dropdown-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+}
+
+.mobile-dropdown-btn.active {
+  background: #16161E;
+  color: #FFFFFF;
+  border-color: #34343C;
 }
 
 /* Tab Switching */
@@ -398,6 +453,7 @@ nav {
   overflow: hidden;
 }
 
+/* Meta fila de Vídeos con Estadísticas */
 .video-meta-row {
   margin-top: auto;
   padding-top: 12px;
@@ -408,6 +464,34 @@ nav {
   color: #8E8E93;
   font-weight: 600;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.video-author-badge {
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.video-stats-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.video-stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #CCCCCE;
+}
+
+.video-stat-item svg {
+  width: 14px;
+  height: 14px;
+  fill: #8E8E93;
+  flex-shrink: 0;
 }
 
 .video-cta-text {
@@ -793,23 +877,8 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .nav-wrapper {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-  }
-  .nav-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  .nav-tabs {
-    width: 100%;
-    justify-content: flex-start;
-    padding-bottom: 4px;
-  }
-  .hero-section { padding: 45px 0 35px; }
+  .desktop-nav { display: none; }
+  .mobile-menu-toggle { display: flex; }
   .hero-title { font-size: 2.2rem; }
   .banner-white-title { font-size: 2rem; }
   .apps-grid-layout { grid-template-columns: 1fr; }

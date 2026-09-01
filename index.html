@@ -71,7 +71,7 @@
       padding: 0 24px;
     }
 
-    /* Header & Navegacion Responsive */
+    /* Header & Navegacion */
     header {
       position: sticky;
       top: 0;
@@ -80,15 +80,13 @@
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid #34343C;
       z-index: 1000;
-      padding: 12px 0;
+      padding: 14px 0;
     }
 
     .nav-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
     .brand {
@@ -96,7 +94,6 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
-      flex-shrink: 0;
     }
 
     .brand-icon {
@@ -119,7 +116,7 @@
       color: #FFFFFF;
     }
 
-    nav {
+    .desktop-nav {
       display: flex;
       align-items: center;
     }
@@ -127,17 +124,8 @@
     .nav-tabs {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       list-style: none;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: none; /* Firefox */
-      -webkit-overflow-scrolling: touch;
-      padding: 4px 0;
-    }
-
-    .nav-tabs::-webkit-scrollbar {
-      display: none; /* Chrome/Safari */
     }
 
     .nav-tab-btn {
@@ -147,11 +135,10 @@
       font-family: var(--font-main);
       font-weight: 600;
       font-size: 0.92rem;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: var(--radius-pill);
       cursor: pointer;
       transition: all 0.15s;
-      flex-shrink: 0;
     }
 
     .nav-tab-btn:hover {
@@ -162,18 +149,17 @@
     .nav-tab-btn.active {
       color: #FFFFFF;
       background: #2A2A35;
-      border: 1px solid #34343C;
+      border-color: #34343C;
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
       gap: 10px;
-      flex-shrink: 0;
     }
 
     .btn-pill {
-      padding: 9px 20px;
+      padding: 8px 18px;
       border-radius: var(--radius-pill);
       font-weight: 700;
       font-size: 0.88rem;
@@ -183,7 +169,6 @@
       transition: all 0.2s;
       border: none;
       cursor: pointer;
-      text-align: center;
     }
 
     .btn-mint {
@@ -215,6 +200,76 @@
     .btn-outline:hover {
       background: #343442;
       border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Botón Hamburguesa Móvil */
+    .mobile-menu-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      background: #2A2A35;
+      border: 1px solid #34343C;
+      border-radius: 8px;
+      color: #FFFFFF;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mobile-menu-toggle:hover {
+      background: #343442;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .mobile-menu-toggle svg {
+      width: 20px;
+      height: 20px;
+      stroke: #FFFFFF;
+      stroke-width: 2.2;
+      fill: none;
+      transition: transform 0.2s;
+    }
+
+    /* Panel Desplegable Móvil */
+    .mobile-dropdown-panel {
+      display: none;
+      background: #2A2A35;
+      border-bottom: 1px solid #34343C;
+      padding: 16px 24px;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-dropdown-panel.open {
+      display: flex;
+    }
+
+    .mobile-dropdown-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #CCCCCE;
+      font-family: var(--font-main);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
+      width: 100%;
+    }
+
+    .mobile-dropdown-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #FFFFFF;
+    }
+
+    .mobile-dropdown-btn.active {
+      background: #16161E;
+      color: #FFFFFF;
+      border-color: #34343C;
     }
 
     /* Pestanias */
@@ -412,6 +467,7 @@
       overflow: hidden;
     }
 
+    /* Meta fila de Vídeos con Estadísticas */
     .video-meta-row {
       margin-top: auto;
       padding-top: 12px;
@@ -422,6 +478,34 @@
       color: #8E8E93;
       font-weight: 600;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .video-author-badge {
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .video-stats-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .video-stat-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: #CCCCCE;
+    }
+
+    .video-stat-item svg {
+      width: 14px;
+      height: 14px;
+      fill: #8E8E93;
+      flex-shrink: 0;
     }
 
     .video-cta-text {
@@ -807,23 +891,8 @@
     }
 
     @media (max-width: 768px) {
-      .nav-wrapper {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 14px;
-      }
-      .nav-top-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-      }
-      .nav-tabs {
-        width: 100%;
-        justify-content: flex-start;
-        padding-bottom: 4px;
-      }
-      .hero-section { padding: 45px 0 35px; }
+      .desktop-nav { display: none; }
+      .mobile-menu-toggle { display: flex; }
       .hero-title { font-size: 2.2rem; }
       .banner-white-title { font-size: 2rem; }
       .apps-grid-layout { grid-template-columns: 1fr; }
@@ -839,26 +908,16 @@
 </head>
 <body>
 
-  <!-- Header con Pestanias Responsive -->
+  <!-- Header con Navegación y Menú Desplegable Móvil -->
   <header>
     <div class="container nav-wrapper">
-      <div class="nav-top-row">
-        <div class="brand" onclick="switchTab('home')">
-          <div class="brand-icon">E</div>
-          <span class="brand-title">EternoDev Studio</span>
-        </div>
-
-        <div class="nav-actions">
-          <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="btn-pill btn-white" style="padding: 7px 14px; font-size: 0.82rem;">
-            Itch.io
-          </a>
-          <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="btn-pill btn-outline" style="padding: 7px 14px; font-size: 0.82rem;">
-            GitHub
-          </a>
-        </div>
+      <div class="brand" onclick="switchTab('home')">
+        <div class="brand-icon">E</div>
+        <span class="brand-title">EternoDev Studio</span>
       </div>
 
-      <nav>
+      <!-- Navegación de Escritorio -->
+      <nav class="desktop-nav">
         <ul class="nav-tabs">
           <li><button class="nav-tab-btn active" data-target="home" onclick="switchTab('home')">Juegos</button></li>
           <li><button class="nav-tab-btn" data-target="apps" onclick="switchTab('apps')">Aplicaciones</button></li>
@@ -867,6 +926,29 @@
           <li><button class="nav-tab-btn" data-target="community" onclick="switchTab('community')">Comunidad</button></li>
         </ul>
       </nav>
+
+      <!-- Botones de Acción + Toggle Hamburguesa Móvil -->
+      <div class="nav-actions">
+        <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="btn-pill btn-white">
+          Itch.io
+        </a>
+        <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="btn-pill btn-outline">
+          GitHub
+        </a>
+        
+        <button id="mobileMenuBtn" class="mobile-menu-toggle" aria-label="Abrir menú" onclick="toggleMobileMenu()">
+          <svg viewBox="0 0 24 24" id="hamburgerIcon"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel Desplegable Móvil que se abre hacia abajo -->
+    <div id="mobileNavDropdown" class="mobile-dropdown-panel">
+      <button class="mobile-dropdown-btn active" data-target="home" onclick="switchTabMobile('home')">🎮 Juegos</button>
+      <button class="mobile-dropdown-btn" data-target="apps" onclick="switchTabMobile('apps')">📱 Aplicaciones</button>
+      <button class="mobile-dropdown-btn" data-target="videos" onclick="switchTabMobile('videos')">🎬 Vídeos</button>
+      <button class="mobile-dropdown-btn" data-target="about" onclick="switchTabMobile('about')">👤 Sobre Mí</button>
+      <button class="mobile-dropdown-btn" data-target="community" onclick="switchTabMobile('community')">🌐 Comunidad</button>
     </div>
   </header>
 
@@ -913,7 +995,7 @@
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Oonga Bunga!</h3>
-                  <p class="game-item-desc">Compite con tus amigos para convertirte en el lider de la tribu. Solo habra un ganador.</p>
+                  <p class="game-item-desc">Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?</p>
                   
                   <div class="itch-meta-container">
                     <span class="itch-genre-label">Fighting</span>
@@ -931,7 +1013,7 @@
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Verdades Incompletas</h3>
-                  <p class="game-item-desc">Estas muerto... Descubre quien te asesino mientras tus tres amigos investigan tu hogar.</p>
+                  <p class="game-item-desc">Estás muerto... Descubre quién te asesinó mientras tus tres amigos investigan tu hogar.</p>
                   
                   <div class="itch-meta-container">
                     <span class="itch-genre-label">Visual Novel</span>
@@ -952,7 +1034,7 @@
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Soap Dodger</h3>
-                  <p class="game-item-desc">Agudiza tus reflejos en este peliagudo Bullet Hell. No pierdas bocanadas de aire.</p>
+                  <p class="game-item-desc">Agudiza tus reflejos en este peliagudo Bullet Hell. ¡No pierdas bocanadas de aire en tan punzante cámara!</p>
                   
                   <div class="itch-meta-container">
                     <span class="itch-genre-label">Action / Bullet Hell</span>
@@ -973,7 +1055,7 @@
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">CastleCat RPG</h3>
-                  <p class="game-item-desc">Naciste gato, pero moriras como leyenda en este juego de exploracion y mazmorras.</p>
+                  <p class="game-item-desc">¡Naciste gato, pero morirás como leyenda!</p>
                   
                   <div class="itch-meta-container">
                     <span class="itch-genre-label">Adventure</span>
@@ -991,7 +1073,7 @@
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Space Blitz</h3>
-                  <p class="game-item-desc">Un trepidante shooter arcade donde tu nave espacial evoluciona con mejoras dinamicas.</p>
+                  <p class="game-item-desc">Un trepidante shooter arcade donde tu nave evoluciona con mejoras visuales dinámicas.</p>
                   
                   <div class="itch-meta-container">
                     <span class="itch-genre-label">Shooter</span>
@@ -1212,7 +1294,17 @@
                   <h3 class="video-item-title">¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1</h3>
                   <p class="video-item-desc">Creando un videojuego roguelike con zombies y pollos en Unity desde el primer día.</p>
                   <div class="video-meta-row">
-                    <span>EternoDev &bull; YouTube</span>
+                    <span class="video-author-badge">EternoDev</span>
+                    <div class="video-stats-group">
+                      <span class="video-stat-item" title="Visualizaciones">
+                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        <span>1.2K</span>
+                      </span>
+                      <span class="video-stat-item" title="Me gusta">
+                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                        <span>140</span>
+                      </span>
+                    </div>
                     <span class="video-cta-text">Ver Vídeo &rarr;</span>
                   </div>
                 </div>
@@ -1232,7 +1324,17 @@
                   <h3 class="video-item-title">Hice un VTUBER en 48 HORAS</h3>
                   <p class="video-item-desc">Dibujando y programando un modelo de Vtuber en tiempo récord con Krita y Unity.</p>
                   <div class="video-meta-row">
-                    <span>EternoDev &bull; YouTube</span>
+                    <span class="video-author-badge">EternoDev</span>
+                    <div class="video-stats-group">
+                      <span class="video-stat-item" title="Visualizaciones">
+                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        <span>890</span>
+                      </span>
+                      <span class="video-stat-item" title="Me gusta">
+                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                        <span>95</span>
+                      </span>
+                    </div>
                     <span class="video-cta-text">Ver Vídeo &rarr;</span>
                   </div>
                 </div>
@@ -1252,7 +1354,17 @@
                   <h3 class="video-item-title">Sobreviví a mi PRIMERA GameJam</h3>
                   <p class="video-item-desc">Desarrollando un videojuego completo en 48 horas sin dormir con 6 desarrolladores.</p>
                   <div class="video-meta-row">
-                    <span>EternoDev &bull; YouTube</span>
+                    <span class="video-author-badge">EternoDev</span>
+                    <div class="video-stats-group">
+                      <span class="video-stat-item" title="Visualizaciones">
+                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                        <span>1.5K</span>
+                      </span>
+                      <span class="video-stat-item" title="Me gusta">
+                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                        <span>180</span>
+                      </span>
+                    </div>
                     <span class="video-cta-text">Ver Vídeo &rarr;</span>
                   </div>
                 </div>

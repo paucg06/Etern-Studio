@@ -1,5 +1,5 @@
 // ==========================================================================
-// EternoDev Studio - Tabbed Navigation & Dual Dynamic Carousels
+// EternoDev Studio - Tabbed Navigation, Mobile Dropdown & Dual Carousels
 // ==========================================================================
 
 let currentGameIndex = 0;
@@ -28,20 +28,46 @@ document.addEventListener('DOMContentLoaded', () => {
   loadDynamicData();
 });
 
+// Toggle del Menú Hamburguesa Móvil
+function toggleMobileMenu() {
+  const dropdown = document.getElementById('mobileNavDropdown');
+  const btn = document.getElementById('mobileMenuBtn');
+  if (!dropdown) return;
+
+  const isOpen = dropdown.classList.toggle('open');
+  if (btn) {
+    btn.innerHTML = isOpen
+      ? `<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+      : `<svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+  }
+}
+
+window.toggleMobileMenu = toggleMobileMenu;
+
+function switchTabMobile(tabId) {
+  switchTab(tabId);
+  const dropdown = document.getElementById('mobileNavDropdown');
+  if (dropdown && dropdown.classList.contains('open')) {
+    toggleMobileMenu();
+  }
+}
+
+window.switchTabMobile = switchTabMobile;
+
 // Tab Switcher
 function switchTab(tabId) {
   const tabs = document.querySelectorAll('.tab-view');
-  const buttons = document.querySelectorAll('.nav-tab-btn');
+  const desktopButtons = document.querySelectorAll('.nav-tab-btn');
+  const mobileButtons = document.querySelectorAll('.mobile-dropdown-btn');
 
-  tabs.forEach(tab => {
-    tab.classList.remove('active-tab');
+  tabs.forEach(tab => tab.classList.remove('active-tab'));
+
+  desktopButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-target') === tabId);
   });
 
-  buttons.forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.getAttribute('data-target') === tabId) {
-      btn.classList.add('active');
-    }
+  mobileButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-target') === tabId);
   });
 
   const targetTab = document.getElementById(`tab-${tabId}`);
@@ -230,6 +256,30 @@ async function loadDynamicData() {
             card.target = '_blank';
             card.rel = 'noopener';
             card.className = 'video-card-item';
+
+            let statsHtml = '';
+            if (v.views || v.likes) {
+              statsHtml = `
+                <div class="video-stats-group">
+                  ${v.views ? `
+                    <span class="video-stat-item" title="Visualizaciones">
+                      <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                      <span>${v.views}</span>
+                    </span>` : ''}
+                  ${v.likes ? `
+                    <span class="video-stat-item" title="Me gusta">
+                      <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                      <span>${v.likes}</span>
+                    </span>` : ''}
+                  ${v.comments ? `
+                    <span class="video-stat-item" title="Comentarios">
+                      <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+                      <span>${v.comments}</span>
+                    </span>` : ''}
+                </div>
+              `;
+            }
+
             card.innerHTML = `
               <div class="video-thumb-box">
                 <img src="${v.cover_url}" alt="${v.title}" class="video-thumb-img" loading="lazy" />
@@ -243,7 +293,8 @@ async function loadDynamicData() {
                 <h3 class="video-item-title">${v.title}</h3>
                 <p class="video-item-desc">${v.desc || ''}</p>
                 <div class="video-meta-row">
-                  <span>${v.channel || 'EternoDev'} &bull; YouTube</span>
+                  <span class="video-author-badge">EternoDev</span>
+                  ${statsHtml}
                   <span class="video-cta-text">Ver Vídeo &rarr;</span>
                 </div>
               </div>

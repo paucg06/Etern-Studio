@@ -15,6 +15,14 @@ function fetchUrl(url, options = {}) {
   });
 }
 
+function formatCount(num) {
+  const n = parseInt(num, 10);
+  if (isNaN(n)) return '0';
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.0', '') + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'K';
+  return n.toString();
+}
+
 // Extraer metadatos detallados de cada juego (plataformas y género)
 async function enrichGameDetails(game) {
   let genre = "Game";
@@ -117,7 +125,7 @@ async function syncItchGames() {
   }
 }
 
-// 2. Sincronización oficial de YouTube (YouTube Data API v3)
+// 2. Sincronización oficial de YouTube (YouTube Data API v3 con Estadísticas: Views, Likes, Comments)
 async function syncYouTubeVideos() {
   const apiKey = process.env.YOUTUBE_API_KEY;
   const channelId = "UCewJv1M1YAKfLcbld6iWxWg";
@@ -125,34 +133,50 @@ async function syncYouTubeVideos() {
 
   if (apiKey) {
     try {
+      // 1. Obtener ID de la playlist de subidas
       const chanRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`);
       if (chanRes.statusCode === 200) {
         const chanJson = JSON.parse(chanRes.body);
         const uploadsPlaylistId = chanJson.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
 
         if (uploadsPlaylistId) {
+          // 2. Obtener los IDs de los vídeos
           const playlistRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=12&key=${apiKey}`);
           if (playlistRes.statusCode === 200) {
             const playlistJson = JSON.parse(playlistRes.body);
-            const videos = (playlistJson.items || []).map(item => {
-              const s = item.snippet;
-              const videoId = s.resourceId?.videoId;
-              const thumb = s.thumbnails?.maxres?.url || s.thumbnails?.high?.url || s.thumbnails?.medium?.url || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-              return {
-                id: videoId,
-                title: s.title,
-                url: `https://www.youtube.com/watch?v=${videoId}`,
-                cover_url: thumb,
-                desc: s.description ? s.description.split('\n')[0] : 'Vídeo oficial en YouTube de @eternodev',
-                published_at: s.publishedAt,
-                channel: s.channelTitle || 'EternoDev'
-              };
-            });
+            const videoIds = (playlistJson.items || []).map(i => i.snippet?.resourceId?.videoId).filter(Boolean);
 
-            if (videos.length > 0) {
-              fs.writeFileSync('videos.json', JSON.stringify(videos, null, 2), 'utf-8');
-              console.log(`YouTube Data API: ${videos.length} vídeos actualizados en videos.json`);
-              return;
+            if (videoIds.length > 0) {
+              // 3. Consultar estadísticas detalladas de cada vídeo (snippet + statistics)
+              const videosRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoIds.join(',')}&key=${apiKey}`);
+              if (videosRes.statusCode === 200) {
+                const videosJson = JSON.parse(videosRes.body);
+                const videos = (videosJson.items || []).map(item => {
+                  const s = item.snippet;
+                  const stats = item.statistics || {};
+                  const thumb = s.thumbnails?.maxres?.url || s.thumbnails?.high?.url || s.thumbnails?.medium?.url || `https://i.ytimg.com/vi/${item.id}/hqdefault.jpg`;
+
+                  return {
+                    id: item.id,
+                    title: s.title,
+                    url: `https://www.youtube.com/watch?v=${item.id}`,
+                    cover_url: thumb,
+                    desc: s.description ? s.description.split('\n')[0] : 'Vídeo oficial en YouTube de EternoDev',
+                    published_at: s.publishedAt,
+                    channel: s.channelTitle || 'EternoDev',
+                    views: formatCount(stats.viewCount || 0),
+                    raw_views: parseInt(stats.viewCount || 0, 10),
+                    likes: formatCount(stats.likeCount || 0),
+                    comments: formatCount(stats.commentCount || 0)
+                  };
+                });
+
+                if (videos.length > 0) {
+                  fs.writeFileSync('videos.json', JSON.stringify(videos, null, 2), 'utf-8');
+                  console.log(`YouTube Data API: ${videos.length} vídeos con estadísticas (views, likes, comments) guardados en videos.json`);
+                  return;
+                }
+              }
             }
           }
         }
