@@ -244,6 +244,47 @@ async function loadDynamicData() {
         }
       }
     }
+    // Cargar juegos desde games.json si existe
+    const gRes = await fetch(`games.json?_t=${Date.now()}`);
+    if (gRes.ok) {
+      const games = await gRes.json();
+      if (Array.isArray(games) && games.length > 0) {
+        const gTrack = document.getElementById('carouselTrack');
+        if (gTrack) {
+          gTrack.innerHTML = '';
+          games.forEach(g => {
+            let platformsHtml = '';
+            if (g.p_browser) platformsHtml += `<span class="badge-play-browser">Play in browser</span>`;
+            if (g.p_windows || g.traits?.includes('p_windows')) platformsHtml += PLATFORM_SVGS.windows;
+            if (g.p_linux || g.traits?.includes('p_linux')) platformsHtml += PLATFORM_SVGS.linux;
+            if (g.p_osx || g.traits?.includes('p_osx')) platformsHtml += PLATFORM_SVGS.macos;
+
+            const card = document.createElement('a');
+            card.href = g.url;
+            card.target = '_blank';
+            card.rel = 'noopener';
+            card.className = 'game-card-item';
+            card.innerHTML = `
+              <div class="game-thumb-box">
+                <img src="${g.cover_url}" alt="${g.title}" class="game-thumb-img" loading="lazy" />
+              </div>
+              <div class="game-content-box">
+                <h3 class="game-item-title">${g.title}</h3>
+                <p class="game-item-desc">${g.desc || g.short_text || ''}</p>
+                <div class="itch-meta-container">
+                  <span class="itch-genre-label">${g.genre || 'Game'}</span>
+                  <div class="itch-platforms-row">
+                    ${platformsHtml}
+                  </div>
+                </div>
+              </div>
+            `;
+            gTrack.appendChild(card);
+          });
+          initGamesCarousel();
+        }
+      }
+    }
   } catch (e) {
     // Usar datos estáticos ya renderizados
   }
@@ -253,3 +294,4 @@ window.addEventListener('resize', () => {
   initGamesCarousel();
   initVideosCarousel();
 });
+
