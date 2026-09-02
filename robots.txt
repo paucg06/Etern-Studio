@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paucg06.github.io/Etern-Studio/sitemap.xml
