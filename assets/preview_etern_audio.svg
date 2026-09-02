@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532d" />
+      <stop offset="100%" stop-color="#064e3b" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)" />
+  <!-- Soundboard equalizer bars -->
+  <g transform="translate(440, 200)">
+    <rect x="0" y="80" width="30" height="140" rx="6" fill="#34d399" />
+    <rect x="50" y="30" width="30" height="190" rx="6" fill="#10b981" />
+    <rect x="100" y="110" width="30" height="110" rx="6" fill="#00f59b" />
+    <rect x="150" y="50" width="30" height="170" rx="6" fill="#34d399" />
+    <rect x="200" y="10" width="30" height="210" rx="6" fill="#6ee7b7" />
+    <rect x="250" y="70" width="30" height="150" rx="6" fill="#10b981" />
+    <rect x="300" y="130" width="30" height="90" rx="6" fill="#00f59b" />
+    <rect x="350" y="40" width="30" height="180" rx="6" fill="#34d399" />
+  </g>
+  <text x="640" y="480" font-family="'Plus Jakarta Sans', sans-serif" font-size="44" font-weight="800" fill="#ffffff" text-anchor="middle">Etern-Audio</text>
+  <text x="640" y="530" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="600" fill="#a7f3d0" text-anchor="middle">Soundboard &amp; Streamer Audio Library • 1280 x 720</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="100%" stop-color="#4338ca" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)" />
+  <!-- Synthesizer wave graphic -->
+  <path d="M 200 360 Q 320 200, 440 360 T 680 360 T 920 360 T 1080 360" fill="none" stroke="#a855f7" stroke-width="8" stroke-linecap="round" />
+  <path d="M 200 360 Q 320 240, 440 360 T 680 360 T 920 360 T 1080 360" fill="none" stroke="#c084fc" stroke-width="3" opacity="0.6" />
+  <circle cx="440" cy="360" r="12" fill="#c084fc" />
+  <circle cx="680" cy="360" r="12" fill="#c084fc" />
+  <circle cx="920" cy="360" r="12" fill="#c084fc" />
+  <text x="640" y="470" font-family="'Plus Jakarta Sans', sans-serif" font-size="44" font-weight="800" fill="#ffffff" text-anchor="middle">Etern-Synth</text>
+  <text x="640" y="520" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="600" fill="#ddd6fe" text-anchor="middle">Retro 8-Bit Synthesizer &amp; SFX Tool • 1280 x 720</text>
+</svg>

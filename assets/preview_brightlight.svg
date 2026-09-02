@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)" />
+  <circle cx="640" cy="310" r="130" fill="#38bdf8" opacity="0.18" />
+  <circle cx="640" cy="310" r="90" fill="#38bdf8" opacity="0.3" />
+  <g transform="translate(590, 260) scale(4.2)" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m7 7 10 10-5 5V2l5 5L7 17"/>
+  </g>
+  <text x="640" y="490" font-family="'Plus Jakarta Sans', sans-serif" font-size="44" font-weight="800" fill="#ffffff" text-anchor="middle">BrightLight</text>
+  <text x="640" y="540" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="600" fill="#93c5fd" text-anchor="middle">Web Bluetooth Multi-Light Controller • 1280 x 720</text>
+</svg>
