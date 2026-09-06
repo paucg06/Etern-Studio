@@ -54,8 +54,8 @@ function switchTabMobile(tabId) {
 
 window.switchTabMobile = switchTabMobile;
 
-// Tab Switcher
-function switchTab(tabId) {
+// Tab Switcher con URLs Limpias (/apps, /videos, /about, /community)
+function switchTab(tabId, updateUrl = true) {
   const tabs = document.querySelectorAll('.tab-view');
   const desktopButtons = document.querySelectorAll('.nav-tab-btn');
   const mobileButtons = document.querySelectorAll('.mobile-dropdown-btn');
@@ -74,7 +74,13 @@ function switchTab(tabId) {
   if (targetTab) {
     targetTab.classList.add('active-tab');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    history.replaceState(null, null, `#${tabId}`);
+    
+    if (updateUrl) {
+      const cleanPath = tabId === 'home' ? '/' : `/${tabId}`;
+      if (window.location.pathname !== cleanPath) {
+        history.pushState({ tab: tabId }, '', cleanPath);
+      }
+    }
   }
 
   if (tabId === 'home') {
@@ -86,12 +92,38 @@ function switchTab(tabId) {
 
 window.switchTab = switchTab;
 
+// Manejo del botón atrás/adelante del navegador
+window.addEventListener('popstate', (e) => {
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+  if (['home', 'apps', 'videos', 'about', 'community'].includes(path)) {
+    switchTab(path, false);
+  } else {
+    switchTab('home', false);
+  }
+});
+
 function initTabNavigation() {
-  const hash = window.location.hash.replace('#', '');
-  if (['home', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(hash)) {
-    if (hash === 'juegos') switchTab('home');
-    else if (hash === 'sobre-mi') switchTab('about');
-    else switchTab(hash);
+  // Comprobar redirección desde 404 (para recargas directas en GitHub Pages)
+  const redirectedPath = sessionStorage.getItem('spa_redirect');
+  if (redirectedPath) {
+    sessionStorage.removeItem('spa_redirect');
+    const clean = redirectedPath.toLowerCase();
+    if (['home', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(clean)) {
+      if (clean === 'juegos') switchTab('home');
+      else if (clean === 'sobre-mi') switchTab('about');
+      else switchTab(clean);
+      return;
+    }
+  }
+
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
+  const hash = window.location.hash.replace('#', '').toLowerCase();
+  const current = path || hash;
+
+  if (['home', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(current)) {
+    if (current === 'juegos') switchTab('home');
+    else if (current === 'sobre-mi') switchTab('about');
+    else switchTab(current);
   }
 }
 
