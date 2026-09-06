@@ -1,11 +1,11 @@
-﻿<div align="center">
-  <h1>Etern Studio</h1>
+<div align="center">
+  <h1>EternoDev</h1>
   
-  **Indie Game Development & Open Source Creative Software by EternoDev (Pau CG)**
+  **Indie Game Development & Open Source Creative Software by EternoDev**
 
   <p>
-    <a href="https://paucg06.github.io/Etern-Studio/">
-      <img src="https://img.shields.io/badge/Web-Live_Portfolio-2563eb?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Portfolio" />
+    <a href="https://eternodev.com/">
+      <img src="https://img.shields.io/badge/Web-eternodev.com-2563eb?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Portfolio" />
     </a>
     <a href="https://eternodev.itch.io">
       <img src="https://img.shields.io/badge/Itch.io-Games_Hub-fa5c5c?style=for-the-badge&logo=itchdotio&logoColor=white" alt="Itch.io" />
@@ -23,7 +23,7 @@
 
 ## Overview
 
-**Etern Studio** is the official portfolio and hub for indie games built with Unity, open-source software tools, and digital media created by **EternoDev (Pau CG)**.
+**EternoDev** is the official portfolio and hub for indie games built with Unity, open-source software tools, and digital media created by **EternoDev**.
 
 Designed with a modern, high-performance dark aesthetic inspired by **GDevelop**, featuring an interactive games carousel dynamically linked to **Itch.io**, application showcase cards, creator biography, and community integration.
 
