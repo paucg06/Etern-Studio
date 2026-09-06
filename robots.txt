@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eternodev.com/sitemap.xml
+Sitemap: https://paucg06.github.io/Etern-Studio/sitemap.xml
