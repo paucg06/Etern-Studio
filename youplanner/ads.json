@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "generated_at": "2026-09-07T16:48:00.000Z",
+  "total_ads": 9,
+  "ads": [
+    {
+      "id": "yt_video_wjoGjOxCTCQ",
+      "type": "youtube_video",
+      "badge": "NUEVO VÍDEO",
+      "title": "¡REHICE el Juego de mis SUEÑOS! - DevBlog 2",
+      "subtitle": "Nuevo devlog disponible en el canal de YouTube de EternoDev",
+      "action_text": "Ver en YouTube",
+      "target_url": "https://www.youtube.com/watch?v=wjoGjOxCTCQ",
+      "image_url": "https://i.ytimg.com/vi/wjoGjOxCTCQ/maxresdefault.jpg",
+      "features": [
+        "Desarrollo indie en Unity y mecánicas",
+        "60 visualizaciones en YouTube",
+        "¡Suscríbete al canal de EternoDev!"
+      ]
+    },
+    {
+      "id": "yt_channel_promo",
+      "type": "youtube_channel",
+      "badge": "CANAL DE YOUTUBE",
+      "title": "EternoDev en YouTube",
+      "subtitle": "Devlogs de desarrollo, tutoriales y creación de videojuegos",
+      "action_text": "Visitar Canal",
+      "target_url": "https://www.youtube.com/@eternodev",
+      "image_url": "https://i.ytimg.com/vi/wjoGjOxCTCQ/maxresdefault.jpg",
+      "features": [
+        "Aprende desarrollo de videojuegos indie",
+        "Detrás de cámaras de mis proyectos en Unity",
+        "Comunidad activa y directos"
+      ]
+    },
+    {
+      "id": "game_4244918",
+      "type": "game",
+      "badge": "JUEGO DESTACADO",
+      "title": "Oonga Bunga!",
+      "subtitle": "Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?",
+      "action_text": "Descargar en Itch.io",
+      "target_url": "https://eternodev.itch.io/oonga-bunga",
+      "image_url": "https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png",
+      "features": [
+        "Género: Fighting",
+        "💻 Descarga disponible para PC (Windows / Linux)",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    },
+    {
+      "id": "game_3974299",
+      "type": "game",
+      "badge": "JUEGO DESTACADO",
+      "title": "Verdades Incompletas",
+      "subtitle": "Estás muerto... Descubre quién te asesinó mientras tus tres amigos investigan tu hogar.",
+      "action_text": "Jugar Gratis Online",
+      "target_url": "https://eternodev.itch.io/verdades-incompletas",
+      "image_url": "https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png",
+      "features": [
+        "Género: Visual Novel",
+        "🎮 Jugable directamente en el navegador",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    },
+    {
+      "id": "game_3269482",
+      "type": "game",
+      "badge": "JUEGO DESTACADO",
+      "title": "Soap Dodger",
+      "subtitle": "Agudiza tus reflejos en este peliagudo Bullet Hell. ¡No pierdas bocanadas de aire en tan punzante cámara!",
+      "action_text": "Jugar Gratis Online",
+      "target_url": "https://eternodev.itch.io/soap-dodger",
+      "image_url": "https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png",
+      "features": [
+        "Género: Action / Bullet Hell",
+        "🎮 Jugable directamente en el navegador",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    },
+    {
+      "id": "game_3533624",
+      "type": "game",
+      "badge": "JUEGO DESTACADO",
+      "title": "CastleCat RPG",
+      "subtitle": "¡Naciste gato, pero morirás como leyenda!",
+      "action_text": "Jugar Gratis Online",
+      "target_url": "https://eternodev.itch.io/castlecat-rpg",
+      "image_url": "https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png",
+      "features": [
+        "Género: Adventure",
+        "🎮 Jugable directamente en el navegador",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    },
+    {
+      "id": "game_4692794",
+      "type": "game",
+      "badge": "JUEGO DESTACADO",
+      "title": "Space Blitz",
+      "subtitle": "Un trepidante shooter arcade donde tu nave evoluciona con mejoras visuales dinámicas.",
+      "action_text": "Jugar Gratis Online",
+      "target_url": "https://eternodev.itch.io/space-blitz",
+      "image_url": "https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png",
+      "features": [
+        "Género: Shooter",
+        "🎮 Jugable directamente en el navegador",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    },
+    {
+      "id": "app_brightlight",
+      "type": "app",
+      "badge": "WEB APP ÚTIL",
+      "title": "BrightLight Web",
+      "subtitle": "Controla tus luces y bombillas inteligentes por Web Bluetooth",
+      "action_text": "Abrir Herramienta",
+      "target_url": "https://paucg06.github.io/BrightLight-Bluetooth/",
+      "image_url": "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
+      "features": [
+        "100% Web Bluetooth API",
+        "Sin descargas ni instalaciones previas",
+        "Control de color y efectos de iluminación"
+      ]
+    },
+    {
+      "id": "pro_default",
+      "type": "pro",
+      "badge": "YOUPLANNER PRO",
+      "title": "YouPlanner PRO",
+      "subtitle": "Potencia tu canal de YouTube sin esperas ni límites",
+      "action_text": "Desbloquear PRO",
+      "target_url": "youplanner://premium",
+      "image_url": "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
+      "features": [
+        "Proyectos de vídeo y guiones ilimitados",
+        "Guardado y sincronización Google Play",
+        "Exportación completa de datos",
+        "100% Libre de anuncios"
+      ]
+    }
+  ]
+}

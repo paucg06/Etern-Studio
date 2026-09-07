@@ -225,15 +225,144 @@ async function syncYouTubeVideos() {
           }
         }
       }
-    } catch (e) {
-      console.warn("Aviso YouTube API:", e.message);
+// 3. Generación automática del sistema de Anuncios Remoto (ads.json para YouPlanner y apps móviles)
+function generateAdsJson() {
+  console.log("Generando ads.json para YouPlanner y apps móviles...");
+  let games = [];
+  let videos = [];
+
+  try {
+    if (fs.existsSync('games.json')) {
+      games = JSON.parse(fs.readFileSync('games.json', 'utf-8'));
     }
+  } catch (e) {
+    console.warn("Aviso leyendo games.json para ads:", e.message);
   }
+
+  try {
+    if (fs.existsSync('videos.json')) {
+      videos = JSON.parse(fs.readFileSync('videos.json', 'utf-8'));
+    }
+  } catch (e) {
+    console.warn("Aviso leyendo videos.json para ads:", e.message);
+  }
+
+  const ads = [];
+
+  // A) Anuncio del Último Vídeo de YouTube (si hay vídeos disponibles)
+  if (videos.length > 0) {
+    const latest = videos[0];
+    ads.push({
+      id: `yt_video_${latest.id}`,
+      type: "youtube_video",
+      badge: "NUEVO VÍDEO",
+      title: latest.title,
+      subtitle: latest.desc || "Nuevo devlog disponible en el canal de YouTube de EternoDev",
+      action_text: "Ver en YouTube",
+      target_url: latest.url,
+      image_url: latest.cover_url,
+      features: [
+        "Desarrollo indie en Unity y mecánicas",
+        `${latest.views || 'Nuevas'} visualizaciones en YouTube`,
+        "¡Suscríbete al canal de EternoDev!"
+      ]
+    });
+
+    // B) Anuncio general del Canal de YouTube
+    ads.push({
+      id: "yt_channel_promo",
+      type: "youtube_channel",
+      badge: "CANAL DE YOUTUBE",
+      title: "EternoDev en YouTube",
+      subtitle: "Devlogs de desarrollo, tutoriales y creación de videojuegos",
+      action_text: "Visitar Canal",
+      target_url: "https://www.youtube.com/@eternodev",
+      image_url: latest.cover_url,
+      features: [
+        "Aprende desarrollo de videojuegos indie",
+        "Detrás de cámaras de mis proyectos en Unity",
+        "Comunidad activa y directos"
+      ]
+    });
+  }
+
+  // C) Anuncios de Videojuegos (Itch.io)
+  games.forEach(g => {
+    ads.push({
+      id: `game_${g.id}`,
+      type: "game",
+      badge: "JUEGO DESTACADO",
+      title: g.title,
+      subtitle: g.short_text || "Videojuego independiente creado por EternoDev",
+      action_text: g.p_browser ? "Jugar Gratis Online" : "Descargar en Itch.io",
+      target_url: g.url,
+      image_url: g.cover_url,
+      features: [
+        `Género: ${g.genre || 'Indie Game'}`,
+        g.p_browser ? "🎮 Jugable directamente en el navegador" : "💻 Descarga disponible para PC",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    });
+  });
+
+  // D) Anuncio de Aplicación Web (BrightLight)
+  ads.push({
+    id: "app_brightlight",
+    type: "app",
+    badge: "WEB APP ÚTIL",
+    title: "BrightLight Web",
+    subtitle: "Controla tus luces y bombillas inteligentes por Web Bluetooth",
+    action_text: "Abrir Herramienta",
+    target_url: "https://paucg06.github.io/BrightLight-Bluetooth/",
+    image_url: "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
+    features: [
+      "100% Web Bluetooth API",
+      "Sin descargas ni instalaciones previas",
+      "Control de color y efectos de iluminación"
+    ]
+  });
+
+  // E) Anuncio de YouPlanner PRO (Nativo / Fallback)
+  ads.push({
+    id: "pro_default",
+    type: "pro",
+    badge: "YOUPLANNER PRO",
+    title: "YouPlanner PRO",
+    subtitle: "Potencia tu canal de YouTube sin esperas ni límites",
+    action_text: "Desbloquear PRO",
+    target_url: "youplanner://premium",
+    image_url: "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
+    features: [
+      "Proyectos de vídeo y guiones ilimitados",
+      "Guardado y sincronización Google Play",
+      "Exportación completa de datos",
+      "100% Libre de anuncios"
+    ]
+  });
+
+  const adsPayload = {
+    version: 1,
+    generated_at: new Date().toISOString(),
+    total_ads: ads.length,
+    ads
+  };
+
+  // Crear carpeta youplanner si no existe
+  if (!fs.existsSync('youplanner')) {
+    fs.mkdirSync('youplanner', { recursive: true });
+  }
+
+  // Guardar en youplanner/ads.json y en ads.json (raíz)
+  fs.writeFileSync('youplanner/ads.json', JSON.stringify(adsPayload, null, 2), 'utf-8');
+  fs.writeFileSync('ads.json', JSON.stringify(adsPayload, null, 2), 'utf-8');
+  console.log(`Sistema de Anuncios: ${ads.length} promociones generadas en youplanner/ads.json y ads.json`);
 }
 
 async function main() {
   await syncItchGames();
   await syncYouTubeVideos();
+  generateAdsJson();
 }
 
 main();
+
