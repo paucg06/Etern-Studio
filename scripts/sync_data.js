@@ -249,26 +249,28 @@ function generateAdsJson() {
 
   const ads = [];
 
-  // A) Anuncio del Último Vídeo de YouTube (si hay vídeos disponibles)
-  if (videos.length > 0) {
-    const latest = videos[0];
+  // A) Anuncios de los 3 Últimos Vídeos de YouTube (dinámicos con portadas HD)
+  const topVideos = videos.slice(0, 3);
+  topVideos.forEach((v, index) => {
     ads.push({
-      id: `yt_video_${latest.id}`,
+      id: `yt_video_${v.id}`,
       type: "youtube_video",
-      badge: "NUEVO VÍDEO",
-      title: latest.title,
-      subtitle: latest.desc || "Nuevo devlog disponible en el canal de YouTube de EternoDev",
+      badge: index === 0 ? "ÚLTIMO DEVLOG" : "VÍDEO DE YOUTUBE",
+      title: v.title,
+      subtitle: v.desc || "Nuevo devlog disponible en el canal de YouTube de EternoDev",
       action_text: "Ver en YouTube",
-      target_url: latest.url,
-      image_url: latest.cover_url,
+      target_url: v.url,
+      image_url: v.cover_url,
       features: [
         "Desarrollo indie en Unity y mecánicas",
-        `${latest.views || 'Nuevas'} visualizaciones en YouTube`,
+        `${v.views || 'Nuevas'} visualizaciones en YouTube`,
         "¡Suscríbete al canal de EternoDev!"
       ]
     });
+  });
 
-    // B) Anuncio general del Canal de YouTube
+  // B) Anuncio general del Canal de YouTube
+  if (videos.length > 0) {
     ads.push({
       id: "yt_channel_promo",
       type: "youtube_channel",
@@ -277,7 +279,7 @@ function generateAdsJson() {
       subtitle: "Devlogs de desarrollo, tutoriales y creación de videojuegos",
       action_text: "Visitar Canal",
       target_url: "https://www.youtube.com/@eternodev",
-      image_url: latest.cover_url,
+      image_url: videos[0].cover_url,
       features: [
         "Aprende desarrollo de videojuegos indie",
         "Detrás de cámaras de mis proyectos en Unity",
@@ -286,7 +288,7 @@ function generateAdsJson() {
     });
   }
 
-  // C) Anuncios de Videojuegos (Itch.io)
+  // C) Anuncios de Videojuegos (Itch.io - 100% Dinámicos)
   games.forEach(g => {
     ads.push({
       id: `game_${g.id}`,
@@ -305,24 +307,7 @@ function generateAdsJson() {
     });
   });
 
-  // D) Anuncio de Aplicación Web (BrightLight)
-  ads.push({
-    id: "app_brightlight",
-    type: "app",
-    badge: "WEB APP ÚTIL",
-    title: "BrightLight Web",
-    subtitle: "Controla tus luces y bombillas inteligentes por Web Bluetooth",
-    action_text: "Abrir Herramienta",
-    target_url: "https://paucg06.github.io/BrightLight-Bluetooth/",
-    image_url: "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
-    features: [
-      "100% Web Bluetooth API",
-      "Sin descargas ni instalaciones previas",
-      "Control de color y efectos de iluminación"
-    ]
-  });
-
-  // E) Anuncio de YouPlanner PRO (Nativo / Fallback)
+  // D) Anuncio de YouPlanner PRO (Nativo / Fallback)
   ads.push({
     id: "pro_default",
     type: "pro",

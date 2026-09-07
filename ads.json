@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generated_at": "2026-09-07T16:48:00.000Z",
-  "total_ads": 9,
+  "generated_at": "2026-09-07T17:40:00.000Z",
+  "total_ads": 10,
   "ads": [
     {
       "id": "yt_video_wjoGjOxCTCQ",
       "type": "youtube_video",
-      "badge": "NUEVO VÍDEO",
+      "badge": "ÚLTIMO DEVLOG",
       "title": "¡REHICE el Juego de mis SUEÑOS! - DevBlog 2",
       "subtitle": "Nuevo devlog disponible en el canal de YouTube de EternoDev",
       "action_text": "Ver en YouTube",
@@ -15,6 +15,36 @@
       "features": [
         "Desarrollo indie en Unity y mecánicas",
         "60 visualizaciones en YouTube",
+        "¡Suscríbete al canal de EternoDev!"
+      ]
+    },
+    {
+      "id": "yt_video_DFR5UtAuHTw",
+      "type": "youtube_video",
+      "badge": "VÍDEO DE YOUTUBE",
+      "title": "Sobreviví a mi PRIMERA GameJam",
+      "subtitle": "Nuevo devlog disponible en el canal de YouTube de EternoDev",
+      "action_text": "Ver en YouTube",
+      "target_url": "https://www.youtube.com/watch?v=DFR5UtAuHTw",
+      "image_url": "https://i.ytimg.com/vi/DFR5UtAuHTw/maxresdefault.jpg",
+      "features": [
+        "Desarrollo indie en Unity y mecánicas",
+        "159 visualizaciones en YouTube",
+        "¡Suscríbete al canal de EternoDev!"
+      ]
+    },
+    {
+      "id": "yt_video_bRbhRWQvqs8",
+      "type": "youtube_video",
+      "badge": "VÍDEO DE YOUTUBE",
+      "title": "Hice un VTUBER en 48 HORAS",
+      "subtitle": "Nuevo devlog disponible en el canal de YouTube de EternoDev",
+      "action_text": "Ver en YouTube",
+      "target_url": "https://www.youtube.com/watch?v=bRbhRWQvqs8",
+      "image_url": "https://i.ytimg.com/vi/bRbhRWQvqs8/maxresdefault.jpg",
+      "features": [
+        "Desarrollo indie en Unity y mecánicas",
+        "150 visualizaciones en YouTube",
         "¡Suscríbete al canal de EternoDev!"
       ]
     },
@@ -41,7 +71,7 @@
       "subtitle": "Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?",
       "action_text": "Descargar en Itch.io",
       "target_url": "https://eternodev.itch.io/oonga-bunga",
-      "image_url": "https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png",
+      "image_url": "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
       "features": [
         "Género: Fighting",
         "💻 Descarga disponible para PC (Windows / Linux)",
@@ -106,21 +136,6 @@
         "Género: Shooter",
         "🎮 Jugable directamente en el navegador",
         "⭐ 100% Gratuito en Itch.io"
-      ]
-    },
-    {
-      "id": "app_brightlight",
-      "type": "app",
-      "badge": "WEB APP ÚTIL",
-      "title": "BrightLight Web",
-      "subtitle": "Controla tus luces y bombillas inteligentes por Web Bluetooth",
-      "action_text": "Abrir Herramienta",
-      "target_url": "https://paucg06.github.io/BrightLight-Bluetooth/",
-      "image_url": "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
-      "features": [
-        "100% Web Bluetooth API",
-        "Sin descargas ni instalaciones previas",
-        "Control de color y efectos de iluminación"
       ]
     },
     {
