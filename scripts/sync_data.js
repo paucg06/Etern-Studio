@@ -175,11 +175,30 @@ async function syncYouTubeVideos() {
 
   if (apiKey) {
     try {
-      // 1. Obtener ID de la playlist de subidas
-      const chanRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`);
+      // 1. Obtener ID de la playlist de subidas y estadísticas del canal
+      const chanRes = await fetchUrl(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails,statistics,snippet&id=${channelId}&key=${apiKey}`);
       if (chanRes.statusCode === 200) {
         const chanJson = JSON.parse(chanRes.body);
-        const uploadsPlaylistId = chanJson.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+        const item0 = chanJson.items?.[0];
+        const uploadsPlaylistId = item0?.contentDetails?.relatedPlaylists?.uploads;
+        const chanStats = item0?.statistics || {};
+        const chanSnippet = item0?.snippet || {};
+
+        const channelData = {
+          id: channelId,
+          name: chanSnippet.title || 'EternoDev',
+          handle: chanSnippet.customUrl || '@eternodev',
+          subscribers: formatCount(chanStats.subscriberCount || 160),
+          raw_subscribers: parseInt(chanStats.subscriberCount || 160, 10),
+          video_count: (chanStats.videoCount || 4).toString(),
+          raw_video_count: parseInt(chanStats.videoCount || 4, 10),
+          view_count: formatCount(chanStats.viewCount || 568),
+          raw_view_count: parseInt(chanStats.viewCount || 568, 10),
+          avatar_url: chanSnippet.thumbnails?.medium?.url || 'assets/icon.png',
+          url: "https://www.youtube.com/@eternodev"
+        };
+        fs.writeFileSync('channel.json', JSON.stringify(channelData, null, 2), 'utf-8');
+        console.log(`YouTube Data API: Estadísticas del canal guardadas en channel.json (${channelData.subscribers} subs, ${channelData.video_count} vídeos)`);
 
         if (uploadsPlaylistId) {
           // 2. Obtener los IDs de los vídeos

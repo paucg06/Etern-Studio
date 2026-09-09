@@ -397,6 +397,22 @@ function createVideoCard(v) {
 // 3. Cargar datos sincronizados por GitHub Actions si existen
 async function loadDynamicData() {
   try {
+    // 0) Cargar estadísticas del canal de YouTube (suscriptores y total de vídeos)
+    try {
+      const cRes = await fetch(`channel.json?_t=${Date.now()}`);
+      if (cRes.ok) {
+        const chan = await cRes.json();
+        const subEls = document.querySelectorAll('.yt-dynamic-subs');
+        const vidEls = document.querySelectorAll('.yt-dynamic-vids');
+        if (chan.subscribers) {
+          subEls.forEach(el => el.textContent = `${chan.subscribers} suscriptores`);
+        }
+        if (chan.video_count) {
+          vidEls.forEach(el => el.textContent = `${chan.video_count} vídeos`);
+        }
+      }
+    } catch (_) {}
+
     // A) Cargar videos desde videos.json
     const vRes = await fetch(`videos.json?_t=${Date.now()}`);
     if (vRes.ok) {
@@ -419,6 +435,14 @@ async function loadDynamicData() {
             vTrackHome.appendChild(createVideoCard(v));
           });
         }
+
+        // Actualizar contador de vídeos si no viniera de channel.json
+        const vidEls = document.querySelectorAll('.yt-dynamic-vids');
+        vidEls.forEach(el => {
+          if (!el.textContent.includes('vídeos')) {
+            el.textContent = `${videos.length} vídeos`;
+          }
+        });
       }
     }
 
