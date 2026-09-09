@@ -35,7 +35,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add games.json videos.json
+          git add games.json videos.json ads.json youplanner/ads.json
           if ! git diff --cached --quiet; then
             git commit -m "chore: auto-sync Itch.io games and YouTube videos [skip ci]"
             git pull --rebase origin main
