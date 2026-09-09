@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-09-07T17:40:00.000Z",
+  "generated_at": "2026-09-09T19:58:03.156Z",
   "total_ads": 10,
   "ads": [
     {
@@ -8,13 +8,13 @@
       "type": "youtube_video",
       "badge": "ÚLTIMO DEVLOG",
       "title": "¡REHICE el Juego de mis SUEÑOS! - DevBlog 2",
-      "subtitle": "Nuevo devlog disponible en el canal de YouTube de EternoDev",
+      "subtitle": "¡Pummm! ¿Otra vez a Unityyy?",
       "action_text": "Ver en YouTube",
       "target_url": "https://www.youtube.com/watch?v=wjoGjOxCTCQ",
       "image_url": "https://i.ytimg.com/vi/wjoGjOxCTCQ/maxresdefault.jpg",
       "features": [
         "Desarrollo indie en Unity y mecánicas",
-        "60 visualizaciones en YouTube",
+        "70 visualizaciones en YouTube",
         "¡Suscríbete al canal de EternoDev!"
       ]
     },
@@ -23,13 +23,13 @@
       "type": "youtube_video",
       "badge": "VÍDEO DE YOUTUBE",
       "title": "Sobreviví a mi PRIMERA GameJam",
-      "subtitle": "Nuevo devlog disponible en el canal de YouTube de EternoDev",
+      "subtitle": "¡Ding! Espera... ¿La Global Game Jam 2025?",
       "action_text": "Ver en YouTube",
       "target_url": "https://www.youtube.com/watch?v=DFR5UtAuHTw",
       "image_url": "https://i.ytimg.com/vi/DFR5UtAuHTw/maxresdefault.jpg",
       "features": [
         "Desarrollo indie en Unity y mecánicas",
-        "159 visualizaciones en YouTube",
+        "160 visualizaciones en YouTube",
         "¡Suscríbete al canal de EternoDev!"
       ]
     },
@@ -38,7 +38,7 @@
       "type": "youtube_video",
       "badge": "VÍDEO DE YOUTUBE",
       "title": "Hice un VTUBER en 48 HORAS",
-      "subtitle": "Nuevo devlog disponible en el canal de YouTube de EternoDev",
+      "subtitle": "¡Voy a hacer un Vtuber Furro! Espera... ¿Qué?",
       "action_text": "Ver en YouTube",
       "target_url": "https://www.youtube.com/watch?v=bRbhRWQvqs8",
       "image_url": "https://i.ytimg.com/vi/bRbhRWQvqs8/maxresdefault.jpg",
@@ -64,51 +64,6 @@
       ]
     },
     {
-      "id": "game_4244918",
-      "type": "game",
-      "badge": "JUEGO DESTACADO",
-      "title": "Oonga Bunga!",
-      "subtitle": "Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?",
-      "action_text": "Descargar en Itch.io",
-      "target_url": "https://eternodev.itch.io/oonga-bunga",
-      "image_url": "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
-      "features": [
-        "Género: Fighting",
-        "💻 Descarga disponible para PC (Windows / Linux)",
-        "⭐ 100% Gratuito en Itch.io"
-      ]
-    },
-    {
-      "id": "game_3974299",
-      "type": "game",
-      "badge": "JUEGO DESTACADO",
-      "title": "Verdades Incompletas",
-      "subtitle": "Estás muerto... Descubre quién te asesinó mientras tus tres amigos investigan tu hogar.",
-      "action_text": "Jugar Gratis Online",
-      "target_url": "https://eternodev.itch.io/verdades-incompletas",
-      "image_url": "https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png",
-      "features": [
-        "Género: Visual Novel",
-        "🎮 Jugable directamente en el navegador",
-        "⭐ 100% Gratuito en Itch.io"
-      ]
-    },
-    {
-      "id": "game_3269482",
-      "type": "game",
-      "badge": "JUEGO DESTACADO",
-      "title": "Soap Dodger",
-      "subtitle": "Agudiza tus reflejos en este peliagudo Bullet Hell. ¡No pierdas bocanadas de aire en tan punzante cámara!",
-      "action_text": "Jugar Gratis Online",
-      "target_url": "https://eternodev.itch.io/soap-dodger",
-      "image_url": "https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png",
-      "features": [
-        "Género: Action / Bullet Hell",
-        "🎮 Jugable directamente en el navegador",
-        "⭐ 100% Gratuito en Itch.io"
-      ]
-    },
-    {
       "id": "game_3533624",
       "type": "game",
       "badge": "JUEGO DESTACADO",
@@ -124,6 +79,36 @@
       ]
     },
     {
+      "id": "game_4244918",
+      "type": "game",
+      "badge": "JUEGO DESTACADO",
+      "title": "Oonga Bunga!",
+      "subtitle": "Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?",
+      "action_text": "Descargar en Itch.io",
+      "target_url": "https://eternodev.itch.io/oonga-bunga",
+      "image_url": "https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png",
+      "features": [
+        "Género: Fighting",
+        "💻 Descarga disponible para PC",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    },
+    {
+      "id": "game_3269482",
+      "type": "game",
+      "badge": "JUEGO DESTACADO",
+      "title": "Soap Dodger",
+      "subtitle": "Agudiza tus reflejos en este peliagudo Bullet Hell. ¡No pierdas bocanadas de aire en tan punzante cámara!",
+      "action_text": "Jugar Gratis Online",
+      "target_url": "https://eternodev.itch.io/soap-dodger",
+      "image_url": "https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png",
+      "features": [
+        "Género: Action",
+        "🎮 Jugable directamente en el navegador",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    },
+    {
       "id": "game_4692794",
       "type": "game",
       "badge": "JUEGO DESTACADO",
@@ -131,9 +116,24 @@
       "subtitle": "Un trepidante shooter arcade donde tu nave evoluciona con mejoras visuales dinámicas.",
       "action_text": "Jugar Gratis Online",
       "target_url": "https://eternodev.itch.io/space-blitz",
-      "image_url": "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
+      "image_url": "https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png",
       "features": [
         "Género: Shooter",
+        "🎮 Jugable directamente en el navegador",
+        "⭐ 100% Gratuito en Itch.io"
+      ]
+    },
+    {
+      "id": "game_3974299",
+      "type": "game",
+      "badge": "JUEGO DESTACADO",
+      "title": "Verdades Incompletas",
+      "subtitle": "Estás muerto... Descubre quién te asesinó mientras tus tres amigos investigan tu hogar.",
+      "action_text": "Jugar Gratis Online",
+      "target_url": "https://eternodev.itch.io/verdades-incompletas",
+      "image_url": "https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png",
+      "features": [
+        "Género: Visual Novel",
         "🎮 Jugable directamente en el navegador",
         "⭐ 100% Gratuito en Itch.io"
       ]
