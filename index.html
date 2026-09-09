@@ -344,13 +344,13 @@
       fill: none;
     }
 
-    /* Panel Desplegable Móvil (Sin emojis y justo debajo de la navbar) */
+    /* Panel Desplegable Móvil (Con iconos y alineado con la navbar) */
     .mobile-dropdown-panel {
       display: none;
       position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
+      top: calc(100% + 14px);
+      left: -24px;
+      right: -24px;
       background: #2A2A35;
       border-top: 1px solid #34343C;
       border-bottom: 1px solid #34343C;
@@ -372,12 +372,21 @@
       font-family: var(--font-main);
       font-size: 0.95rem;
       font-weight: 700;
-      padding: 11px 16px;
+      padding: 12px 16px;
       border-radius: var(--radius-md);
       text-align: left;
       cursor: pointer;
       transition: all 0.15s;
       width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mobile-dropdown-btn .tab-icon-svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
     }
 
     .mobile-dropdown-btn:hover {
@@ -1179,10 +1188,10 @@
           </li>
           <li>
             <button class="nav-tab-btn" data-target="games" onclick="switchTab('games')">
-              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="#FA5C5C">
-                <path d="M2.5 4.5A2 2 0 0 0 .5 6.5v2.8c0 1.3.8 2.5 2 2.9v6.3c0 2.2 1.8 4 4 4h11c2.2 0 4-1.8 4-4v-6.3c1.2-.4 2-1.6 2-2.9V6.5a2 2 0 0 0-2-2H2.5zm4.8 4.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm9.4 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM6 14.5h2v2H6v-2zm10 0h2v2h-2v-2z"/>
+              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17 5H7C4.24 5 2 7.24 2 10C2 12.76 4.24 15 7 15H8V17.5C8 18.88 9.12 20 10.5 20C11.53 20 12.41 19.37 12.78 18.47L13.15 17.57C13.37 17.03 13.89 16.67 14.47 16.67H17C19.76 16.67 22 14.43 22 11.67C22 8.91 19.76 5 17 5ZM8 11H6.5V9.5H8V8H9.5V9.5H11V11H9.5V12.5H8V11ZM16 11.75C15.31 11.75 14.75 11.19 14.75 10.5C14.75 9.81 15.31 9.25 16 9.25C16.69 9.25 17.25 9.81 17.25 10.5C17.25 11.19 16.69 11.75 16 11.75ZM18.5 9.5C17.81 9.5 17.25 8.94 17.25 8.25C17.25 7.56 17.81 7 18.5 7C19.19 7 19.75 7.56 19.75 8.25C19.75 8.94 19.19 9.5 18.5 9.5Z"/>
               </svg>
-              Juegos <span style="color: #FA5C5C; font-weight: 800; margin-left: 2px;">Itch.io</span>
+              Juegos
             </button>
           </li>
           <li>
@@ -1195,10 +1204,10 @@
           </li>
           <li>
             <button class="nav-tab-btn" data-target="videos" onclick="switchTab('videos')">
-              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="#FF0000">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-10 12.5v-9l7 4.5-7 4.5z"/>
               </svg>
-              Vídeos <span style="color: #FF0000; font-weight: 800; margin-left: 2px;">YouTube</span>
+              Vídeos
             </button>
           </li>
           <li>
@@ -1220,7 +1229,7 @@
         </ul>
       </nav>
 
-      <!-- Botones de Acción Estilo CrazyGames (Marcador, Campanita & Plátano) -->
+      <!-- Botones de Acción (Marcador & Campanita) -->
       <div class="nav-actions">
         <button class="action-icon-btn" onclick="openSavedModal()" title="Mis proyectos guardados">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1235,10 +1244,6 @@
           </svg>
           <span class="badge-notif-dot"></span>
         </button>
-
-        <a href="https://buymeacoffee.com/eternodev" target="_blank" rel="noopener" class="btn-pill" style="background: rgba(251, 191, 36, 0.15); border: 1px solid #FBBF24; color: #FBBF24; font-weight: 800;">
-          🍌 Plátano
-        </a>
         
         <button id="mobileMenuBtn" class="mobile-menu-toggle" aria-label="Abrir menú" onclick="toggleMobileMenu()">
           <svg viewBox="0 0 24 24" id="hamburgerIcon"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -1247,12 +1252,42 @@
 
       <!-- Panel Desplegable Móvil -->
       <div id="mobileNavDropdown" class="mobile-dropdown-panel">
-        <button class="mobile-dropdown-btn active" data-target="home" onclick="switchTabMobile('home')">Home</button>
-        <button class="mobile-dropdown-btn" data-target="games" onclick="switchTabMobile('games')">Juegos Itch.io</button>
-        <button class="mobile-dropdown-btn" data-target="apps" onclick="switchTabMobile('apps')">Aplicaciones</button>
-        <button class="mobile-dropdown-btn" data-target="videos" onclick="switchTabMobile('videos')">Vídeos YouTube</button>
-        <button class="mobile-dropdown-btn" data-target="about" onclick="switchTabMobile('about')">Sobre Mí</button>
-        <button class="mobile-dropdown-btn" data-target="community" onclick="switchTabMobile('community')">Comunidad</button>
+        <button class="mobile-dropdown-btn active" data-target="home" onclick="switchTabMobile('home')">
+          <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3c-.5 0-1 .2-1.4.6l-7.3 6.1c-.8.7-.9 1.9-.3 2.7.6.8 1.8.9 2.6.3L6 12.3V19c0 1.1.9 2 2 2h2.5c.6 0 1-.4 1-1v-4.5c0-.3.2-.5.5-.5h4c.3 0 .5.2.5.5V20c0 .6.4 1 1 1H19c1.1 0 2-.9 2-2v-6.7l.4.4c.8.6 2 .5 2.6-.3.6-.8.5-2-.3-2.7L13.4 3.6c-.4-.4-.9-.6-1.4-.6z"/>
+          </svg>
+          Home
+        </button>
+        <button class="mobile-dropdown-btn" data-target="games" onclick="switchTabMobile('games')">
+          <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17 5H7C4.24 5 2 7.24 2 10C2 12.76 4.24 15 7 15H8V17.5C8 18.88 9.12 20 10.5 20C11.53 20 12.41 19.37 12.78 18.47L13.15 17.57C13.37 17.03 13.89 16.67 14.47 16.67H17C19.76 16.67 22 14.43 22 11.67C22 8.91 19.76 5 17 5ZM8 11H6.5V9.5H8V8H9.5V9.5H11V11H9.5V12.5H8V11ZM16 11.75C15.31 11.75 14.75 11.19 14.75 10.5C14.75 9.81 15.31 9.25 16 9.25C16.69 9.25 17.25 9.81 17.25 10.5C17.25 11.19 16.69 11.75 16 11.75ZM18.5 9.5C17.81 9.5 17.25 8.94 17.25 8.25C17.25 7.56 17.81 7 18.5 7C19.19 7 19.75 7.56 19.75 8.25C19.75 8.94 19.19 9.5 18.5 9.5Z"/>
+          </svg>
+          Juegos
+        </button>
+        <button class="mobile-dropdown-btn" data-target="apps" onclick="switchTabMobile('apps')">
+          <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/>
+          </svg>
+          Aplicaciones
+        </button>
+        <button class="mobile-dropdown-btn" data-target="videos" onclick="switchTabMobile('videos')">
+          <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-10 12.5v-9l7 4.5-7 4.5z"/>
+          </svg>
+          Vídeos
+        </button>
+        <button class="mobile-dropdown-btn" data-target="about" onclick="switchTabMobile('about')">
+          <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+          </svg>
+          Sobre Mí
+        </button>
+        <button class="mobile-dropdown-btn" data-target="community" onclick="switchTabMobile('community')">
+          <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+          </svg>
+          Comunidad
+        </button>
       </div>
     </div>
   </header>
@@ -1276,10 +1311,10 @@
 
           <div class="hero-cta-group">
             <button onclick="switchTab('games')" class="btn-pill btn-mint" style="padding: 13px 28px; font-size: 0.95rem;">
-              🎮 Explorar Juegos
+              Explorar Juegos
             </button>
             <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 13px 28px; font-size: 0.95rem;">
-              💻 Ver Aplicaciones
+              Ver Aplicaciones
             </button>
           </div>
         </div>
@@ -1290,7 +1325,7 @@
         <div class="container">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
             <h2 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; display: flex; align-items: center; gap: 8px;">
-              <span>🎮</span> Videojuegos en <a href="https://eternodev.itch.io" target="_blank" rel="noopener" style="color: #FA5C5C; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="Abrir perfil en Itch.io">Itch.io <svg viewBox="0 0 24 24" width="20" height="20" fill="#FA5C5C"><path d="M2.5 4.5A2 2 0 0 0 .5 6.5v2.8c0 1.3.8 2.5 2 2.9v6.3c0 2.2 1.8 4 4 4h11c2.2 0 4-1.8 4-4v-6.3c1.2-.4 2-1.6 2-2.9V6.5a2 2 0 0 0-2-2H2.5zm4.8 4.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm9.4 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM6 14.5h2v2H6v-2zm10 0h2v2h-2v-2z"/></svg></a>
+              Videojuegos en <a href="https://eternodev.itch.io" target="_blank" rel="noopener" style="color: #FA5C5C; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="Abrir perfil en Itch.io">Itch.io <svg viewBox="0 0 32 32" width="22" height="22" fill="#FA5C5C"><path d="M 16 5 C 12.748 5 8.3121094 5.0508594 7.4121094 5.1308594 C 6.4021094 5.7368594 4.4028125 8.0309531 4.3828125 8.6269531 L 4.3828125 9.6269531 C 4.3828125 10.889953 5.5657188 12 6.6367188 12 C 7.9197187 12 8.9902344 10.929969 8.9902344 9.6679688 C 8.9902344 10.929969 10.0305 12 11.3125 12 C 12.6055 12 13.605469 10.930969 13.605469 9.6679688 C 13.605469 10.929969 14.695281 12 15.988281 12 L 16.009766 12 C 17.302766 12 18.392578 10.930969 18.392578 9.6679688 C 18.392578 10.929969 19.402547 12 20.685547 12 C 21.968547 12 23.009766 10.930969 23.009766 9.6679688 C 23.009766 10.929969 24.080281 12 25.363281 12 C 26.434281 12 27.615234 10.889953 27.615234 9.6269531 L 27.615234 8.6269531 C 27.595234 8.0309531 25.595938 5.7368594 24.585938 5.1308594 C 21.443938 5.0198594 19.252 5 16 5 z M 13.550781 11.742188 C 12.497781 13.552188 9.8523125 13.573906 8.8203125 11.753906 C 8.1903125 12.845906 6.7642969 13.267547 6.1542969 13.060547 C 5.9762969 14.959547 5.8534844 24.70875 7.1464844 26.34375 C 10.943484 27.22875 21.164516 27.20975 24.853516 26.34375 C 26.348516 24.81975 26.013703 14.821547 25.845703 13.060547 C 25.235703 13.267547 23.809453 12.845906 23.189453 11.753906 C 22.146453 13.573906 19.501219 13.552188 18.449219 11.742188 C 18.124219 12.332187 17.367 13.109375 16 13.109375 C 14.997 13.148375 14.051781 12.607187 13.550781 11.742188 z M 11.419922 14 C 12.219922 14 12.950078 14.000469 13.830078 14.980469 C 15.280078 14.830469 16.719922 14.830469 18.169922 14.980469 C 19.059922 14.010469 19.780078 14.009766 20.580078 14.009766 C 23.160078 14.009766 23.780937 17.819609 24.710938 21.099609 C 25.550938 24.149609 24.429062 24.230469 23.039062 24.230469 C 20.969062 24.150469 19.820313 22.650625 19.820312 21.140625 C 17.890313 21.460625 14.809688 21.580625 12.179688 21.140625 C 12.179688 22.650625 11.030938 24.150469 8.9609375 24.230469 C 7.5709375 24.230469 6.4490625 24.149609 7.2890625 21.099609 C 8.2190625 17.799609 8.8399219 14.009766 11.419922 14.009766 L 11.419922 14 z M 16 16.876953 C 16 16.876953 14.306 18.439375 14 18.984375 L 15.107422 18.943359 L 15.107422 19.910156 C 15.107422 19.968156 15.926 19.917969 16 19.917969 C 16.447 19.934969 16.892578 19.951156 16.892578 19.910156 L 16.892578 18.943359 L 18 18.984375 C 17.694 18.438375 16 16.876953 16 16.876953 z"/></svg></a>
             </h2>
             <button onclick="switchTab('games')" class="btn-pill btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">
               Ver todos los juegos &rarr;
@@ -1310,7 +1345,7 @@
         <div class="container">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
             <h2 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; display: flex; align-items: center; gap: 8px;">
-              <span>⚡</span> Software & Apps
+              Software & Apps
             </h2>
             <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">
               Ver todas las apps &rarr;
@@ -1366,7 +1401,7 @@
         <div class="container">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
             <h2 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; display: flex; align-items: center; gap: 8px;">
-              <span>🎬</span> Vídeos de <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" style="color: #FF0000; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="Abrir canal oficial de YouTube">YouTube <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+              Vídeos de <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" style="color: #FF0000; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="Abrir canal oficial de YouTube">YouTube <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
             </h2>
             <button onclick="switchTab('videos')" class="btn-pill btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">
               Ver todos los vídeos &rarr;
@@ -1391,7 +1426,7 @@
         <div class="container">
           <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
             <h2 class="section-title-center" style="margin-bottom: 8px;">
-              Juegos en <a href="https://eternodev.itch.io" target="_blank" rel="noopener" style="color: #FA5C5C; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;" title="Ver todos los juegos en Itch.io">Itch.io <svg viewBox="0 0 24 24" width="28" height="28" fill="#FA5C5C"><path d="M2.5 4.5A2 2 0 0 0 .5 6.5v2.8c0 1.3.8 2.5 2 2.9v6.3c0 2.2 1.8 4 4 4h11c2.2 0 4-1.8 4-4v-6.3c1.2-.4 2-1.6 2-2.9V6.5a2 2 0 0 0-2-2H2.5zm4.8 4.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm9.4 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM6 14.5h2v2H6v-2zm10 0h2v2h-2v-2z"/></svg></a>
+              Juegos en <a href="https://eternodev.itch.io" target="_blank" rel="noopener" style="color: #FA5C5C; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;" title="Ver todos los juegos en Itch.io">Itch.io <svg viewBox="0 0 32 32" width="28" height="28" fill="#FA5C5C"><path d="M 16 5 C 12.748 5 8.3121094 5.0508594 7.4121094 5.1308594 C 6.4021094 5.7368594 4.4028125 8.0309531 4.3828125 8.6269531 L 4.3828125 9.6269531 C 4.3828125 10.889953 5.5657188 12 6.6367188 12 C 7.9197187 12 8.9902344 10.929969 8.9902344 9.6679688 C 8.9902344 10.929969 10.0305 12 11.3125 12 C 12.6055 12 13.605469 10.930969 13.605469 9.6679688 C 13.605469 10.929969 14.695281 12 15.988281 12 L 16.009766 12 C 17.302766 12 18.392578 10.930969 18.392578 9.6679688 C 18.392578 10.929969 19.402547 12 20.685547 12 C 21.968547 12 23.009766 10.930969 23.009766 9.6679688 C 23.009766 10.929969 24.080281 12 25.363281 12 C 26.434281 12 27.615234 10.889953 27.615234 9.6269531 L 27.615234 8.6269531 C 27.595234 8.0309531 25.595938 5.7368594 24.585938 5.1308594 C 21.443938 5.0198594 19.252 5 16 5 z M 13.550781 11.742188 C 12.497781 13.552188 9.8523125 13.573906 8.8203125 11.753906 C 8.1903125 12.845906 6.7642969 13.267547 6.1542969 13.060547 C 5.9762969 14.959547 5.8534844 24.70875 7.1464844 26.34375 C 10.943484 27.22875 21.164516 27.20975 24.853516 26.34375 C 26.348516 24.81975 26.013703 14.821547 25.845703 13.060547 C 25.235703 13.267547 23.809453 12.845906 23.189453 11.753906 C 22.146453 13.573906 19.501219 13.552188 18.449219 11.742188 C 18.124219 12.332187 17.367 13.109375 16 13.109375 C 14.997 13.148375 14.051781 12.607187 13.550781 11.742188 z M 11.419922 14 C 12.219922 14 12.950078 14.000469 13.830078 14.980469 C 15.280078 14.830469 16.719922 14.830469 18.169922 14.980469 C 19.059922 14.010469 19.780078 14.009766 20.580078 14.009766 C 23.160078 14.009766 23.780937 17.819609 24.710938 21.099609 C 25.550938 24.149609 24.429062 24.230469 23.039062 24.230469 C 20.969062 24.150469 19.820313 22.650625 19.820312 21.140625 C 17.890313 21.460625 14.809688 21.580625 12.179688 21.140625 C 12.179688 22.650625 11.030938 24.150469 8.9609375 24.230469 C 7.5709375 24.230469 6.4490625 24.149609 7.2890625 21.099609 C 8.2190625 17.799609 8.8399219 14.009766 11.419922 14.009766 L 11.419922 14 z M 16 16.876953 C 16 16.876953 14.306 18.439375 14 18.984375 L 15.107422 18.943359 L 15.107422 19.910156 C 15.107422 19.968156 15.926 19.917969 16 19.917969 C 16.447 19.934969 16.892578 19.951156 16.892578 19.910156 L 16.892578 18.943359 L 18 18.984375 C 17.694 18.438375 16 16.876953 16 16.876953 z"/></svg></a>
             </h2>
             <p style="color: #CCCCCE; font-size: 1.05rem;">Videojuegos indie creados en Unity. Jugables directamente en el navegador o descargables para PC.</p>
           </div>
@@ -1428,7 +1463,7 @@
 
           <!-- Subcategoría 1: Aplicaciones Web -->
           <div class="app-subcat-header">
-            <h3 class="app-subcat-title">🌐 Aplicaciones Web</h3>
+            <h3 class="app-subcat-title"><svg viewBox="0 0 24 24" width="22" height="22" fill="#38bdf8" style="vertical-align: middle;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> Aplicaciones Web</h3>
             <span class="app-subcat-desc">• Sin instalación previa, ejecutables directamente desde el navegador</span>
           </div>
 
@@ -1459,7 +1494,7 @@
 
           <!-- Subcategoría 2: Software de Escritorio -->
           <div class="app-subcat-header" style="margin-top: 50px;">
-            <h3 class="app-subcat-title">💻 Software de Escritorio</h3>
+            <h3 class="app-subcat-title"><svg viewBox="0 0 24 24" width="22" height="22" fill="#CCCCCE" style="vertical-align: middle;"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg> Software de Escritorio</h3>
             <span class="app-subcat-desc">• Programas descargables y utilidades nativas para PC</span>
           </div>
 
@@ -1667,7 +1702,7 @@
             </a>
 
             <a href="https://buymeacoffee.com/eternodev" target="_blank" rel="noopener" class="community-link-card" style="border-color: rgba(251, 191, 36, 0.45); background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(42, 42, 53, 1) 100%);">
-              <div class="comm-title" style="color: #FBBF24;">Buy Me a Plátano 🍌</div>
+              <div class="comm-title" style="color: #FBBF24;">Buy Me a Plátano</div>
               <div class="comm-handle" style="color: #FDE68A;">buymeacoffee.com/eternodev</div>
               <p class="comm-desc">Apoya el desarrollo de videojuegos independientes y herramientas de software libre invitándome a un plátano.</p>
             </a>
