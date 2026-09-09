@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <!-- SEO Principal -->
-  <title>EternoDev</title>
-  <meta name="description" content="Sitio oficial de EternoDev. Videojuegos indie desarrollados en Unity, aplicaciones de código abierto, devlogs y herramientas interactivas." />
-  <meta name="keywords" content="EternoDev, eternodev, eternodev itch io, eternodev youtube, videojuegos indie, Unity devlog, Etern-Notes, BrightLight" />
+  <title>EternoDev | Desarrollo de Videojuegos, Software y Apps</title>
+  <meta name="description" content="Sitio web oficial de EternoDev (Eterno Developer). Videojuegos indie desarrollados en Unity, aplicaciones web y de escritorio, apps móviles y proyectos de código abierto." />
+  <meta name="keywords" content="EternoDev, Eterno Developer, Eterno Dev, videojuegos indie, software, aplicaciones web, apps android, itch io, Unity, BrightLight, Etern-Notes" />
   <meta name="author" content="EternoDev" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://eternodev.com/" />
@@ -15,36 +15,54 @@
   <!-- Open Graph / Redes Sociales y Google -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="EternoDev" />
-  <meta property="og:title" content="EternoDev" />
-  <meta property="og:description" content="Sitio oficial de EternoDev. Explora videojuegos indie, aplicaciones y devlogs de YouTube." />
+  <meta property="og:title" content="EternoDev | Desarrollo de Videojuegos, Software y Apps" />
+  <meta property="og:description" content="Sitio web oficial de EternoDev (Eterno Developer). Explora videojuegos indie, aplicaciones web, software y devlogs." />
   <meta property="og:url" content="https://eternodev.com/" />
-  <meta property="og:image" content="https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png" />
+  <meta property="og:image" content="https://eternodev.com/favicon.png" />
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="EternoDev" />
-  <meta name="twitter:description" content="Sitio oficial de EternoDev. Explora videojuegos indie, aplicaciones y devlogs." />
-  <meta name="twitter:image" content="https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png" />
+  <meta name="twitter:title" content="EternoDev | Desarrollo de Videojuegos, Software y Apps" />
+  <meta name="twitter:description" content="Sitio web oficial de EternoDev (Eterno Developer). Explora videojuegos indie, aplicaciones web y software." />
+  <meta name="twitter:image" content="https://eternodev.com/favicon.png" />
 
-  <!-- Datos Estructurados Schema.org para Google -->
+  <!-- Datos Estructurados Schema.org para Google (Site Name & Organization) -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "EternoDev",
-    "url": "https://eternodev.com/",
-    "logo": "https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png",
-    "sameAs": [
-      "https://www.youtube.com/@eternodev",
-      "https://eternodev.itch.io",
-      "https://github.com/paucg06",
-      "https://www.tiktok.com/@eternodev",
-      "https://instagram.com/eternodev"
-    ]
-  }
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "EternoDev",
+      "alternateName": [
+        "Eterno Developer",
+        "EternoDev Web",
+        "Eterno Dev"
+      ],
+      "url": "https://eternodev.com/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "EternoDev",
+      "alternateName": [
+        "Eterno Developer",
+        "Eterno Dev"
+      ],
+      "url": "https://eternodev.com/",
+      "logo": "https://eternodev.com/favicon.png",
+      "sameAs": [
+        "https://www.youtube.com/@eternodev",
+        "https://eternodev.itch.io",
+        "https://github.com/paucg06",
+        "https://www.tiktok.com/@eternodev",
+        "https://instagram.com/eternodev"
+      ]
+    }
+  ]
   </script>
   
-  <link rel="icon" type="image/png" sizes="192x192" href="https://img.itch.zone/aW1nLzI1Mjk4NTUzLnBuZw==/original/XUjDP1.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   
   <!-- Tipografia Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -361,6 +379,135 @@
       justify-content: center;
       gap: 16px;
       margin-top: 8px;
+    }
+
+    /* Panel Destacado de Steam */
+    .steam-showcase-section {
+      padding: 10px 0 35px;
+    }
+
+    .steam-card-banner {
+      background: linear-gradient(135deg, #171a21 0%, #1b2838 50%, #2a475e 100%);
+      border: 1px solid rgba(102, 192, 244, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      display: grid;
+      grid-template-columns: 1.4fr 0.6fr;
+      gap: 28px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    }
+
+    .steam-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .steam-pill-badge {
+      background: rgba(102, 192, 244, 0.18);
+      border: 1px solid #66c0f4;
+      color: #66c0f4;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .steam-status-tag {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+    }
+
+    .steam-banner-title {
+      font-size: 1.95rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .steam-banner-desc {
+      color: #c6d4df;
+      font-size: 0.96rem;
+      line-height: 1.55;
+      margin-bottom: 22px;
+      max-width: 580px;
+    }
+
+    .steam-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-steam {
+      background: linear-gradient(90deg, #66c0f4 0%, #4199d6 100%);
+      color: #0b121e;
+      font-weight: 800;
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-steam:hover {
+      background: linear-gradient(90deg, #7ad0ff 0%, #52abeb 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 192, 244, 0.4);
+    }
+
+    .steam-hint-text {
+      font-size: 0.84rem;
+      color: #8fa7bf;
+      font-weight: 600;
+    }
+
+    .steam-card-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .steam-art-box {
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(102, 192, 244, 0.25) 0%, rgba(27, 40, 56, 0.6) 70%);
+      border: 1px solid rgba(102, 192, 244, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #66c0f4;
+      box-shadow: 0 0 35px rgba(102, 192, 244, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .steam-card-banner {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        text-align: left;
+      }
+      .steam-card-visual {
+        display: none;
+      }
     }
 
     /* Carrusel de Juegos & Videos */
@@ -956,6 +1103,7 @@
   <header>
     <div class="container nav-wrapper">
       <div class="brand" onclick="switchTab('home')">
+        <img src="favicon.png" alt="EternoDev Logo" style="width: 30px; height: 30px; border-radius: 8px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.3);" />
         <span class="brand-title" style="font-size: 1.35rem; font-weight: 900; letter-spacing: -0.5px; color: #FFFFFF;">EternoDev</span>
       </div>
 
@@ -965,7 +1113,7 @@
           <li><button class="nav-tab-btn active" data-target="home" onclick="switchTab('home')">Juegos</button></li>
           <li><button class="nav-tab-btn" data-target="apps" onclick="switchTab('apps')">Aplicaciones</button></li>
           <li><button class="nav-tab-btn" data-target="videos" onclick="switchTab('videos')">Vídeos</button></li>
-          <li><button class="nav-tab-btn" data-target="about" onclick="switchTab('about')">Sobre Mi</button></li>
+          <li><button class="nav-tab-btn" data-target="about" onclick="switchTab('about')">Sobre Mí</button></li>
           <li><button class="nav-tab-btn" data-target="community" onclick="switchTab('community')">Comunidad</button></li>
         </ul>
       </nav>
@@ -1009,7 +1157,7 @@
           </h1>
 
           <p class="hero-desc">
-            EternoDev es un estudio indie centrado en el desarrollo de videojuegos en Unity, software libre para creadores y divulgacion digital.
+            EternoDev es un desarrollador indie centrado en la creación de videojuegos en Unity, software de escritorio, herramientas web y divulgación digital.
           </p>
 
           <div class="hero-cta-group">
@@ -1019,6 +1167,45 @@
             <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 13px 28px; font-size: 0.95rem;">
               Ver Aplicaciones
             </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel Destacado de Steam (Próximos lanzamientos & Wishlist) -->
+      <section class="steam-showcase-section">
+        <div class="container">
+          <div class="steam-card-banner">
+            <div class="steam-card-content">
+              <div class="steam-badge-row">
+                <span class="steam-pill-badge">
+                  <svg class="steam-icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.008l2.861-4.142V8.93c0-2.485 2.015-4.5 4.5-4.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5c-.121 0-.239-.01-.358-.018l-4.077 2.912c.005.064.009.128.009.194 0 2.209-1.791 4-4 4-1.798 0-3.316-1.187-3.824-2.814L.493 15.684C1.945 20.48 6.564 24 12 24c6.627 0 12-5.373 12-12S18.627 0 11.979 0zM7.54 18.207l-1.464-.606c.264.444.64.809 1.096 1.052.887.471 1.984.346 2.732-.314l-.004-.002-2.36-1.13zm8.375-10.777c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 1.5c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5-1.5-.672-1.5-1.5.672-1.5 1.5-1.5z"/>
+                  </svg>
+                  STEAM • PRÓXIMOS LANZAMIENTOS
+                </span>
+                <span class="steam-status-tag">En Desarrollo</span>
+              </div>
+              <h2 class="steam-banner-title">Videojuegos en Steam</h2>
+              <p class="steam-banner-desc">
+                Futuros lanzamientos comerciales con logros, guardado en la nube y compatibilidad para Steam Deck. ¡Sé el primero en añadirlos a tu lista de deseados (Wishlist)!
+              </p>
+              <div class="steam-actions-row">
+                <a href="https://store.steampowered.com" target="_blank" rel="noopener" class="btn-steam">
+                  <svg class="steam-icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.008l2.861-4.142V8.93c0-2.485 2.015-4.5 4.5-4.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5c-.121 0-.239-.01-.358-.018l-4.077 2.912c.005.064.009.128.009.194 0 2.209-1.791 4-4 4-1.798 0-3.316-1.187-3.824-2.814L.493 15.684C1.945 20.48 6.564 24 12 24c6.627 0 12-5.373 12-12S18.627 0 11.979 0z"/>
+                  </svg>
+                  Ver en Steam Store
+                </a>
+                <span class="steam-hint-text">🔔 Próximamente ficha oficial en Steam</span>
+              </div>
+            </div>
+            <div class="steam-card-visual">
+              <div class="steam-art-box">
+                <svg viewBox="0 0 24 24" width="72" height="72" fill="currentColor">
+                  <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.008l2.861-4.142V8.93c0-2.485 2.015-4.5 4.5-4.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5c-.121 0-.239-.01-.358-.018l-4.077 2.912c.005.064.009.128.009.194 0 2.209-1.791 4-4 4-1.798 0-3.316-1.187-3.824-2.814L.493 15.684C1.945 20.48 6.564 24 12 24c6.627 0 12-5.373 12-12S18.627 0 11.979 0z"/>
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </section>
