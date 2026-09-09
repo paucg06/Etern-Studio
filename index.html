@@ -151,26 +151,20 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
+      user-select: none;
     }
 
-    .brand-icon {
-      width: 34px;
-      height: 34px;
-      background: var(--accent-purple);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: #fff;
+    .brand-logo-svg {
+      height: 36px;
+      width: auto;
+      max-height: 40px;
+      display: block;
+      transition: transform 0.2s ease, filter 0.2s ease;
     }
 
-    .brand-title {
-      font-weight: 800;
-      font-size: 1.15rem;
-      letter-spacing: -0.4px;
-      color: #FFFFFF;
+    .brand:hover .brand-logo-svg {
+      transform: scale(1.03);
+      filter: drop-shadow(0 2px 10px rgba(253, 211, 29, 0.35));
     }
 
     .desktop-nav {
@@ -973,9 +967,8 @@
   <!-- Header con Navegación y Menú Desplegable Móvil -->
   <header>
     <div class="container nav-wrapper">
-      <div class="brand" onclick="switchTab('home')">
-        <img src="favicon.png" alt="EternoDev Logo" style="width: 30px; height: 30px; border-radius: 8px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.3);" />
-        <span class="brand-title" style="font-size: 1.35rem; font-weight: 900; letter-spacing: -0.5px; color: #FFFFFF;">EternoDev</span>
+      <div class="brand" onclick="switchTab('home')" title="EternoDev - Inicio">
+        <img src="assets/EternoDev_Logo.svg" alt="EternoDev" class="brand-logo-svg" />
       </div>
 
       <!-- Navegación de Escritorio -->
