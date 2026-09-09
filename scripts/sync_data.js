@@ -225,6 +225,12 @@ async function syncYouTubeVideos() {
           }
         }
       }
+    } catch (e) {
+      console.warn("Aviso YouTube API:", e.message);
+    }
+  }
+}
+
 // 3. Generación automática del sistema de Anuncios Remoto (ads.json para YouPlanner y apps móviles)
 function generateAdsJson() {
   console.log("Generando ads.json para YouPlanner y apps móviles...");
