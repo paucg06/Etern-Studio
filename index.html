@@ -149,7 +149,7 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
       user-select: none;
       transition: opacity 0.2s ease;
@@ -161,9 +161,9 @@
     }
 
     .brand-icon-img {
-      width: 38px;
-      height: 38px;
-      border-radius: 9px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       object-fit: cover;
       display: block;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
@@ -171,9 +171,9 @@
     }
 
     .brand-logo-svg {
-      height: 44px;
+      height: 38px;
       width: auto;
-      max-height: 48px;
+      max-height: 40px;
       display: block;
       object-fit: contain;
     }
@@ -186,7 +186,7 @@
     .nav-tabs {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       list-style: none;
     }
 
@@ -197,15 +197,29 @@
       font-family: var(--font-main);
       font-weight: 600;
       font-size: 0.92rem;
-      padding: 8px 18px;
+      padding: 8px 16px;
       border-radius: var(--radius-pill);
       cursor: pointer;
       transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .nav-tab-btn .tab-icon-svg {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      transition: transform 0.15s;
     }
 
     .nav-tab-btn:hover {
       color: #FFFFFF;
       background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-tab-btn:hover .tab-icon-svg {
+      transform: scale(1.1);
     }
 
     .nav-tab-btn.active {
@@ -217,7 +231,45 @@
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+    }
+
+    .action-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #2A2A35;
+      border: 1px solid #34343C;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #CCCCCE;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .action-icon-btn:hover {
+      background: #343442;
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .action-icon-btn svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .badge-notif-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 8px;
+      height: 8px;
+      background: #FA5C5C;
+      border-radius: 50%;
+      border: 2px solid #2A2A35;
     }
 
     .btn-pill {
@@ -918,6 +970,137 @@
       line-height: 1.4;
     }
 
+    /* Subtítulos de Categoría */
+    .app-subcat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 40px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .app-subcat-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .app-subcat-desc {
+      font-size: 0.88rem;
+      color: #8E8E93;
+    }
+
+    /* Modales interactivos (Guardados & Notificaciones) */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #2A2A35;
+      border: 1px solid #34343C;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 480px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: #8E8E93;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.15s;
+    }
+
+    .modal-close-btn:hover {
+      color: #FFFFFF;
+    }
+
+    .modal-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      font-size: 0.92rem;
+      color: #CCCCCE;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .notif-item {
+      background: #1D1D26;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .notif-item:hover {
+      background: #232330;
+    }
+
+    .notif-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .badge-itch { background: rgba(250, 92, 92, 0.2); color: #FA5C5C; border: 1px solid #FA5C5C; }
+    .badge-yt { background: rgba(255, 0, 0, 0.2); color: #FF4D4D; border: 1px solid #FF0000; }
+    .badge-app { background: rgba(0, 245, 155, 0.2); color: #00F59B; border: 1px solid #00F59B; }
+
     /* Footer */
     footer {
       background: #16161E;
@@ -983,24 +1166,78 @@
         <img src="assets/EternoDev_Logo.svg" alt="EternoDev" class="brand-logo-svg" />
       </div>
 
-      <!-- Navegación de Escritorio -->
+      <!-- Navegación de Escritorio con Iconos Cartoon -->
       <nav class="desktop-nav">
         <ul class="nav-tabs">
-          <li><button class="nav-tab-btn active" data-target="home" onclick="switchTab('home')">Juegos</button></li>
-          <li><button class="nav-tab-btn" data-target="apps" onclick="switchTab('apps')">Aplicaciones</button></li>
-          <li><button class="nav-tab-btn" data-target="videos" onclick="switchTab('videos')">Vídeos</button></li>
-          <li><button class="nav-tab-btn" data-target="about" onclick="switchTab('about')">Sobre Mí</button></li>
-          <li><button class="nav-tab-btn" data-target="community" onclick="switchTab('community')">Comunidad</button></li>
+          <li>
+            <button class="nav-tab-btn active" data-target="home" onclick="switchTab('home')">
+              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3c-.5 0-1 .2-1.4.6l-7.3 6.1c-.8.7-.9 1.9-.3 2.7.6.8 1.8.9 2.6.3L6 12.3V19c0 1.1.9 2 2 2h2.5c.6 0 1-.4 1-1v-4.5c0-.3.2-.5.5-.5h4c.3 0 .5.2.5.5V20c0 .6.4 1 1 1H19c1.1 0 2-.9 2-2v-6.7l.4.4c.8.6 2 .5 2.6-.3.6-.8.5-2-.3-2.7L13.4 3.6c-.4-.4-.9-.6-1.4-.6z"/>
+              </svg>
+              Home
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-target="games" onclick="switchTab('games')">
+              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="#FA5C5C">
+                <path d="M2.5 4.5A2 2 0 0 0 .5 6.5v2.8c0 1.3.8 2.5 2 2.9v6.3c0 2.2 1.8 4 4 4h11c2.2 0 4-1.8 4-4v-6.3c1.2-.4 2-1.6 2-2.9V6.5a2 2 0 0 0-2-2H2.5zm4.8 4.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm9.4 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM6 14.5h2v2H6v-2zm10 0h2v2h-2v-2z"/>
+              </svg>
+              Juegos <span style="color: #FA5C5C; font-weight: 800; margin-left: 2px;">Itch.io</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-target="apps" onclick="switchTab('apps')">
+              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/>
+              </svg>
+              Aplicaciones
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-target="videos" onclick="switchTab('videos')">
+              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="#FF0000">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Vídeos <span style="color: #FF0000; font-weight: 800; margin-left: 2px;">YouTube</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-target="about" onclick="switchTab('about')">
+              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+              </svg>
+              Sobre Mí
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-target="community" onclick="switchTab('community')">
+              <svg class="tab-icon-svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+              </svg>
+              Comunidad
+            </button>
+          </li>
         </ul>
       </nav>
 
-      <!-- Botones de Acción + Toggle Hamburguesa Móvil -->
+      <!-- Botones de Acción Estilo CrazyGames (Marcador, Campanita & Plátano) -->
       <div class="nav-actions">
-        <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="btn-pill btn-white">
-          Itch.io
-        </a>
-        <a href="https://github.com/paucg06" target="_blank" rel="noopener" class="btn-pill btn-outline">
-          GitHub
+        <button class="action-icon-btn" onclick="openSavedModal()" title="Mis proyectos guardados">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+
+        <button class="action-icon-btn" onclick="openNotifModal()" title="Novedades y Notificaciones">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="badge-notif-dot"></span>
+        </button>
+
+        <a href="https://buymeacoffee.com/eternodev" target="_blank" rel="noopener" class="btn-pill" style="background: rgba(251, 191, 36, 0.15); border: 1px solid #FBBF24; color: #FBBF24; font-weight: 800;">
+          🍌 Plátano
         </a>
         
         <button id="mobileMenuBtn" class="mobile-menu-toggle" aria-label="Abrir menú" onclick="toggleMobileMenu()">
@@ -1008,11 +1245,12 @@
         </button>
       </div>
 
-      <!-- Panel Desplegable Móvil que se abre justo debajo de la navbar -->
+      <!-- Panel Desplegable Móvil -->
       <div id="mobileNavDropdown" class="mobile-dropdown-panel">
-        <button class="mobile-dropdown-btn active" data-target="home" onclick="switchTabMobile('home')">Juegos</button>
+        <button class="mobile-dropdown-btn active" data-target="home" onclick="switchTabMobile('home')">Home</button>
+        <button class="mobile-dropdown-btn" data-target="games" onclick="switchTabMobile('games')">Juegos Itch.io</button>
         <button class="mobile-dropdown-btn" data-target="apps" onclick="switchTabMobile('apps')">Aplicaciones</button>
-        <button class="mobile-dropdown-btn" data-target="videos" onclick="switchTabMobile('videos')">Vídeos</button>
+        <button class="mobile-dropdown-btn" data-target="videos" onclick="switchTabMobile('videos')">Vídeos YouTube</button>
         <button class="mobile-dropdown-btn" data-target="about" onclick="switchTabMobile('about')">Sobre Mí</button>
         <button class="mobile-dropdown-btn" data-target="community" onclick="switchTabMobile('community')">Comunidad</button>
       </div>
@@ -1021,7 +1259,7 @@
 
   <main>
     <!-- ====================================================================
-         PESTANIA 1: INICIO & JUEGOS
+         PESTANIA 1: HOME (HUB PRINCIPAL)
          ==================================================================== -->
     <div id="tab-home" class="tab-view active-tab">
       
@@ -1037,125 +1275,133 @@
           </p>
 
           <div class="hero-cta-group">
-            <a href="#carousel-anchor" class="btn-pill btn-mint" style="padding: 13px 28px; font-size: 0.95rem;">
-              Explorar Juegos
-            </a>
+            <button onclick="switchTab('games')" class="btn-pill btn-mint" style="padding: 13px 28px; font-size: 0.95rem;">
+              🎮 Explorar Juegos
+            </button>
             <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 13px 28px; font-size: 0.95rem;">
-              Ver Aplicaciones
+              💻 Ver Aplicaciones
             </button>
           </div>
         </div>
       </section>
 
-      <!-- Carrusel de Juegos -->
-      <section id="carousel-anchor" class="carousel-section">
+      <!-- Resumen Home: Juegos en Itch.io -->
+      <section class="carousel-section" style="padding-top: 20px;">
         <div class="container">
-          <h2 class="section-title-center">Juegos publicados</h2>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <h2 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; display: flex; align-items: center; gap: 8px;">
+              <span>🎮</span> Videojuegos en <a href="https://eternodev.itch.io" target="_blank" rel="noopener" style="color: #FA5C5C; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="Abrir perfil en Itch.io">Itch.io <svg viewBox="0 0 24 24" width="20" height="20" fill="#FA5C5C"><path d="M2.5 4.5A2 2 0 0 0 .5 6.5v2.8c0 1.3.8 2.5 2 2.9v6.3c0 2.2 1.8 4 4 4h11c2.2 0 4-1.8 4-4v-6.3c1.2-.4 2-1.6 2-2.9V6.5a2 2 0 0 0-2-2H2.5zm4.8 4.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm9.4 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM6 14.5h2v2H6v-2zm10 0h2v2h-2v-2z"/></svg></a>
+            </h2>
+            <button onclick="switchTab('games')" class="btn-pill btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">
+              Ver todos los juegos &rarr;
+            </button>
+          </div>
+
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrackHome">
+              <!-- Cargado dinámicamente o fallback -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumen Home: Aplicaciones Destacadas -->
+      <section class="apps-section" style="padding: 30px 0;">
+        <div class="container">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <h2 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; display: flex; align-items: center; gap: 8px;">
+              <span>⚡</span> Software & Apps
+            </h2>
+            <button onclick="switchTab('apps')" class="btn-pill btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">
+              Ver todas las apps &rarr;
+            </button>
+          </div>
+
+          <div class="apps-grid-layout">
+            <article class="app-box-card" style="border-color: rgba(56, 189, 248, 0.35);">
+              <div class="app-top-header">
+                <h3 class="app-name-title" style="color: #38bdf8;">BrightLight</h3>
+                <span class="app-arrow-icon" style="color: #38bdf8;">&rarr;</span>
+              </div>
+              <div class="app-preview-media">
+                <img src="assets/preview_brightlight.svg" alt="BrightLight" class="app-preview-img" />
+              </div>
+              <div class="app-details-dark">
+                <ul class="app-bullets-container">
+                  <li class="app-bullet-point">100% Web Bluetooth API sin instalación previa</li>
+                  <li class="app-bullet-point">Control multi-luz sincronizado e individual</li>
+                </ul>
+                <div class="app-platforms-badge-row">
+                  <span class="badge-play-browser" style="background: rgba(2, 132, 199, 0.25); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Web App</span>
+                  <a href="https://paucg06.github.io/BrightLight-Bluetooth/" target="_blank" rel="noopener" class="app-action-link" style="color: #38bdf8;">Abrir Web &rarr;</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="app-box-card">
+              <div class="app-top-header">
+                <h3 class="app-name-title">Etern-Notes</h3>
+                <span class="app-arrow-icon">&rarr;</span>
+              </div>
+              <div class="app-preview-media">
+                <img src="assets/preview_etern_notes.svg" alt="Etern-Notes" class="app-preview-img" />
+              </div>
+              <div class="app-details-dark">
+                <ul class="app-bullets-container">
+                  <li class="app-bullet-point">Gestor Kanban y bloc de notas de alta velocidad</li>
+                  <li class="app-bullet-point">Multiplataforma para Windows, Linux y macOS</li>
+                </ul>
+                <div class="app-platforms-badge-row">
+                  <span style="color:#8E8E93; font-size: 0.78rem; font-weight: 800;">DESKTOP APP</span>
+                  <a href="https://github.com/paucg06/Etern-Notes/releases" target="_blank" rel="noopener" class="app-action-link">Descargar &rarr;</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumen Home: Vídeos de YouTube -->
+      <section class="carousel-section" style="padding: 30px 0 60px;">
+        <div class="container">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <h2 style="font-size: 1.85rem; font-weight: 900; color: #FFFFFF; display: flex; align-items: center; gap: 8px;">
+              <span>🎬</span> Vídeos de <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" style="color: #FF0000; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="Abrir canal oficial de YouTube">YouTube <svg viewBox="0 0 24 24" width="22" height="22" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+            </h2>
+            <button onclick="switchTab('videos')" class="btn-pill btn-outline" style="padding: 6px 16px; font-size: 0.85rem;">
+              Ver todos los vídeos &rarr;
+            </button>
+          </div>
+
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="videoTrackHome">
+              <!-- Cargado dinámicamente -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ====================================================================
+         PESTANIA 2: JUEGOS ITCH.IO
+         ==================================================================== -->
+    <div id="tab-games" class="tab-view">
+      <section class="carousel-section" style="padding-top: 50px;">
+        <div class="container">
+          <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
+            <h2 class="section-title-center" style="margin-bottom: 8px;">
+              Juegos en <a href="https://eternodev.itch.io" target="_blank" rel="noopener" style="color: #FA5C5C; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;" title="Ver todos los juegos en Itch.io">Itch.io <svg viewBox="0 0 24 24" width="28" height="28" fill="#FA5C5C"><path d="M2.5 4.5A2 2 0 0 0 .5 6.5v2.8c0 1.3.8 2.5 2 2.9v6.3c0 2.2 1.8 4 4 4h11c2.2 0 4-1.8 4-4v-6.3c1.2-.4 2-1.6 2-2.9V6.5a2 2 0 0 0-2-2H2.5zm4.8 4.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm9.4 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM6 14.5h2v2H6v-2zm10 0h2v2h-2v-2z"/></svg></a>
+            </h2>
+            <p style="color: #CCCCCE; font-size: 1.05rem;">Videojuegos indie creados en Unity. Jugables directamente en el navegador o descargables para PC.</p>
+          </div>
 
           <div class="carousel-viewport">
             <div class="carousel-track" id="carouselTrack">
-              
-              <!-- Juego 1: Oonga Bunga! -->
-              <a href="https://eternodev.itch.io/oonga-bunga" target="_blank" rel="noopener" class="game-card-item">
-                <div class="game-thumb-box">
-                  <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga!" class="game-thumb-img" />
-                </div>
-                <div class="game-content-box">
-                  <h3 class="game-item-title">Oonga Bunga!</h3>
-                  <p class="game-item-desc">Compite con tus amigos para convertirte en el líder de la tribu. ¡Solo habrá un ganador! ¿Serás tú?</p>
-                  
-                  <div class="itch-meta-container">
-                    <span class="itch-genre-label">Fighting</span>
-                    <div class="itch-platforms-row">
-                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Windows"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M675 785 c-44 -7 -119 -18 -167 -25 l-88 -12 0 -134 0 -134 185 0 186 0 -3 157 c-3 132 -5 158 -18 159 -8 1 -51 -4 -95 -11z"/><path d="M220 721 l-115 -16 -3 -112 -3 -113 136 0 135 0 0 130 c0 118 -2 130 -17 129 -10 -1 -70 -9 -133 -18z"/><path d="M100 325 c0 -132 -14 -117 125 -135 44 -6 95 -13 113 -16 l32 -5 0 136 0 135 -135 0 -135 0 0 -115z"/><path d="M420 302 l0 -139 178 -24 c97 -14 180 -22 185 -19 4 4 6 76 5 161 l-3 154 -182 3 -183 2 0 -138z"/></g></svg>
-                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Linux"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M350 837 c-170 -40 -225 -148 -213 -419 4 -112 3 -131 -21 -211 -14 -48 -26 -90 -26 -93 0 -3 21 -4 47 -2 l47 3 11 48 10 48 36 -31 c42 -34 79 -50 118 -50 28 0 184 70 213 97 15 13 17 12 23 -9 4 -13 14 -42 22 -65 l16 -43 97 0 98 0 -42 83 -43 82 -6 156 c-8 189 -27 264 -87 331 -22 25 -58 53 -81 62 -57 23 -152 28 -219 13z m199 -293 c19 -18 25 -36 28 -81 4 -67 -4 -85 -36 -76 -18 5 -21 10 -16 31 7 28 -10 78 -30 86 -19 7 -55 -22 -55 -45 0 -34 -44 -21 -48 14 -4 36 18 69 60 90 38 19 63 14 97 -19z m-265 -15 c28 -33 36 -89 12 -89 -7 0 -16 9 -19 20 -3 11 -13 23 -22 27 -27 10 -48 -25 -41 -69 7 -41 -6 -51 -24 -19 -23 43 -2 140 32 154 26 11 37 6 62 -24z m172 -153 c98 -44 109 -51 112 -69 5 -27 -15 -45 -100 -88 -109 -55 -139 -53 -218 12 -35 30 -60 58 -58 67 2 8 32 37 67 65 75 57 95 58 197 13z"/><path d="M223 315 c-20 -53 139 -84 255 -50 41 13 52 20 52 37 0 17 -4 19 -27 13 -64 -16 -199 -17 -237 -1 -32 13 -38 14 -43 1z"/></g></svg>
-                    </div>
-                  </div>
-                </div>
-              </a>
-
-              <!-- Juego 2: Verdades Incompletas -->
-              <a href="https://eternodev.itch.io/verdades-incompletas" target="_blank" rel="noopener" class="game-card-item">
-                <div class="game-thumb-box">
-                  <img src="https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png" alt="Verdades Incompletas" class="game-thumb-img" />
-                </div>
-                <div class="game-content-box">
-                  <h3 class="game-item-title">Verdades Incompletas</h3>
-                  <p class="game-item-desc">Estás muerto... Descubre quién te asesinó mientras tus tres amigos investigan tu hogar.</p>
-                  
-                  <div class="itch-meta-container">
-                    <span class="itch-genre-label">Visual Novel</span>
-                    <div class="itch-platforms-row">
-                      <span class="badge-play-browser">Play in browser</span>
-                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Windows"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M675 785 c-44 -7 -119 -18 -167 -25 l-88 -12 0 -134 0 -134 185 0 186 0 -3 157 c-3 132 -5 158 -18 159 -8 1 -51 -4 -95 -11z"/><path d="M220 721 l-115 -16 -3 -112 -3 -113 136 0 135 0 0 130 c0 118 -2 130 -17 129 -10 -1 -70 -9 -133 -18z"/><path d="M100 325 c0 -132 -14 -117 125 -135 44 -6 95 -13 113 -16 l32 -5 0 136 0 135 -135 0 -135 0 0 -115z"/><path d="M420 302 l0 -139 178 -24 c97 -14 180 -22 185 -19 4 4 6 76 5 161 l-3 154 -182 3 -183 2 0 -138z"/></g></svg>
-                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Linux"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M350 837 c-170 -40 -225 -148 -213 -419 4 -112 3 -131 -21 -211 -14 -48 -26 -90 -26 -93 0 -3 21 -4 47 -2 l47 3 11 48 10 48 36 -31 c42 -34 79 -50 118 -50 28 0 184 70 213 97 15 13 17 12 23 -9 4 -13 14 -42 22 -65 l16 -43 97 0 98 0 -42 83 -43 82 -6 156 c-8 189 -27 264 -87 331 -22 25 -58 53 -81 62 -57 23 -152 28 -219 13z m199 -293 c19 -18 25 -36 28 -81 4 -67 -4 -85 -36 -76 -18 5 -21 10 -16 31 7 28 -10 78 -30 86 -19 7 -55 -22 -55 -45 0 -34 -44 -21 -48 14 -4 36 18 69 60 90 38 19 63 14 97 -19z m-265 -15 c28 -33 36 -89 12 -89 -7 0 -16 9 -19 20 -3 11 -13 23 -22 27 -27 10 -48 -25 -41 -69 7 -41 -6 -51 -24 -19 -23 43 -2 140 32 154 26 11 37 6 62 -24z m172 -153 c98 -44 109 -51 112 -69 5 -27 -15 -45 -100 -88 -109 -55 -139 -53 -218 12 -35 30 -60 58 -58 67 2 8 32 37 67 65 75 57 95 58 197 13z"/><path d="M223 315 c-20 -53 139 -84 255 -50 41 13 52 20 52 37 0 17 -4 19 -27 13 -64 -16 -199 -17 -237 -1 -32 13 -38 14 -43 1z"/></g></svg>
-                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="macOS"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M556 829 c-58 -16 -129 -112 -112 -154 4 -11 12 -12 37 -5 61 18 114 89 107 142 -3 22 -6 24 -32 17z"/><path d="M265 641 c-78 -36 -115 -102 -115 -205 0 -88 31 -182 84 -253 56 -76 90 -92 149 -69 54 20 104 20 152 1 69 -29 134 18 191 137 l17 37 -41 40 c-47 46 -56 72 -50 142 4 39 12 57 38 84 29 30 32 36 19 51 -20 25 -89 54 -127 54 -18 0 -49 -7 -69 -15 -19 -8 -48 -15 -63 -15 -15 0 -44 7 -63 15 -47 19 -73 19 -122 -4z"/></g></svg>
-                    </div>
-                  </div>
-                </div>
-              </a>
-
-              <!-- Juego 3: Soap Dodger -->
-              <a href="https://eternodev.itch.io/soap-dodger" target="_blank" rel="noopener" class="game-card-item">
-                <div class="game-thumb-box">
-                  <img src="https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png" alt="Soap Dodger" class="game-thumb-img" />
-                </div>
-                <div class="game-content-box">
-                  <h3 class="game-item-title">Soap Dodger</h3>
-                  <p class="game-item-desc">Agudiza tus reflejos en este peliagudo Bullet Hell. ¡No pierdas bocanadas de aire en tan punzante cámara!</p>
-                  
-                  <div class="itch-meta-container">
-                    <span class="itch-genre-label">Action / Bullet Hell</span>
-                    <div class="itch-platforms-row">
-                      <span class="badge-play-browser">Play in browser</span>
-                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Windows"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M675 785 c-44 -7 -119 -18 -167 -25 l-88 -12 0 -134 0 -134 185 0 186 0 -3 157 c-3 132 -5 158 -18 159 -8 1 -51 -4 -95 -11z"/><path d="M220 721 l-115 -16 -3 -112 -3 -113 136 0 135 0 0 130 c0 118 -2 130 -17 129 -10 -1 -70 -9 -133 -18z"/><path d="M100 325 c0 -132 -14 -117 125 -135 44 -6 95 -13 113 -16 l32 -5 0 136 0 135 -135 0 -135 0 0 -115z"/><path d="M420 302 l0 -139 178 -24 c97 -14 180 -22 185 -19 4 4 6 76 5 161 l-3 154 -182 3 -183 2 0 -138z"/></g></svg>
-                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Linux"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M350 837 c-170 -40 -225 -148 -213 -419 4 -112 3 -131 -21 -211 -14 -48 -26 -90 -26 -93 0 -3 21 -4 47 -2 l47 3 11 48 10 48 36 -31 c42 -34 79 -50 118 -50 28 0 184 70 213 97 15 13 17 12 23 -9 4 -13 14 -42 22 -65 l16 -43 97 0 98 0 -42 83 -43 82 -6 156 c-8 189 -27 264 -87 331 -22 25 -58 53 -81 62 -57 23 -152 28 -219 13z m199 -293 c19 -18 25 -36 28 -81 4 -67 -4 -85 -36 -76 -18 5 -21 10 -16 31 7 28 -10 78 -30 86 -19 7 -55 -22 -55 -45 0 -34 -44 -21 -48 14 -4 36 18 69 60 90 38 19 63 14 97 -19z m-265 -15 c28 -33 36 -89 12 -89 -7 0 -16 9 -19 20 -3 11 -13 23 -22 27 -27 10 -48 -25 -41 -69 7 -41 -6 -51 -24 -19 -23 43 -2 140 32 154 26 11 37 6 62 -24z m172 -153 c98 -44 109 -51 112 -69 5 -27 -15 -45 -100 -88 -109 -55 -139 -53 -218 12 -35 30 -60 58 -58 67 2 8 32 37 67 65 75 57 95 58 197 13z"/><path d="M223 315 c-20 -53 139 -84 255 -50 41 13 52 20 52 37 0 17 -4 19 -27 13 -64 -16 -199 -17 -237 -1 -32 13 -38 14 -43 1z"/></g></svg>
-                      <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="macOS"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M556 829 c-58 -16 -129 -112 -112 -154 4 -11 12 -12 37 -5 61 18 114 89 107 142 -3 22 -6 24 -32 17z"/><path d="M265 641 c-78 -36 -115 -102 -115 -205 0 -88 31 -182 84 -253 56 -76 90 -92 149 -69 54 20 104 20 152 1 69 -29 134 18 191 137 l17 37 -41 40 c-47 46 -56 72 -50 142 4 39 12 57 38 84 29 30 32 36 19 51 -20 25 -89 54 -127 54 -18 0 -49 -7 -69 -15 -19 -8 -48 -15 -63 -15 -15 0 -44 7 -63 15 -47 19 -73 19 -122 -4z"/></g></svg>
-                    </div>
-                  </div>
-                </div>
-              </a>
-
-              <!-- Juego 4: CastleCat RPG -->
-              <a href="https://eternodev.itch.io/castlecat-rpg" target="_blank" rel="noopener" class="game-card-item">
-                <div class="game-thumb-box">
-                  <img src="https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png" alt="CastleCat RPG" class="game-thumb-img" />
-                </div>
-                <div class="game-content-box">
-                  <h3 class="game-item-title">CastleCat RPG</h3>
-                  <p class="game-item-desc">¡Naciste gato, pero morirás como leyenda!</p>
-                  
-                  <div class="itch-meta-container">
-                    <span class="itch-genre-label">Adventure</span>
-                    <div class="itch-platforms-row">
-                      <span class="badge-play-browser">Play in browser</span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-
-              <!-- Juego 5: Space Blitz -->
-              <a href="https://eternodev.itch.io/space-blitz" target="_blank" rel="noopener" class="game-card-item">
-                <div class="game-thumb-box">
-                  <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" />
-                </div>
-                <div class="game-content-box">
-                  <h3 class="game-item-title">Space Blitz</h3>
-                  <p class="game-item-desc">Un trepidante shooter arcade donde tu nave evoluciona con mejoras visuales dinámicas.</p>
-                  
-                  <div class="itch-meta-container">
-                    <span class="itch-genre-label">Shooter</span>
-                    <div class="itch-platforms-row">
-                      <span class="badge-play-browser">Play in browser</span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-
+              <!-- Cargado dinámicamente con games.json -->
             </div>
           </div>
 
-          <!-- Controles del Carrusel con Píldora Activa Blanca -->
           <div class="carousel-nav-bar">
             <button id="carouselPrev" class="carousel-arrow" aria-label="Anterior">
               <svg width="16" height="16" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
@@ -1167,76 +1413,40 @@
           </div>
         </div>
       </section>
-
-      <!-- Banner Blanco de Alto Contraste -->
-      <section class="banner-white-section">
-        <div class="container banner-white-grid">
-          <div>
-            <h2 class="banner-white-title">Creacion de videojuegos <span>realmente intuitiva</span></h2>
-            <p class="banner-white-desc">
-              Soy un desarrollador de videojuegos indie que lucha contra los errores de Unity, crea herramientas de software libre y suenia con pollos legendarios. 
-              Actualmente compagino la creacion de proyectos con mis estudios universitarios y la creacion de contenido digital.
-            </p>
-
-            <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="btn-pill btn-white" style="border: 1px solid #CBD5E1; color: #0F172A; font-weight: 800;">
-              Ver Canal de YouTube &rarr;
-            </a>
-          </div>
-
-          <div class="banner-stats-box">
-            <div class="banner-stat-item">
-              <span class="stat-title">Motor Principal</span>
-              <span class="stat-content">Unity &bull; C#</span>
-            </div>
-            <div class="banner-stat-item">
-              <span class="stat-title">Meta YouTube</span>
-              <span class="stat-content">7.000 Subs (Apertura Discord)</span>
-            </div>
-            <div class="banner-stat-item">
-              <span class="stat-title">Filosofia</span>
-              <span class="stat-content">Software Independiente</span>
-            </div>
-            <div class="banner-stat-item">
-              <span class="stat-title">Estudios</span>
-              <span class="stat-content">Carrera Universitaria</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
     </div>
 
     <!-- ====================================================================
-         PESTANIA 2: APLICACIONES
+         PESTANIA 3: APLICACIONES (WEB & ESCRITORIO)
          ==================================================================== -->
     <div id="tab-apps" class="tab-view">
       <section class="apps-section" style="padding-top: 50px;">
         <div class="container">
           <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
-            <h2 class="section-title-center" style="margin-bottom: 8px;">Aplicaciones creadas por EternoDev</h2>
-            <p style="color: #CCCCCE; font-size: 1.05rem;">Software nativo y herramientas web diseñadas para potenciar tu flujo de trabajo y productividad.</p>
+            <h2 class="section-title-center" style="margin-bottom: 8px;">Aplicaciones & Software</h2>
+            <p style="color: #CCCCCE; font-size: 1.05rem;">Herramientas web instantáneas y software de escritorio para creadores y usuarios.</p>
+          </div>
+
+          <!-- Subcategoría 1: Aplicaciones Web -->
+          <div class="app-subcat-header">
+            <h3 class="app-subcat-title">🌐 Aplicaciones Web</h3>
+            <span class="app-subcat-desc">• Sin instalación previa, ejecutables directamente desde el navegador</span>
           </div>
 
           <div class="apps-grid-layout">
-            
-            <!-- App 1: BrightLight (Web App Azul) -->
             <article class="app-box-card" style="border-color: rgba(56, 189, 248, 0.35);">
               <div class="app-top-header">
                 <h3 class="app-name-title" style="color: #38bdf8;">BrightLight</h3>
                 <span class="app-arrow-icon" style="color: #38bdf8;">&rarr;</span>
               </div>
-
               <div class="app-preview-media">
                 <img src="assets/preview_brightlight.svg" alt="BrightLight" class="app-preview-img" />
               </div>
-
               <div class="app-details-dark">
                 <ul class="app-bullets-container">
-                  <li class="app-bullet-point">100% Web Bluetooth API sin instalación previa</li>
+                  <li class="app-bullet-point">100% Web Bluetooth API sin instalar nada en tu PC</li>
                   <li class="app-bullet-point">Control multi-luz sincronizado e individual</li>
                   <li class="app-bullet-point">Soporte para bombillas Triones / HappyLighting</li>
                 </ul>
-
                 <div class="app-platforms-badge-row">
                   <div class="itch-platforms-row">
                     <span class="badge-play-browser" style="background: rgba(2, 132, 199, 0.25); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Web App</span>
@@ -1245,25 +1455,30 @@
                 </div>
               </div>
             </article>
+          </div>
 
-            <!-- App 2: Etern-Notes -->
+          <!-- Subcategoría 2: Software de Escritorio -->
+          <div class="app-subcat-header" style="margin-top: 50px;">
+            <h3 class="app-subcat-title">💻 Software de Escritorio</h3>
+            <span class="app-subcat-desc">• Programas descargables y utilidades nativas para PC</span>
+          </div>
+
+          <div class="apps-grid-layout">
+            <!-- App 1: Etern-Notes -->
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Notes</h3>
                 <span class="app-arrow-icon">&rarr;</span>
               </div>
-
               <div class="app-preview-media">
                 <img src="assets/preview_etern_notes.svg" alt="Etern-Notes" class="app-preview-img" />
               </div>
-
               <div class="app-details-dark">
                 <ul class="app-bullets-container">
                   <li class="app-bullet-point">Gestor Kanban y bloc de notas de alta velocidad</li>
                   <li class="app-bullet-point">Multiplataforma para Windows, Linux y macOS</li>
                   <li class="app-bullet-point">Almacenamiento local seguro y privado</li>
                 </ul>
-
                 <div class="app-platforms-badge-row">
                   <div class="itch-platforms-row">
                     <svg class="itch-platform-svg" viewBox="0 0 90 90" width="18" height="18" preserveAspectRatio="xMidYMid meet" title="Windows"><g transform="translate(0,90) scale(0.1,-0.1)" fill="currentColor"><path d="M675 785 c-44 -7 -119 -18 -167 -25 l-88 -12 0 -134 0 -134 185 0 186 0 -3 157 c-3 132 -5 158 -18 159 -8 1 -51 -4 -95 -11z"/><path d="M220 721 l-115 -16 -3 -112 -3 -113 136 0 135 0 0 130 c0 118 -2 130 -17 129 -10 -1 -70 -9 -133 -18z"/><path d="M100 325 c0 -132 -14 -117 125 -135 44 -6 95 -13 113 -16 l32 -5 0 136 0 135 -135 0 -135 0 0 -115z"/><path d="M420 302 l0 -139 178 -24 c97 -14 180 -22 185 -19 4 4 6 76 5 161 l-3 154 -182 3 -183 2 0 -138z"/></g></svg>
@@ -1275,24 +1490,21 @@
               </div>
             </article>
 
-            <!-- App 3: Etern-Synth -->
+            <!-- App 2: Etern-Synth -->
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Synth</h3>
                 <span class="app-arrow-icon">&rarr;</span>
               </div>
-
               <div class="app-preview-media">
                 <img src="assets/preview_etern_synth.svg" alt="Etern-Synth" class="app-preview-img" />
               </div>
-
               <div class="app-details-dark">
                 <ul class="app-bullets-container">
                   <li class="app-bullet-point">Generador de efectos de sonido retro 8-bit</li>
                   <li class="app-bullet-point">Modulación de parámetros y ondas sonoras</li>
                   <li class="app-bullet-point">Exportación directa a WAV y MP3</li>
                 </ul>
-
                 <div class="app-platforms-badge-row">
                   <span style="color:#8E8E93;">AUDIO &bull; SFX</span>
                   <span style="color:#8E8E93;">En Desarrollo</span>
@@ -1300,140 +1512,48 @@
               </div>
             </article>
 
-            <!-- App 4: Etern-Audio -->
+            <!-- App 3: Etern-Audio -->
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Audio</h3>
                 <span class="app-arrow-icon">&rarr;</span>
               </div>
-
               <div class="app-preview-media">
                 <img src="assets/preview_etern_audio.svg" alt="Etern-Audio" class="app-preview-img" />
               </div>
-
               <div class="app-details-dark">
                 <ul class="app-bullets-container">
                   <li class="app-bullet-point">Buscador y reproductor rápido de audio</li>
                   <li class="app-bullet-point">Atajos globales para streamers y edición</li>
                   <li class="app-bullet-point">Optimizada para creadores de contenido</li>
                 </ul>
-
                 <div class="app-platforms-badge-row">
                   <span style="color:#8E8E93;">DESKTOP APP</span>
                   <span style="color:#8E8E93;">Pronto</span>
                 </div>
               </div>
             </article>
-
           </div>
         </div>
       </section>
     </div>
 
     <!-- ====================================================================
-         PESTANIA 3: VÍDEOS
+         PESTANIA 4: VÍDEOS DE YOUTUBE
          ==================================================================== -->
     <div id="tab-videos" class="tab-view">
       <section class="carousel-section" style="padding-top: 50px;">
         <div class="container">
           <div style="text-align: center; max-width: 800px; margin: 0 auto 30px;">
-            <h2 class="section-title-center" style="margin-bottom: 8px;">Vídeos de YouTube</h2>
+            <h2 class="section-title-center" style="margin-bottom: 8px;">
+              Vídeos de <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" style="color: #FF0000; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;" title="Abrir canal oficial de YouTube">YouTube <svg viewBox="0 0 24 24" width="28" height="28" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+            </h2>
             <p style="color: #CCCCCE; font-size: 1.05rem;">Devlogs de desarrollo de videojuegos, retos de programación y contenido indie de @eternodev.</p>
           </div>
 
           <div class="carousel-viewport">
             <div class="carousel-track" id="videoTrack">
-              
-              <!-- Video 1: Roguelike DevLog 1 -->
-              <a href="https://youtu.be/F1-R5hljGLM" target="_blank" rel="noopener" class="video-card-item">
-                <div class="video-thumb-box">
-                  <img src="https://i.ytimg.com/vi/F1-R5hljGLM/maxresdefault.jpg" alt="¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1" class="video-thumb-img" />
-                  <div class="video-play-overlay">
-                    <div class="video-play-btn">
-                      <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="video-content-box">
-                  <h3 class="video-item-title">¡Creando Mi Propio ROGUELIKE Desde CERO! - DevBlog 1</h3>
-                  <p class="video-item-desc">Creando un videojuego roguelike con zombies y pollos en Unity desde el primer día.</p>
-                  <div class="video-meta-row">
-                    <span class="video-author-badge">EternoDev</span>
-                    <div class="video-stats-group">
-                      <span class="video-stat-item" title="Visualizaciones">
-                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        <span>180</span>
-                      </span>
-                      <span class="video-stat-item" title="Me gusta">
-                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                        <span>16</span>
-                      </span>
-                    </div>
-                    <span class="video-cta-text">Ver Vídeo &rarr;</span>
-                  </div>
-                </div>
-              </a>
-
-              <!-- Video 2: VTuber en 48 Horas -->
-              <a href="https://www.youtube.com/watch?v=bRbhRWQvqs8" target="_blank" rel="noopener" class="video-card-item">
-                <div class="video-thumb-box">
-                  <img src="https://i.ytimg.com/vi/bRbhRWQvqs8/maxresdefault.jpg" alt="Hice un VTUBER en 48 HORAS" class="video-thumb-img" />
-                  <div class="video-play-overlay">
-                    <div class="video-play-btn">
-                      <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="video-content-box">
-                  <h3 class="video-item-title">Hice un VTUBER en 48 HORAS</h3>
-                  <p class="video-item-desc">Dibujando y programando un modelo de Vtuber en tiempo récord con Krita y Unity.</p>
-                  <div class="video-meta-row">
-                    <span class="video-author-badge">EternoDev</span>
-                    <div class="video-stats-group">
-                      <span class="video-stat-item" title="Visualizaciones">
-                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        <span>144</span>
-                      </span>
-                      <span class="video-stat-item" title="Me gusta">
-                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                        <span>14</span>
-                      </span>
-                    </div>
-                    <span class="video-cta-text">Ver Vídeo &rarr;</span>
-                  </div>
-                </div>
-              </a>
-
-              <!-- Video 3: GameJam -->
-              <a href="https://www.youtube.com/watch?v=DFR5UtAuHTw" target="_blank" rel="noopener" class="video-card-item">
-                <div class="video-thumb-box">
-                  <img src="https://i.ytimg.com/vi/DFR5UtAuHTw/maxresdefault.jpg" alt="Sobreviví a mi PRIMERA GameJam" class="video-thumb-img" />
-                  <div class="video-play-overlay">
-                    <div class="video-play-btn">
-                      <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    </div>
-                  </div>
-                </div>
-                <div class="video-content-box">
-                  <h3 class="video-item-title">Sobreviví a mi PRIMERA GameJam</h3>
-                  <p class="video-item-desc">Desarrollando un videojuego completo en 48 horas sin dormir con 6 desarrolladores.</p>
-                  <div class="video-meta-row">
-                    <span class="video-author-badge">EternoDev</span>
-                    <div class="video-stats-group">
-                      <span class="video-stat-item" title="Visualizaciones">
-                        <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                        <span>151</span>
-                      </span>
-                      <span class="video-stat-item" title="Me gusta">
-                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                        <span>16</span>
-                      </span>
-                    </div>
-                    <span class="video-cta-text">Ver Vídeo &rarr;</span>
-                  </div>
-                </div>
-              </a>
-
+              <!-- Cargado dinámicamente con videos.json -->
             </div>
           </div>
 
@@ -1583,6 +1703,60 @@
       </div>
     </div>
   </footer>
+
+  <!-- Modal: Proyectos Guardados -->
+  <div id="savedModal" class="modal-backdrop" onclick="if(event.target === this) closeSavedModal()">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          Proyectos Guardados
+        </h3>
+        <button class="modal-close-btn" onclick="closeSavedModal()" aria-label="Cerrar">&times;</button>
+      </div>
+      <div class="modal-body" id="savedModalContent">
+        <p style="text-align:center; padding: 20px 0; color: #8E8E93;">No tienes proyectos guardados aún. Explora los juegos o herramientas y márcalos como favoritos para acceder a ellos rápidamente.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Novedades & Notificaciones -->
+  <div id="notifModal" class="modal-backdrop" onclick="if(event.target === this) closeNotifModal()">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Novedades & Actualizaciones
+        </h3>
+        <button class="modal-close-btn" onclick="closeNotifModal()" aria-label="Cerrar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <a href="https://eternodev.itch.io" target="_blank" rel="noopener" class="notif-item">
+          <span class="notif-badge badge-itch">Itch.io</span>
+          <div>
+            <strong style="color: #FFFFFF; display: block; font-size: 0.95rem; margin-bottom: 2px;">Nuevos videojuegos jugables</strong>
+            <span style="font-size: 0.85rem; color: #CCCCCE;">Descubre y juega a Oonga Bunga, Soap Dodger y Verdades Incompletas en Itch.io.</span>
+          </div>
+        </a>
+
+        <a href="https://paucg06.github.io/BrightLight-Bluetooth/" target="_blank" rel="noopener" class="notif-item">
+          <span class="notif-badge badge-app">Web App</span>
+          <div>
+            <strong style="color: #FFFFFF; display: block; font-size: 0.95rem; margin-bottom: 2px;">BrightLight Web Bluetooth</strong>
+            <span style="font-size: 0.85rem; color: #CCCCCE;">Controla tus luces LED Bluetooth directamente desde el navegador web.</span>
+          </div>
+        </a>
+
+        <a href="https://www.youtube.com/@eternodev" target="_blank" rel="noopener" class="notif-item">
+          <span class="notif-badge badge-yt">YouTube</span>
+          <div>
+            <strong style="color: #FFFFFF; display: block; font-size: 0.95rem; margin-bottom: 2px;">Nuevo Devlog en YouTube</strong>
+            <span style="font-size: 0.85rem; color: #CCCCCE;">Echa un vistazo a los últimos retos y progreso de desarrollo indie en el canal.</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

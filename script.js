@@ -28,6 +28,32 @@ document.addEventListener('DOMContentLoaded', () => {
   loadDynamicData();
 });
 
+// Modales interactivos (Guardados & Notificaciones)
+function openSavedModal() {
+  const modal = document.getElementById('savedModal');
+  if (modal) modal.classList.add('open');
+}
+
+function closeSavedModal() {
+  const modal = document.getElementById('savedModal');
+  if (modal) modal.classList.remove('open');
+}
+
+function openNotifModal() {
+  const modal = document.getElementById('notifModal');
+  if (modal) modal.classList.add('open');
+}
+
+function closeNotifModal() {
+  const modal = document.getElementById('notifModal');
+  if (modal) modal.classList.remove('open');
+}
+
+window.openSavedModal = openSavedModal;
+window.closeSavedModal = closeSavedModal;
+window.openNotifModal = openNotifModal;
+window.closeNotifModal = closeNotifModal;
+
 // Toggle del Menú Hamburguesa Móvil
 function toggleMobileMenu() {
   const dropdown = document.getElementById('mobileNavDropdown');
@@ -54,8 +80,13 @@ function switchTabMobile(tabId) {
 
 window.switchTabMobile = switchTabMobile;
 
-// Tab Switcher con URLs Limpias (/apps, /videos, /about, /community)
+// Tab Switcher con URLs Limpias (/games, /apps, /videos, /about, /community)
 function switchTab(tabId, updateUrl = true) {
+  const validTabs = ['home', 'games', 'apps', 'videos', 'about', 'community'];
+  if (!validTabs.includes(tabId)) {
+    tabId = 'home';
+  }
+
   const tabs = document.querySelectorAll('.tab-view');
   const desktopButtons = document.querySelectorAll('.nav-tab-btn');
   const mobileButtons = document.querySelectorAll('.mobile-dropdown-btn');
@@ -83,9 +114,10 @@ function switchTab(tabId, updateUrl = true) {
     }
   }
 
-  if (tabId === 'home') {
+  if (tabId === 'home' || tabId === 'games') {
     setTimeout(initGamesCarousel, 50);
-  } else if (tabId === 'videos') {
+  }
+  if (tabId === 'home' || tabId === 'videos') {
     setTimeout(initVideosCarousel, 50);
   }
 }
@@ -95,7 +127,7 @@ window.switchTab = switchTab;
 // Manejo del botón atrás/adelante del navegador
 window.addEventListener('popstate', (e) => {
   const path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
-  if (['home', 'apps', 'videos', 'about', 'community'].includes(path)) {
+  if (['home', 'games', 'apps', 'videos', 'about', 'community'].includes(path)) {
     switchTab(path, false);
   } else {
     switchTab('home', false);
@@ -108,8 +140,8 @@ function initTabNavigation() {
   if (redirectedPath) {
     sessionStorage.removeItem('spa_redirect');
     const clean = redirectedPath.toLowerCase();
-    if (['home', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(clean)) {
-      if (clean === 'juegos') switchTab('home');
+    if (['home', 'games', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(clean)) {
+      if (clean === 'juegos') switchTab('games');
       else if (clean === 'sobre-mi') switchTab('about');
       else switchTab(clean);
       return;
@@ -120,8 +152,8 @@ function initTabNavigation() {
   const hash = window.location.hash.replace('#', '').toLowerCase();
   const current = path || hash;
 
-  if (['home', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(current)) {
-    if (current === 'juegos') switchTab('home');
+  if (['home', 'games', 'apps', 'videos', 'about', 'community', 'juegos', 'sobre-mi'].includes(current)) {
+    if (current === 'juegos') switchTab('games');
     else if (current === 'sobre-mi') switchTab('about');
     else switchTab(current);
   }
@@ -133,7 +165,7 @@ function getCardsPerView() {
   return 3;
 }
 
-// 1. Carrusel de Juegos
+// 1. Carrusel de Juegos (tab-games)
 function initGamesCarousel() {
   const track = document.getElementById('carouselTrack');
   const prevBtn = document.getElementById('carouselPrev');
@@ -202,7 +234,7 @@ function initGamesCarousel() {
   updateCarousel();
 }
 
-// 2. Carrusel de Vídeos de YouTube
+// 2. Carrusel de Vídeos de YouTube (tab-videos)
 function initVideosCarousel() {
   const track = document.getElementById('videoTrack');
   const prevBtn = document.getElementById('videoPrev');
@@ -271,6 +303,97 @@ function initVideosCarousel() {
   updateVideoCarousel();
 }
 
+function createGameCard(g) {
+  const slug = (g.url || '').split('/').filter(Boolean).pop();
+  const known = KNOWN_GAME_METADATA[slug] || {};
+
+  const genre = g.genre || known.genre || 'Game';
+  const isBrowser = g.p_browser || (g.type === 'html') || known.p_browser;
+  const isWin = g.p_windows || known.p_windows;
+  const isLin = g.p_linux || known.p_linux;
+  const isMac = g.p_osx || known.p_osx;
+
+  let platformsHtml = '';
+  if (isBrowser) platformsHtml += `<span class="badge-play-browser">Play in browser</span>`;
+  if (isWin) platformsHtml += PLATFORM_SVGS.windows;
+  if (isLin) platformsHtml += PLATFORM_SVGS.linux;
+  if (isMac) platformsHtml += PLATFORM_SVGS.macos;
+
+  const card = document.createElement('a');
+  card.href = g.url;
+  card.target = '_blank';
+  card.rel = 'noopener';
+  card.className = 'game-card-item';
+  card.innerHTML = `
+    <div class="game-thumb-box">
+      <img src="${g.cover_url}" alt="${g.title}" class="game-thumb-img" loading="lazy" />
+    </div>
+    <div class="game-content-box">
+      <h3 class="game-item-title">${g.title}</h3>
+      <p class="game-item-desc">${g.desc || g.short_text || ''}</p>
+      <div class="itch-meta-container">
+        <span class="itch-genre-label">${genre}</span>
+        <div class="itch-platforms-row">
+          ${platformsHtml}
+        </div>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function createVideoCard(v) {
+  const card = document.createElement('a');
+  card.href = v.url;
+  card.target = '_blank';
+  card.rel = 'noopener';
+  card.className = 'video-card-item';
+
+  let statsHtml = '';
+  if (v.views || v.likes) {
+    statsHtml = `
+      <div class="video-stats-group">
+        ${v.views ? `
+          <span class="video-stat-item" title="Visualizaciones">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            <span>${v.views}</span>
+          </span>` : ''}
+        ${v.likes ? `
+          <span class="video-stat-item" title="Me gusta">
+            <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+            <span>${v.likes}</span>
+          </span>` : ''}
+        ${v.comments ? `
+          <span class="video-stat-item" title="Comentarios">
+            <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+            <span>${v.comments}</span>
+          </span>` : ''}
+      </div>
+    `;
+  }
+
+  card.innerHTML = `
+    <div class="video-thumb-box">
+      <img src="${v.cover_url}" alt="${v.title}" class="video-thumb-img" loading="lazy" />
+      <div class="video-play-overlay">
+        <div class="video-play-btn">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="video-content-box">
+      <h3 class="video-item-title">${v.title}</h3>
+      <p class="video-item-desc">${v.desc || ''}</p>
+      <div class="video-meta-row">
+        <span class="video-author-badge">EternoDev</span>
+        ${statsHtml}
+        <span class="video-cta-text">Ver Vídeo &rarr;</span>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
 // 3. Cargar datos sincronizados por GitHub Actions si existen
 async function loadDynamicData() {
   try {
@@ -280,60 +403,21 @@ async function loadDynamicData() {
       const videos = await vRes.json();
       if (Array.isArray(videos) && videos.length > 0) {
         const vTrack = document.getElementById('videoTrack');
+        const vTrackHome = document.getElementById('videoTrackHome');
+
         if (vTrack) {
           vTrack.innerHTML = '';
           videos.forEach(v => {
-            const card = document.createElement('a');
-            card.href = v.url;
-            card.target = '_blank';
-            card.rel = 'noopener';
-            card.className = 'video-card-item';
-
-            let statsHtml = '';
-            if (v.views || v.likes) {
-              statsHtml = `
-                <div class="video-stats-group">
-                  ${v.views ? `
-                    <span class="video-stat-item" title="Visualizaciones">
-                      <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                      <span>${v.views}</span>
-                    </span>` : ''}
-                  ${v.likes ? `
-                    <span class="video-stat-item" title="Me gusta">
-                      <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                      <span>${v.likes}</span>
-                    </span>` : ''}
-                  ${v.comments ? `
-                    <span class="video-stat-item" title="Comentarios">
-                      <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
-                      <span>${v.comments}</span>
-                    </span>` : ''}
-                </div>
-              `;
-            }
-
-            card.innerHTML = `
-              <div class="video-thumb-box">
-                <img src="${v.cover_url}" alt="${v.title}" class="video-thumb-img" loading="lazy" />
-                <div class="video-play-overlay">
-                  <div class="video-play-btn">
-                    <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  </div>
-                </div>
-              </div>
-              <div class="video-content-box">
-                <h3 class="video-item-title">${v.title}</h3>
-                <p class="video-item-desc">${v.desc || ''}</p>
-                <div class="video-meta-row">
-                  <span class="video-author-badge">EternoDev</span>
-                  ${statsHtml}
-                  <span class="video-cta-text">Ver Vídeo &rarr;</span>
-                </div>
-              </div>
-            `;
-            vTrack.appendChild(card);
+            vTrack.appendChild(createVideoCard(v));
           });
           initVideosCarousel();
+        }
+
+        if (vTrackHome) {
+          vTrackHome.innerHTML = '';
+          videos.slice(0, 3).forEach(v => {
+            vTrackHome.appendChild(createVideoCard(v));
+          });
         }
       }
     }
@@ -344,47 +428,21 @@ async function loadDynamicData() {
       const games = await gRes.json();
       if (Array.isArray(games) && games.length > 0) {
         const gTrack = document.getElementById('carouselTrack');
+        const gTrackHome = document.getElementById('carouselTrackHome');
+
         if (gTrack) {
           gTrack.innerHTML = '';
           games.forEach(g => {
-            const slug = (g.url || '').split('/').filter(Boolean).pop();
-            const known = KNOWN_GAME_METADATA[slug] || {};
-
-            const genre = g.genre || known.genre || 'Game';
-            const isBrowser = g.p_browser || (g.type === 'html') || known.p_browser;
-            const isWin = g.p_windows || known.p_windows;
-            const isLin = g.p_linux || known.p_linux;
-            const isMac = g.p_osx || known.p_osx;
-
-            let platformsHtml = '';
-            if (isBrowser) platformsHtml += `<span class="badge-play-browser">Play in browser</span>`;
-            if (isWin) platformsHtml += PLATFORM_SVGS.windows;
-            if (isLin) platformsHtml += PLATFORM_SVGS.linux;
-            if (isMac) platformsHtml += PLATFORM_SVGS.macos;
-
-            const card = document.createElement('a');
-            card.href = g.url;
-            card.target = '_blank';
-            card.rel = 'noopener';
-            card.className = 'game-card-item';
-            card.innerHTML = `
-              <div class="game-thumb-box">
-                <img src="${g.cover_url}" alt="${g.title}" class="game-thumb-img" loading="lazy" />
-              </div>
-              <div class="game-content-box">
-                <h3 class="game-item-title">${g.title}</h3>
-                <p class="game-item-desc">${g.desc || g.short_text || ''}</p>
-                <div class="itch-meta-container">
-                  <span class="itch-genre-label">${genre}</span>
-                  <div class="itch-platforms-row">
-                    ${platformsHtml}
-                  </div>
-                </div>
-              </div>
-            `;
-            gTrack.appendChild(card);
+            gTrack.appendChild(createGameCard(g));
           });
           initGamesCarousel();
+        }
+
+        if (gTrackHome) {
+          gTrackHome.innerHTML = '';
+          games.slice(0, 3).forEach(g => {
+            gTrackHome.appendChild(createGameCard(g));
+          });
         }
       }
     }
