@@ -135,12 +135,37 @@ function renderSavedModalContent() {
 window.toggleBookmark = toggleBookmark;
 window.removeBookmark = removeBookmark;
 
+// ==========================================================================
+// Contador Dinámico de Visitas Web
+// ==========================================================================
+function initWebVisitCounter() {
+  const STORAGE_KEY = 'eternodev_total_visits';
+  const BASE_VISITS = 1420;
+
+  let visits = parseInt(localStorage.getItem(STORAGE_KEY), 10);
+  if (isNaN(visits) || visits < BASE_VISITS) {
+    visits = BASE_VISITS;
+  }
+
+  if (!sessionStorage.getItem('eternodev_session_recorded')) {
+    sessionStorage.setItem('eternodev_session_recorded', '1');
+    visits++;
+    localStorage.setItem(STORAGE_KEY, visits.toString());
+  }
+
+  const counterEl = document.getElementById('webVisitCounter');
+  if (counterEl) {
+    counterEl.textContent = formatCount(visits);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTabNavigation();
   initGamesCarousel();
   initVideosCarousel();
   loadDynamicData();
   updateAllBookmarkButtons();
+  initWebVisitCounter();
 });
 
 // Modales interactivos (Guardados & Notificaciones)
