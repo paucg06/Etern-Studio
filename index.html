@@ -501,6 +501,7 @@
       width: 100%;
       aspect-ratio: 315 / 250;
       background: #16161E;
+      position: relative;
       overflow: hidden;
     }
 
@@ -786,13 +787,16 @@
     .app-top-header {
       padding: 18px 20px 14px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
+      gap: 12px;
     }
 
     .app-header-title-wrap {
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;
     }
 
     .app-icon-thumb {
@@ -807,6 +811,76 @@
       font-size: 1.25rem;
       font-weight: 800;
       color: #FFFFFF;
+    }
+
+    /* Botones de Marcador / Proyectos Guardados */
+    .btn-bookmark-action {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #8E8E93;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-bookmark-action:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.28);
+      transform: scale(1.08);
+    }
+
+    .btn-bookmark-action.is-bookmarked {
+      background: rgba(253, 211, 29, 0.12);
+      border-color: #FDD31D;
+      color: #FDD31D;
+    }
+
+    .btn-bookmark-action.is-bookmarked svg {
+      fill: #FDD31D;
+    }
+
+    .game-bookmark-overlay-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      background: rgba(22, 22, 30, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      color: #CCCCCE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      z-index: 10;
+    }
+
+    .game-bookmark-overlay-btn:hover {
+      background: rgba(42, 42, 53, 0.95);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: scale(1.1);
+    }
+
+    .game-bookmark-overlay-btn.is-bookmarked {
+      background: rgba(22, 22, 30, 0.92);
+      border-color: #FDD31D;
+      color: #FDD31D;
+    }
+
+    .game-bookmark-overlay-btn.is-bookmarked svg {
+      fill: #FDD31D;
     }
 
     .app-preview-media {
@@ -1222,6 +1296,101 @@
     .badge-yt { background: rgba(255, 0, 0, 0.2); color: #FF4D4D; border: 1px solid #FF0000; }
     .badge-app { background: rgba(0, 245, 155, 0.2); color: #00F59B; border: 1px solid #00F59B; }
 
+    /* Estilos del Listado de Guardados */
+    .saved-item-row {
+      background: #1D1D26;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      transition: all 0.15s ease;
+    }
+
+    .saved-item-row:hover {
+      background: #232330;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .saved-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .saved-item-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #16161E;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .saved-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .saved-item-title {
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .saved-item-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .saved-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .saved-item-open-btn {
+      background: #FDD31D;
+      color: #0B121E;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    .saved-item-open-btn:hover {
+      background: #E5BE14;
+      transform: translateY(-1px);
+    }
+
+    .saved-item-remove-btn {
+      background: transparent;
+      border: none;
+      color: #8E8E93;
+      cursor: pointer;
+      padding: 4px 6px;
+      font-size: 1.3rem;
+      line-height: 1;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+
+    .saved-item-remove-btn:hover {
+      color: #FA5C5C;
+    }
+
     /* Footer */
     footer {
       background: #16161E;
@@ -1347,6 +1516,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
           </svg>
+          <span id="savedNavDot" class="badge-notif-dot" style="display: none; background: #FDD31D;"></span>
         </button>
 
         <button class="action-icon-btn" onclick="openNotifModal()" title="Novedades y Notificaciones">
@@ -1685,6 +1855,9 @@
               <a href="https://eternodev.itch.io/castlecat-rpg" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png" alt="CastleCat RPG" class="game-thumb-img" loading="lazy" />
+                  <button class="game-bookmark-overlay-btn" data-bookmark-id="castlecat-rpg" onclick="toggleBookmark(event, { id: 'castlecat-rpg', type: 'game', title: 'CastleCat RPG', url: 'https://eternodev.itch.io/castlecat-rpg', cover_url: 'https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png', badge: 'Adventure' })" title="Guardar juego">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                  </button>
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">CastleCat RPG</h3>
@@ -1702,6 +1875,9 @@
               <a href="https://eternodev.itch.io/oonga-bunga" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png" alt="Oonga Bunga!" class="game-thumb-img" loading="lazy" />
+                  <button class="game-bookmark-overlay-btn" data-bookmark-id="oonga-bunga" onclick="toggleBookmark(event, { id: 'oonga-bunga', type: 'game', title: 'Oonga Bunga!', url: 'https://eternodev.itch.io/oonga-bunga', cover_url: 'https://img.itch.zone/aW1nLzI1Mzc4NjQzLnBuZw==/315x250%23c/XJshJJ.png', badge: 'Fighting' })" title="Guardar juego">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                  </button>
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Oonga Bunga!</h3>
@@ -1719,6 +1895,9 @@
               <a href="https://eternodev.itch.io/soap-dodger" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png" alt="Soap Dodger" class="game-thumb-img" loading="lazy" />
+                  <button class="game-bookmark-overlay-btn" data-bookmark-id="soap-dodger" onclick="toggleBookmark(event, { id: 'soap-dodger', type: 'game', title: 'Soap Dodger', url: 'https://eternodev.itch.io/soap-dodger', cover_url: 'https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png', badge: 'Action' })" title="Guardar juego">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                  </button>
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Soap Dodger</h3>
@@ -1736,6 +1915,9 @@
               <a href="https://eternodev.itch.io/space-blitz" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png" alt="Space Blitz" class="game-thumb-img" loading="lazy" />
+                  <button class="game-bookmark-overlay-btn" data-bookmark-id="space-blitz" onclick="toggleBookmark(event, { id: 'space-blitz', type: 'game', title: 'Space Blitz', url: 'https://eternodev.itch.io/space-blitz', cover_url: 'https://img.itch.zone/aW1nLzI3OTY2NzY0LnBuZw==/315x250%23c/unPQbM.png', badge: 'Shooter' })" title="Guardar juego">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                  </button>
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Space Blitz</h3>
@@ -1752,6 +1934,9 @@
               <a href="https://eternodev.itch.io/verdades-incompletas" target="_blank" rel="noopener" class="game-card-item">
                 <div class="game-thumb-box">
                   <img src="https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png" alt="Verdades Incompletas" class="game-thumb-img" loading="lazy" />
+                  <button class="game-bookmark-overlay-btn" data-bookmark-id="verdades-incompletas" onclick="toggleBookmark(event, { id: 'verdades-incompletas', type: 'game', title: 'Verdades Incompletas', url: 'https://eternodev.itch.io/verdades-incompletas', cover_url: 'https://img.itch.zone/aW1nLzIzNzAyMTc2LnBuZw==/315x250%23c/rgaSxI.png', badge: 'Visual Novel' })" title="Guardar juego">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                  </button>
                 </div>
                 <div class="game-content-box">
                   <h3 class="game-item-title">Verdades Incompletas</h3>
@@ -1805,6 +1990,9 @@
                   <img src="assets/icon_brightlight.png" alt="BrightLight" class="app-icon-thumb" />
                   <h3 class="app-name-title">BrightLight</h3>
                 </div>
+                <button class="btn-bookmark-action" data-bookmark-id="brightlight" onclick="toggleBookmark(event, { id: 'brightlight', type: 'app', title: 'BrightLight', url: 'https://paucg06.github.io/BrightLight-Bluetooth/', cover_url: 'assets/icon_brightlight.png', badge: 'Web App' })" title="Guardar proyecto">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </button>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_brightlight.png" alt="BrightLight" class="app-preview-img" />
@@ -1836,6 +2024,9 @@
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Notes</h3>
+                <button class="btn-bookmark-action" data-bookmark-id="etern-notes" onclick="toggleBookmark(event, { id: 'etern-notes', type: 'app', title: 'Etern-Notes', url: 'https://github.com/paucg06/Etern-Notes/releases', cover_url: 'assets/preview_etern_notes.svg', badge: 'Desktop App' })" title="Guardar proyecto">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </button>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_etern_notes.svg" alt="Etern-Notes" class="app-preview-img" />
@@ -1861,6 +2052,9 @@
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Synth</h3>
+                <button class="btn-bookmark-action" data-bookmark-id="etern-synth" onclick="toggleBookmark(event, { id: 'etern-synth', type: 'app', title: 'Etern-Synth', url: '#', cover_url: 'assets/preview_etern_synth.svg', badge: 'Desktop App' })" title="Guardar proyecto">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </button>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_etern_synth.svg" alt="Etern-Synth" class="app-preview-img" />
@@ -1882,6 +2076,9 @@
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Audio</h3>
+                <button class="btn-bookmark-action" data-bookmark-id="etern-audio" onclick="toggleBookmark(event, { id: 'etern-audio', type: 'app', title: 'Etern-Audio', url: '#', cover_url: 'assets/preview_etern_audio.svg', badge: 'Desktop App' })" title="Guardar proyecto">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                </button>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_etern_audio.svg" alt="Etern-Audio" class="app-preview-img" />

@@ -21,15 +21,131 @@ const KNOWN_GAME_METADATA = {
   "just-an-idiot-dev": { genre: "Adventure", p_windows: true, p_browser: true }
 };
 
+// ==========================================================================
+// Sistema de Proyectos Guardados (LocalStorage)
+// ==========================================================================
+const BOOKMARKS_STORAGE_KEY = 'eternodev_saved_projects';
+
+function getBookmarks() {
+  try {
+    const data = localStorage.getItem(BOOKMARKS_STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveBookmarks(bookmarks) {
+  try {
+    localStorage.setItem(BOOKMARKS_STORAGE_KEY, JSON.stringify(bookmarks));
+  } catch (e) {}
+  updateAllBookmarkButtons();
+  renderSavedModalContent();
+}
+
+function isBookmarked(id) {
+  const bookmarks = getBookmarks();
+  return bookmarks.some(item => item.id === id);
+}
+
+function toggleBookmark(e, item) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  let bookmarks = getBookmarks();
+  const index = bookmarks.findIndex(b => b.id === item.id);
+  if (index >= 0) {
+    bookmarks.splice(index, 1);
+  } else {
+    bookmarks.push(item);
+  }
+  saveBookmarks(bookmarks);
+}
+
+function removeBookmark(id) {
+  let bookmarks = getBookmarks();
+  bookmarks = bookmarks.filter(b => b.id !== id);
+  saveBookmarks(bookmarks);
+}
+
+function updateAllBookmarkButtons() {
+  const bookmarks = getBookmarks();
+  const savedIds = new Set(bookmarks.map(b => b.id));
+
+  document.querySelectorAll('[data-bookmark-id]').forEach(btn => {
+    const id = btn.getAttribute('data-bookmark-id');
+    const active = savedIds.has(id);
+    btn.classList.toggle('is-bookmarked', active);
+    btn.title = active ? 'Quitar de guardados' : 'Guardar proyecto';
+    const svg = btn.querySelector('svg');
+    if (svg) {
+      svg.setAttribute('fill', active ? 'currentColor' : 'none');
+    }
+  });
+
+  const navDot = document.getElementById('savedNavDot');
+  if (navDot) {
+    navDot.style.display = bookmarks.length > 0 ? 'block' : 'none';
+  }
+}
+
+function renderSavedModalContent() {
+  const container = document.getElementById('savedModalContent');
+  if (!container) return;
+
+  const bookmarks = getBookmarks();
+  if (bookmarks.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 30px 10px; color: #8E8E93;">
+        <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="#8E8E93" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; opacity: 0.6;"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <p style="font-size: 0.95rem; font-weight: 600; color: #CCCCCE; margin-bottom: 4px;">No tienes proyectos guardados aún</p>
+        <p style="font-size: 0.84rem; max-width: 340px; margin: 0 auto; line-height: 1.5;">Haz clic en el marcador de cualquier videojuego o aplicación para tenerlo guardado aquí y acceder rápidamente.</p>
+      </div>
+    `;
+    return;
+  }
+
+  let html = `<div style="display: flex; flex-direction: column; gap: 10px;">`;
+  bookmarks.forEach(item => {
+    const isApp = item.type === 'app';
+    const badgeColor = isApp ? '#38bdf8' : '#FA5C5C';
+    const badgeText = item.badge || (isApp ? 'Aplicación' : 'Videojuego');
+
+    html += `
+      <div class="saved-item-row">
+        <div class="saved-item-left">
+          <img src="${item.cover_url || 'assets/icon.png'}" alt="${item.title}" class="saved-item-thumb" />
+          <div class="saved-item-info">
+            <span class="saved-item-title">${item.title}</span>
+            <span class="saved-item-badge" style="color: ${badgeColor};">${badgeText}</span>
+          </div>
+        </div>
+        <div class="saved-item-actions">
+          <a href="${item.url}" target="_blank" rel="noopener" class="saved-item-open-btn">Abrir &rarr;</a>
+          <button class="saved-item-remove-btn" onclick="removeBookmark('${item.id}')" title="Eliminar de guardados">&times;</button>
+        </div>
+      </div>
+    `;
+  });
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+window.toggleBookmark = toggleBookmark;
+window.removeBookmark = removeBookmark;
+
 document.addEventListener('DOMContentLoaded', () => {
   initTabNavigation();
   initGamesCarousel();
   initVideosCarousel();
   loadDynamicData();
+  updateAllBookmarkButtons();
 });
 
 // Modales interactivos (Guardados & Notificaciones)
 function openSavedModal() {
+  renderSavedModalContent();
   const modal = document.getElementById('savedModal');
   if (modal) modal.classList.add('open');
 }
@@ -319,14 +435,23 @@ function createGameCard(g) {
   if (isLin) platformsHtml += PLATFORM_SVGS.linux;
   if (isMac) platformsHtml += PLATFORM_SVGS.macos;
 
+  const id = g.id ? g.id.toString() : slug;
+  const isSaved = isBookmarked(id);
+  const escapedTitle = (g.title || '').replace(/'/g, "\\'");
+  const coverUrl = g.cover_url || '';
+  const gameUrl = g.url || '';
+
   const card = document.createElement('a');
-  card.href = g.url;
+  card.href = gameUrl;
   card.target = '_blank';
   card.rel = 'noopener';
   card.className = 'game-card-item';
   card.innerHTML = `
     <div class="game-thumb-box">
-      <img src="${g.cover_url}" alt="${g.title}" class="game-thumb-img" loading="lazy" />
+      <img src="${coverUrl}" alt="${g.title}" class="game-thumb-img" loading="lazy" />
+      <button class="game-bookmark-overlay-btn ${isSaved ? 'is-bookmarked' : ''}" data-bookmark-id="${id}" onclick="toggleBookmark(event, { id: '${id}', type: 'game', title: '${escapedTitle}', url: '${gameUrl}', cover_url: '${coverUrl}', badge: '${genre}' })" title="${isSaved ? 'Quitar de guardados' : 'Guardar juego'}">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </button>
     </div>
     <div class="game-content-box">
       <h3 class="game-item-title">${g.title}</h3>
@@ -470,6 +595,8 @@ async function loadDynamicData() {
         }
       }
     }
+
+    updateAllBookmarkButtons();
   } catch (e) {
     console.warn("Carga dinámica completada.");
   }
