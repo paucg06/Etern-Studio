@@ -784,21 +784,29 @@
     }
 
     .app-top-header {
-      padding: 20px 20px 14px;
+      padding: 18px 20px 14px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+    }
+
+    .app-header-title-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .app-icon-thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      object-fit: cover;
+      flex-shrink: 0;
     }
 
     .app-name-title {
       font-size: 1.25rem;
       font-weight: 800;
       color: #FFFFFF;
-    }
-
-    .app-arrow-icon {
-      font-size: 1.2rem;
-      color: #CCCCCE;
     }
 
     .app-preview-media {
@@ -1506,10 +1514,12 @@
           </div>
 
           <div class="apps-grid-layout">
-            <article class="app-box-card" style="border-color: rgba(56, 189, 248, 0.35);">
+            <article class="app-box-card">
               <div class="app-top-header">
-                <h3 class="app-name-title" style="color: #38bdf8;">BrightLight</h3>
-                <span class="app-arrow-icon" style="color: #38bdf8;">&rarr;</span>
+                <div class="app-header-title-wrap">
+                  <img src="assets/icon_brightlight.png" alt="BrightLight" class="app-icon-thumb" />
+                  <h3 class="app-name-title">BrightLight</h3>
+                </div>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_brightlight.png" alt="BrightLight" class="app-preview-img" />
@@ -1529,7 +1539,6 @@
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Notes</h3>
-                <span class="app-arrow-icon">&rarr;</span>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_etern_notes.svg" alt="Etern-Notes" class="app-preview-img" />
@@ -1790,10 +1799,12 @@
           </div>
 
           <div class="apps-grid-layout">
-            <article class="app-box-card" style="border-color: rgba(56, 189, 248, 0.35);">
+            <article class="app-box-card">
               <div class="app-top-header">
-                <h3 class="app-name-title" style="color: #38bdf8;">BrightLight</h3>
-                <span class="app-arrow-icon" style="color: #38bdf8;">&rarr;</span>
+                <div class="app-header-title-wrap">
+                  <img src="assets/icon_brightlight.png" alt="BrightLight" class="app-icon-thumb" />
+                  <h3 class="app-name-title">BrightLight</h3>
+                </div>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_brightlight.png" alt="BrightLight" class="app-preview-img" />
@@ -1825,7 +1836,6 @@
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Notes</h3>
-                <span class="app-arrow-icon">&rarr;</span>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_etern_notes.svg" alt="Etern-Notes" class="app-preview-img" />
@@ -1851,7 +1861,6 @@
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Synth</h3>
-                <span class="app-arrow-icon">&rarr;</span>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_etern_synth.svg" alt="Etern-Synth" class="app-preview-img" />
@@ -1873,7 +1882,6 @@
             <article class="app-box-card">
               <div class="app-top-header">
                 <h3 class="app-name-title">Etern-Audio</h3>
-                <span class="app-arrow-icon">&rarr;</span>
               </div>
               <div class="app-preview-media">
                 <img src="assets/preview_etern_audio.svg" alt="Etern-Audio" class="app-preview-img" />
