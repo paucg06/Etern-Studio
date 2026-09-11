@@ -444,7 +444,7 @@ function initVideosCarousel() {
   updateVideoCarousel();
 }
 
-function createGameCard(g) {
+function createGameCard(g, showBookmark = true) {
   const slug = (g.url || '').split('/').filter(Boolean).pop();
   const known = KNOWN_GAME_METADATA[slug] || {};
 
@@ -466,6 +466,11 @@ function createGameCard(g) {
   const coverUrl = g.cover_url || '';
   const gameUrl = g.url || '';
 
+  const bookmarkBtnHtml = showBookmark ? `
+      <button class="game-bookmark-overlay-btn ${isSaved ? 'is-bookmarked' : ''}" data-bookmark-id="${id}" onclick="toggleBookmark(event, { id: '${id}', type: 'game', title: '${escapedTitle}', url: '${gameUrl}', cover_url: '${coverUrl}', badge: '${genre}' })" title="${isSaved ? 'Quitar de guardados' : 'Guardar juego'}">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </button>` : '';
+
   const card = document.createElement('a');
   card.href = gameUrl;
   card.target = '_blank';
@@ -474,9 +479,7 @@ function createGameCard(g) {
   card.innerHTML = `
     <div class="game-thumb-box">
       <img src="${coverUrl}" alt="${g.title}" class="game-thumb-img" loading="lazy" />
-      <button class="game-bookmark-overlay-btn ${isSaved ? 'is-bookmarked' : ''}" data-bookmark-id="${id}" onclick="toggleBookmark(event, { id: '${id}', type: 'game', title: '${escapedTitle}', url: '${gameUrl}', cover_url: '${coverUrl}', badge: '${genre}' })" title="${isSaved ? 'Quitar de guardados' : 'Guardar juego'}">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-      </button>
+      ${bookmarkBtnHtml}
     </div>
     <div class="game-content-box">
       <h3 class="game-item-title">${g.title}</h3>
@@ -607,7 +610,7 @@ async function loadDynamicData() {
         if (gTrack) {
           gTrack.innerHTML = '';
           games.forEach(g => {
-            gTrack.appendChild(createGameCard(g));
+            gTrack.appendChild(createGameCard(g, true));
           });
           initGamesCarousel();
         }
@@ -615,7 +618,7 @@ async function loadDynamicData() {
         if (gTrackHome) {
           gTrackHome.innerHTML = '';
           games.slice(0, 3).forEach(g => {
-            gTrackHome.appendChild(createGameCard(g));
+            gTrackHome.appendChild(createGameCard(g, false));
           });
         }
       }
