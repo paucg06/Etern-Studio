@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-09-12T03:43:33.140Z",
+  "generated_at": "2026-09-12T08:28:43.764Z",
   "total_ads": 10,
   "ads": [
     {
@@ -14,7 +14,7 @@
       "image_url": "https://i.ytimg.com/vi/wjoGjOxCTCQ/maxresdefault.jpg",
       "features": [
         "Desarrollo indie en Unity y mecánicas",
-        "72 visualizaciones en YouTube",
+        "73 visualizaciones en YouTube",
         "¡Suscríbete al canal de EternoDev!"
       ]
     },
@@ -44,7 +44,7 @@
       "image_url": "https://i.ytimg.com/vi/bRbhRWQvqs8/maxresdefault.jpg",
       "features": [
         "Desarrollo indie en Unity y mecánicas",
-        "150 visualizaciones en YouTube",
+        "151 visualizaciones en YouTube",
         "¡Suscríbete al canal de EternoDev!"
       ]
     },
@@ -103,7 +103,7 @@
       "target_url": "https://eternodev.itch.io/soap-dodger",
       "image_url": "https://img.itch.zone/aW1nLzE5NTE3MDE5LnBuZw==/315x250%23c/3Jap12.png",
       "features": [
-        "Género: Action / Bullet Hell",
+        "Género: Action",
         "🎮 Jugable directamente en el navegador",
         "⭐ 100% Gratuito en Itch.io"
       ]
