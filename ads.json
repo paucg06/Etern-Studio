@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-09-12T23:50:40.450Z",
-  "total_ads": 11,
+  "generated_at": "2026-09-13T03:51:54.111Z",
+  "total_ads": 10,
   "ads": [
     {
       "id": "yt_video_wjoGjOxCTCQ",
@@ -72,21 +72,6 @@
       "action_text": "Jugar Gratis Online",
       "target_url": "https://eternodev.itch.io/castlecat-rpg",
       "image_url": "https://img.itch.zone/aW1nLzIxMDcyMTMwLnBuZw==/315x250%23c/z1NtlR.png",
-      "features": [
-        "Género: Adventure",
-        "🎮 Jugable directamente en el navegador",
-        "⭐ 100% Gratuito en Itch.io"
-      ]
-    },
-    {
-      "id": "game_3182584",
-      "type": "game",
-      "badge": "JUEGO DESTACADO",
-      "title": "Just An Idiot Dev",
-      "subtitle": "¿Qué? ¿Han robado mi juego? Toma el control de Alva Majo y desvela al culpable.",
-      "action_text": "Jugar Gratis Online",
-      "target_url": "https://eternodev.itch.io/just-an-idiot-dev",
-      "image_url": "https://img.itch.zone/aW1nLzIxMTk0MDA4LnBuZw==/315x250%23c/MQyPRQ.png",
       "features": [
         "Género: Adventure",
         "🎮 Jugable directamente en el navegador",
